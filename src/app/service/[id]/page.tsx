@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-
+import { trackEvent } from "@/lib/tracking/events";
 type ServiceDetail = {
   id: string;
   title: string;
@@ -155,8 +155,8 @@ export default function ServiceDetailPage() {
 
         {!isOwnService && (
           <div className="flex gap-3 mb-10">
-            {telLink && <a href={telLink} className="flex-1 text-center py-3 rounded-lg text-sm font-bold bg-red-500 text-white">Call</a>}
-            {waLink && <a href={waLink} target="_blank" className="flex-1 text-center py-3 rounded-lg text-sm font-bold bg-green-500 text-white">WhatsApp</a>}
+          {telLink && <a href={telLink} onClick={() => trackEvent("contact_call", serviceId)} className="flex-1 text-center py-3 rounded-lg text-sm font-bold bg-red-500 text-white">Call</a>}  
+            {waLink && <a href={waLink} target="_blank" onClick={() => trackEvent("contact_whatsapp", serviceId)} className="flex-1 text-center py-3 rounded-lg text-sm font-bold bg-green-500 text-white">WhatsApp</a>}
           </div>
         )}<div className="border-t border-white/[.08] pt-8">
           <div className="flex items-center gap-3 mb-6">
