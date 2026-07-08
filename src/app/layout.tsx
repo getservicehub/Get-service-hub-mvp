@@ -9,7 +9,7 @@ const inter = Inter({
   weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-inter",
 });
-
+export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "GetServiHub — Find. Connect. Grow.",
   description:
