@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Sidebar from "@/components/layout/Sidebar";
-
+import Footer from "@/components/layout/Footer";
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -26,7 +26,10 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans antialiased`}>
         <Navbar />
         <Sidebar />
-        <div className="md:ml-[72px]">{children}</div>
+        <div className="md:ml-[72px]">
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );
