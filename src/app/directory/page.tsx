@@ -2,24 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
-
-type Service = {
-  id: string;
-  title: string;
-  description: string;
-  city: string;
-  price_from: number | null;
-  emergency: boolean;
-  espanol: boolean;
-  image_url: string | null;
-  profiles: { full_name: string; business_name: string } | null;
-  categories: { name: string; icon: string } | null;
-};
+import { getActiveServices, getProviderName, type ServiceCard } from "@/lib/services/queries";
 
 type Category = { id: string; name: string; icon: string };
 
 export default function DirectoryPage() {
-  const [services, setServices] = useState<Service[]>([]);
+  const [services, setServices] = useState<ServiceCard[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [filter, setFilter] = useState("All");
   const [loading, setLoading] = useState(true);
@@ -30,19 +18,15 @@ export default function DirectoryPage() {
       if (data) setCategories(data);
     });
 
-    supabase
-      .from("services")
-      .select("id, title, description, city, price_from, emergency, espanol, image_url, profiles(full_name, business_name), categories(name, icon)")
-      .eq("is_active", true)
-      .order("created_at", { ascending: false })
-      .then(({ data, error }) => {
-        if (data) setServices(data as unknown as Service[]);
-        if (error) console.log(error);
-        setLoading(false);
-      });
-  }, [supabase]);
+    getActiveServices().then((data) => {
+      setServices(data);
+      setLoading(false);
+    });
+  }, []);
 
-  const filtered = filter === "All" ? services : services.filter((s) => s.categories?.name === filter);return (
+  const filtered = filter === "All" ? services : services.filter((s) => s.categories?.name === filter);
+
+  return (
     <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5">
       <div className="max-w-[1140px] mx-auto">
         <div className="text-xs font-bold tracking-[2px] uppercase text-cyan-400 mb-3">Directory</div>
@@ -76,7 +60,7 @@ export default function DirectoryPage() {
                   {!hasImage && <span>{service.categories?.icon || "⚡"}</span>}
                 </div>
                 <div className="p-4">
-                  <div className="text-[15px] font-extrabold mb-1">{service.profiles?.business_name || service.profiles?.full_name || "Provider"}</div>
+                  <div className="text-[15px] font-extrabold mb-1">{getProviderName(service)}</div>
                   <div className="text-xs text-muted2 mb-2">{service.title} - {service.city}</div>
                   <div className="text-[13px] text-muted2 mb-3">{service.description}</div>
                   <div className="flex gap-2 flex-wrap">
