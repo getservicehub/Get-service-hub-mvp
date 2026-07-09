@@ -46,11 +46,17 @@ export default function GalleryPage() {
     }
 
     if (liked.includes(postId)) {
-      await supabase.from("post_likes").delete().eq("user_id", userId).eq("post_id", postId);
-      setLiked((prev) => prev.filter((id) => id !== postId));
+      const { error } = await supabase.from("post_likes").delete().eq("user_id", userId).eq("post_id", postId);
+      if (!error) {
+        setLiked((prev) => prev.filter((id) => id !== postId));
+      }
     } else {
-      await supabase.from("post_likes").insert({ user_id: userId, post_id: postId });
-      setLiked((prev) => [...prev, postId]);
+      const { error } = await supabase.from("post_likes").insert({ user_id: userId, post_id: postId });
+      if (!error || error.code === "23505") {
+        setLiked((prev) => [...prev, postId]);
+      } else {
+        console.log("Like failed:", error.message);
+      }
     }
   };
 
