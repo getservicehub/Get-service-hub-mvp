@@ -48,13 +48,19 @@ export default function DiscoverPage() {
     }
 
     if (liked.includes(serviceId)) {
-      await supabase.from("favorites").delete().eq("user_id", userId).eq("service_id", serviceId);
-      setLiked((prev) => prev.filter((id) => id !== serviceId));
+      const { error } = await supabase.from("favorites").delete().eq("user_id", userId).eq("service_id", serviceId);
+      if (!error) {
+        setLiked((prev) => prev.filter((id) => id !== serviceId));
+      }
     } else {
-      await supabase.from("favorites").insert({ user_id: userId, service_id: serviceId });
-      setLiked((prev) => [...prev, serviceId]);
+      const { error } = await supabase.from("favorites").insert({ user_id: userId, service_id: serviceId });
+      if (!error || error.code === "23505") {
+        setLiked((prev) => [...prev, serviceId]);
+      } else {
+        console.log("Like failed:", error.message);
+      }
     }
-  };return (
+  };
     <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5">
       <div className="max-w-[1140px] mx-auto">
         <div className="text-xs font-bold tracking-[2px] uppercase text-cyan-400 mb-3">Discover Pros</div>
