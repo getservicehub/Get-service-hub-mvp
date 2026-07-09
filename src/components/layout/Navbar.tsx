@@ -39,7 +39,11 @@ export default function Navbar() {
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     window.location.href = "/";
-  };return (
+  };
+
+  const closeDrawer = () => setDrawerOpen(false);
+
+  return (
     <>
       <nav className={scrolled ? "fixed top-0 left-0 right-0 z-[100] px-6 transition-all duration-300 bg-[#060D1A]/97 backdrop-blur-2xl shadow-lg" : "fixed top-0 left-0 right-0 z-[100] px-6 transition-all duration-300 bg-transparent"}>
         <div className="max-w-[1140px] mx-auto flex items-center justify-between h-[72px]">
@@ -55,7 +59,7 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-2.5 flex-shrink-0">
-            {user ? (
+            {user && (
               <>
                 <Link href="/dashboard" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">Dashboard</Link>
                 <Link href="/favorites" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">Favorites</Link>
@@ -63,20 +67,58 @@ export default function Navbar() {
                 <span className="hidden md:inline text-sm text-muted2">Hi, {fullName || user.email}</span>
                 <button onClick={handleSignOut} className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg border border-white/20 text-white hover:bg-white/5 transition-all">Sign Out</button>
               </>
-            ) : (
+            )}
+            {!user && (
               <>
                 <Link href="/login" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg border border-cyan-400/30 text-cyan-400 hover:bg-cyan-400/10 transition-all">Sign In</Link>
                 <Link href="/register" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg gradient-bg text-white hover:opacity-90 transition-all">Get Started</Link>
               </>
             )}
             <button onClick={() => setDrawerOpen(true)} className="md:hidden flex flex-col gap-1.5 p-1.5">
-              <span className="w-5.5 h-0.5 bg-white rounded-full" />
-              <span className="w-5.5 h-0.5 bg-white rounded-full" />
-              <span className="w-5.5 h-0.5 bg-white rounded-full" />
+              <span className="w-6 h-0.5 bg-white rounded-full" />
+              <span className="w-6 h-0.5 bg-white rounded-full" />
+              <span className="w-6 h-0.5 bg-white rounded-full" />
             </button>
           </div>
         </div>
       </nav>
+
+      {drawerOpen && (
+        <div className="fixed inset-0 z-[200] md:hidden">
+          <div onClick={closeDrawer} className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+          <div className="absolute top-0 right-0 h-full w-[280px] bg-[#0A1628] border-l border-white/10 p-6 flex flex-col gap-1 overflow-y-auto">
+            <div className="flex justify-between items-center mb-6">
+              <Image src="/logo-icon.png" alt="GetServiHub" width={36} height={36} className="h-9 w-9" />
+              <button onClick={closeDrawer} className="text-2xl text-muted2">×</button>
+            </div>
+
+            {user && (
+              <div className="text-sm text-white font-semibold mb-4 pb-4 border-b border-white/10">Hi, {fullName || user.email}</div>
+            )}
+
+            <Link href="/directory" onClick={closeDrawer} className="py-3 text-white font-medium border-b border-white/[.06]">Browse Services</Link>
+            <Link href="/discover" onClick={closeDrawer} className="py-3 text-white font-medium border-b border-white/[.06]">Discover</Link>
+            <Link href="/featured" onClick={closeDrawer} className="py-3 text-white font-medium border-b border-white/[.06]">Featured</Link>
+            <Link href="/gallery" onClick={closeDrawer} className="py-3 text-white font-medium border-b border-white/[.06]">Gallery</Link>
+
+            {user && (
+              <>
+                <Link href="/dashboard" onClick={closeDrawer} className="py-3 text-cyan-400 font-medium border-b border-white/[.06]">Dashboard</Link>
+                <Link href="/favorites" onClick={closeDrawer} className="py-3 text-cyan-400 font-medium border-b border-white/[.06]">Favorites</Link>
+                <Link href="/account" onClick={closeDrawer} className="py-3 text-cyan-400 font-medium border-b border-white/[.06]">Account</Link>
+                <button onClick={() => { closeDrawer(); handleSignOut(); }} className="py-3 text-left text-white font-medium mt-2">Sign Out</button>
+              </>
+            )}
+
+            {!user && (
+              <div className="flex flex-col gap-3 mt-6">
+                <Link href="/login" onClick={closeDrawer} className="text-center py-3 rounded-lg border border-cyan-400/30 text-cyan-400 font-semibold text-sm">Sign In</Link>
+                <Link href="/register" onClick={closeDrawer} className="text-center py-3 rounded-lg gradient-bg text-white font-semibold text-sm">Get Started</Link>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </>
   );
 }
