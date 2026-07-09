@@ -2,19 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
-
-type ServiceRow = {
-  id: string;
-  title: string;
-  city: string;
-  provider_id: string;
-  image_url: string | null;
-  profiles: { full_name: string; business_name: string; phone: string | null } | null;
-  categories: { name: string; icon: string } | null;
-};
+import { getActiveServices, getProviderName, getContactLinks, type ServiceCard } from "@/lib/services/queries";
+import { getRotatedWindow } from "@/lib/services/rotation";
 
 export default function DiscoverPage() {
-  const [services, setServices] = useState<ServiceRow[]>([]);
+  const [allServices, setAllServices] = useState<ServiceCard[]>([]);
+  const [sponsored, setSponsored] = useState<ServiceCard[]>([]);
   const [liked, setLiked] = useState<string[]>([]);
   const [userId, setUserId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -30,16 +23,13 @@ export default function DiscoverPage() {
       }
     });
 
-    supabase
-      .from("services")
-      .select("id, title, city, provider_id, image_url, profiles(full_name, business_name, phone), categories(name, icon)")
-      .eq("is_active", true)
-      .order("created_at", { ascending: false })
-      .then(({ data }) => {
-        if (data) setServices(data as unknown as ServiceRow[]);
-        setLoading(false);
-      });
-  }, [supabase]);
+    getActiveServices().then((data) => {
+      setAllServices(data);
+      const paidPlans = data.filter((s) => s.plan === "pro" || s.plan === "premium" || s.plan === "premier");
+      setSponsored(getRotatedWindow(paidPlans, 4, 1));
+      setLoading(false);
+    });
+  }, []);
 
   const toggleLike = async (serviceId: string) => {
     if (!userId) {
@@ -65,13 +55,37 @@ export default function DiscoverPage() {
   return (
     <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5">
       <div className="max-w-[1140px] mx-auto">
+
+        {sponsored.length > 0 && (
+          <div className="mb-12">
+            <div className="text-[10px] font-bold tracking-[2px] uppercase text-amber-400 mb-4">Sponsored</div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {sponsored.map((s) => {
+                const hasImage = s.image_url !== null && s.image_url !== "";
+                return (
+                  <a key={s.id} href={`/service/${s.id}`} className="block bg-card border border-amber-400/20 rounded-2xl overflow-hidden hover:border-amber-400/40 transition-all">
+                    <div className="w-full h-[100px] flex items-center justify-center text-3xl bg-gradient-to-br from-[#0A1628] to-[#0D1A2E] overflow-hidden">
+                      {hasImage && <img src={s.image_url as string} alt={s.title} className="w-full h-full object-cover" />}
+                      {!hasImage && <span>{s.categories?.icon || "⚡"}</span>}
+                    </div>
+                    <div className="p-3">
+                      <div className="text-[12px] font-bold truncate">{getProviderName(s)}</div>
+                      <div className="text-[10px] text-muted2 truncate">{s.title}</div>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
         <div className="text-xs font-bold tracking-[2px] uppercase text-cyan-400 mb-3">Discover Pros</div>
         <h1 className="text-3xl md:text-4xl font-extrabold mb-4">Local Talent, Right Here</h1>
         <p className="text-base text-muted2 max-w-[540px] mb-10">Follow your favorite pros, like their work, and start a conversation instantly.</p>
 
         {loading && <div className="text-muted2 text-sm">Loading pros...</div>}
 
-        {!loading && services.length === 0 && (
+        {!loading && allServices.length === 0 && (
           <div className="text-center py-16">
             <div className="text-5xl mb-4">📭</div>
             <div className="text-muted2 text-sm">No pros to discover yet.</div>
@@ -79,12 +93,11 @@ export default function DiscoverPage() {
         )}
 
         <div className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {services.map((s) => {
+          {allServices.map((s) => {
             const isLiked = liked.includes(s.id);
             const isOwnService = userId !== null && s.provider_id === userId;
-            const name = s.profiles?.business_name || s.profiles?.full_name || "Provider";
-            const phone = s.profiles?.phone;
-            const waLink = phone ? "https://wa.me/1" + phone.replace(/\D/g, "") : null;
+            const name = getProviderName(s);
+            const { waLink } = getContactLinks(s);
             const hasImage = s.image_url !== null && s.image_url !== "";
 
             return (
