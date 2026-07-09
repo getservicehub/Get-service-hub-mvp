@@ -108,6 +108,7 @@ export default function DashboardPage() {
               <div className="flex gap-2 flex-shrink-0">
              <Link href={`/dashboard/edit-service/${s.id}`} className="px-3 py-2 rounded-lg text-xs font-bold border border-cyan-400/30 text-cyan-400">Edit</Link>   
                <Link href="/dashboard/new-post" className="px-5 py-2.5 rounded-lg border border-cyan-400/30 text-cyan-400 font-semibold text-sm">📸 Post to Gallery</Link> 
+                <Link href="/dashboard/upgrade" className="px-5 py-2.5 rounded-lg border border-amber-400/30 text-amber-400 font-semibold text-sm">👑 Upgrade Plan</Link>
                 <button onClick={() => toggleActive(s.id, s.is_active)} className="px-3 py-2 rounded-lg text-xs font-bold border border-white/20 text-white">
                   {s.is_active ? "Pause" : "Activate"}
                 </button>
