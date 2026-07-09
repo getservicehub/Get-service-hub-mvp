@@ -1,36 +1,20 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createClient } from "@/lib/supabase/client";
-
-type ServiceRow = {
-  id: string;
-  title: string;
-  description: string;
-  city: string;
-  emergency: boolean;
-  espanol: boolean;
-  image_url: string | null;
-  profiles: { full_name: string; business_name: string; phone: string | null } | null;
-  categories: { name: string; icon: string } | null;
-};
+import { getActiveServices, getProviderName, getContactLinks, type ServiceCard } from "@/lib/services/queries";
 
 export default function FeaturedPage() {
-  const [services, setServices] = useState<ServiceRow[]>([]);
+  const [services, setServices] = useState<ServiceCard[]>([]);
   const [loading, setLoading] = useState(true);
-  const supabase = createClient();
 
   useEffect(() => {
-    supabase
-      .from("services")
-      .select("id, title, description, city, emergency, espanol, image_url, profiles(full_name, business_name, phone), categories(name, icon)")
-      .eq("is_active", true)
-      .order("created_at", { ascending: false })
-      .then(({ data }) => {
-        if (data) setServices(data as unknown as ServiceRow[]);
-        setLoading(false);
-      });
-  }, [supabase]);return (
+    getActiveServices().then((data) => {
+      setServices(data);
+      setLoading(false);
+    });
+  }, []);
+
+  return (
     <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5">
       <div className="max-w-[1140px] mx-auto">
         <div className="text-xs font-bold tracking-[2px] uppercase text-cyan-400 mb-3">Featured Professionals</div>
@@ -48,10 +32,8 @@ export default function FeaturedPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {services.map((s) => {
-            const name = s.profiles?.business_name || s.profiles?.full_name || "Provider";
-            const phone = s.profiles?.phone;
-            const waLink = phone ? "https://wa.me/1" + phone.replace(/\D/g, "") : null;
-            const telLink = phone ? "tel:" + phone.replace(/\D/g, "") : null;
+            const name = getProviderName(s);
+            const { telLink, waLink } = getContactLinks(s);
             const hasImage = s.image_url !== null && s.image_url !== "";
 
             return (
