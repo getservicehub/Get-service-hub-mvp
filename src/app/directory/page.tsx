@@ -1,7 +1,9 @@
 import { createClient } from "@/lib/supabase/server";
 import DirectoryClient from "@/components/directory/DirectoryClient";
 import type { Metadata } from "next";
+
 export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Browse All Pros | GetServiHub",
   description: "Find verified local service professionals in San Diego. Mobile mechanics, plumbers, electricians, cleaners, and more. English & Spanish. No commission.",
@@ -13,10 +15,11 @@ const SERVICE_SELECT =
 export default async function DirectoryPage({
   searchParams,
 }: {
-  searchParams: Promise<{ category?: string }>;
+  searchParams: Promise<{ category?: string; city?: string }>;
 }) {
   const params = await searchParams;
   const initialFilter = params.category || "All";
+  const initialCity = params.city || "";
 
   const supabase = await createClient();
 
@@ -28,11 +31,16 @@ export default async function DirectoryPage({
 
   const { data: categories } = await supabase.from("categories").select("id, name, icon").order("name");
 
+  const allServices = (services as any) || [];
+  const cities = Array.from(new Set(allServices.map((s: any) => s.city).filter(Boolean))).sort() as string[];
+
   return (
     <DirectoryClient
-      initialServices={(services as any) || []}
+      initialServices={allServices}
       initialCategories={categories || []}
       initialFilter={initialFilter}
+      initialCity={initialCity}
+      cities={cities}
     />
   );
 }

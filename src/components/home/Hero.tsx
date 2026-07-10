@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { matchCategory } from "@/lib/services/keywords";
+import { getCities } from "@/lib/services/queries";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 type Category = { id: string; name: string; icon: string };
@@ -16,7 +17,9 @@ export default function Hero() {
   const [displayName, setDisplayName] = useState("");
   const [serviceCount, setServiceCount] = useState(0);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [cities, setCities] = useState<string[]>([]);
   const [query, setQuery] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
   const router = useRouter();
   const supabase = createClient();
 
@@ -24,6 +27,8 @@ export default function Hero() {
     supabase.from("categories").select("id, name, icon").then(({ data }) => {
       if (data) setCategories(data);
     });
+
+    getCities().then((data) => setCities(data));
 
     supabase.auth.getUser().then(({ data }) => {
       setUser(data.user);
@@ -43,14 +48,22 @@ export default function Hero() {
   }, [supabase]);
 
   const handleSearch = () => {
+    const params = new URLSearchParams();
+
     if (query.trim()) {
       const matchedCategory = matchCategory(query);
       if (matchedCategory) {
-        router.push(`/directory?category=${encodeURIComponent(matchedCategory)}`);
+        params.set("category", matchedCategory);
       } else {
-        router.push(`/directory?q=${encodeURIComponent(query.trim())}`);
+        params.set("q", query.trim());
       }
     }
+
+    if (selectedCity) {
+      params.set("city", selectedCity);
+    }
+
+    router.push(`/directory?${params.toString()}`);
   };
 
   if (!user) {
@@ -172,9 +185,16 @@ export default function Hero() {
           {t("hero_what_need")}
         </h1>
 
-        <div className="flex bg-card border border-white/[.14] rounded-xl overflow-hidden max-w-[600px] mb-3">
+        <div className="flex flex-col sm:flex-row bg-card border border-white/[.14] rounded-xl overflow-hidden max-w-[700px] mb-3">
           <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleSearch()} placeholder={"🔍  " + t("search_placeholder")} className="flex-1 bg-transparent border-none outline-none px-5 py-4 text-[15px] text-white placeholder:text-muted2" />
-          <button onClick={handleSearch} className="gradient-bg text-white font-semibold px-7 hover:opacity-90 transition-all">{t("search_button")}</button>
+          <div className="hidden sm:block w-px bg-white/[.14]" />
+          <select value={selectedCity} onChange={(e) => setSelectedCity(e.target.value)} className="bg-transparent border-none outline-none px-5 py-4 text-[14px] text-white max-w-[180px]">
+            <option value="" className="bg-bg2">📍 All Cities</option>
+            {cities.map((city) => (
+              <option key={city} value={city} className="bg-bg2">{city}</option>
+            ))}
+          </select>
+          <button onClick={handleSearch} className="gradient-bg text-white font-semibold px-7 py-4 hover:opacity-90 transition-all">{t("search_button")}</button>
         </div>
 
         <div className="text-xs text-muted2 mb-8">

@@ -9,18 +9,34 @@ type Props = {
   initialServices: ServiceCard[];
   initialCategories: Category[];
   initialFilter: string;
+  initialCity: string;
+  cities: string[];
 };
 
-export default function DirectoryClient({ initialServices, initialCategories, initialFilter }: Props) {
+export default function DirectoryClient({ initialServices, initialCategories, initialFilter, initialCity, cities }: Props) {
   const [filter, setFilter] = useState(initialFilter);
+  const [cityFilter, setCityFilter] = useState(initialCity);
 
-  const filtered = filter === "All" ? initialServices : initialServices.filter((s) => s.categories?.name === filter);
+  const filtered = initialServices.filter((s) => {
+    const matchesCategory = filter === "All" || s.categories?.name === filter;
+    const matchesCity = cityFilter === "" || s.city === cityFilter;
+    return matchesCategory && matchesCity;
+  });
 
   return (
     <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5">
       <div className="max-w-[1140px] mx-auto">
         <div className="text-xs font-bold tracking-[2px] uppercase text-cyan-400 mb-3">Directory</div>
         <h1 className="text-3xl md:text-4xl font-extrabold mb-8">Browse All Pros</h1>
+
+        <div className="flex flex-col sm:flex-row gap-3 mb-6">
+          <select value={cityFilter} onChange={(e) => setCityFilter(e.target.value)} className="px-4 py-2.5 bg-card border border-white/20 rounded-lg text-sm text-white max-w-[220px]">
+            <option value="" className="bg-bg2">📍 All Cities</option>
+            {cities.map((city) => (
+              <option key={city} value={city} className="bg-bg2">{city}</option>
+            ))}
+          </select>
+        </div>
 
         <div className="flex flex-wrap gap-2.5 mb-8">
           <button onClick={() => setFilter("All")} className={filter === "All" ? "px-4.5 py-2 rounded-full text-[13px] font-semibold gradient-bg text-white" : "px-4.5 py-2 rounded-full text-[13px] font-semibold border border-white/20 text-muted2"}>All</button>
@@ -34,7 +50,7 @@ export default function DirectoryClient({ initialServices, initialCategories, in
         {filtered.length === 0 && (
           <div className="text-center py-16">
             <div className="text-5xl mb-4">📭</div>
-            <div className="text-muted2 text-sm">No services found in this category yet.</div>
+            <div className="text-muted2 text-sm">No services found matching your filters.</div>
           </div>
         )}
 

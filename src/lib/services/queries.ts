@@ -53,3 +53,11 @@ export function getContactLinks(service: ServiceCard) {
   };
 }
 
+
+export async function getCities(): Promise<string[]> {
+  const supabase = createClient();
+  const { data } = await supabase.from("services").select("city").eq("is_active", true);
+  if (!data) return [];
+  const unique = Array.from(new Set(data.map((row) => row.city).filter(Boolean)));
+  return unique.sort();
+}
