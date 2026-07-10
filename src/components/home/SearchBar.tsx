@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
+import { matchCategory } from "@/lib/services/keywords";
 const tags = [
   { label: "🔧 Mobile Mechanic", value: "Mobile Mechanic" },
   { label: "🚗 Tow Service", value: "Tow Service" },
@@ -17,11 +17,16 @@ export default function SearchBar() {
   const [query, setQuery] = useState("");
   const router = useRouter();
 
-  const handleSearch = () => {
+ const handleSearch = () => {
     if (query.trim()) {
-      router.push(`/directory?q=${encodeURIComponent(query.trim())}`);
+      const matchedCategory = matchCategory(query);
+      if (matchedCategory) {
+        router.push(`/directory?category=${encodeURIComponent(matchedCategory)}`);
+      } else {
+        router.push(`/directory?q=${encodeURIComponent(query.trim())}`);
+      }
     }
-  };
+  }; 
 
   return (
     <div className="bg-bg2 py-10 px-5">

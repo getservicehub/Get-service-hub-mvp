@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-
+import { matchCategory } from "@/lib/services/keywords";
 type Category = { id: string; name: string; icon: string };
 
 export default function Hero() {
@@ -39,11 +39,17 @@ export default function Hero() {
     });
   }, [supabase]);
 
-  const handleSearch = () => {
+ const handleSearch = () => {
     if (query.trim()) {
-      router.push(`/directory?q=${encodeURIComponent(query.trim())}`);
+      const matchedCategory = matchCategory(query);
+      if (matchedCategory) {
+        router.push(`/directory?category=${encodeURIComponent(matchedCategory)}`);
+      } else {
+        router.push(`/directory?q=${encodeURIComponent(query.trim())}`);
+      }
     }
-  };if (!user) {
+  };
+  if (!user) {
     return (
       <section className="relative overflow-hidden pt-[120px] pb-20 px-5">
         <div className="absolute -top-[100px] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse,rgba(0,87,231,.18)_0%,transparent_70%)] pointer-events-none" />

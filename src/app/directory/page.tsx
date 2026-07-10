@@ -1,15 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { getActiveServices, getProviderName, type ServiceCard } from "@/lib/services/queries";
 
 type Category = { id: string; name: string; icon: string };
 
 export default function DirectoryPage() {
+  const searchParams = useSearchParams();
+  const categoryFromUrl = searchParams.get("category");
   const [services, setServices] = useState<ServiceCard[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
-  const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState(categoryFromUrl || "All");
   const [loading, setLoading] = useState(true);
   const supabase = createClient();
 
