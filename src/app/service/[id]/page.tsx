@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { trackEvent } from "@/lib/tracking/events";
-import { useRouter } from "next/navigation";type ServiceDetail = {
+
+type ServiceDetail = {
   id: string;
   title: string;
   description: string;
@@ -23,13 +24,14 @@ type Review = {
   rating: number;
   comment: string;
   created_at: string;
+  client_id: string;
   profiles: { full_name: string } | null;
 };
 
 export default function ServiceDetailPage() {
- const router = useRouter();
-    const params = useParams();
+  const params = useParams();
   const serviceId = params.id as string;
+  const router = useRouter();
   const supabase = createClient();
 
   const [service, setService] = useState<ServiceDetail | null>(null);
@@ -74,6 +76,8 @@ export default function ServiceDetailPage() {
     }
 
     setLoading(false);
+  };
+
   const startConversation = async () => {
     if (!userId) {
       window.location.href = "/login";
@@ -102,7 +106,8 @@ export default function ServiceDetailPage() {
       router.push(`/messages/${newConvo.id}`);
     }
   };
-};const submitReview = async () => {
+
+  const submitReview = async () => {
     setReviewError("");
 
     if (rating === 0) {
@@ -137,7 +142,9 @@ export default function ServiceDetailPage() {
   };
 
   const avgRating = reviews.length > 0 ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1) : null;
-  const isOwnService = userId !== null && service?.provider_id === userId;if (loading) {
+  const isOwnService = userId !== null && service?.provider_id === userId;
+
+  if (loading) {
     return (
       <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5">
         <div className="max-w-[700px] mx-auto text-muted2 text-sm">Loading...</div>
@@ -159,8 +166,8 @@ export default function ServiceDetailPage() {
   const name = service.profiles?.business_name || service.profiles?.full_name || "Provider";
   const phone = service.profiles?.phone;
   const waLink = phone ? "https://wa.me/1" + phone.replace(/\D/g, "") : null;
-  const smsLink = phone ? "sms:" + phone.replace(/\D/g, "") : null;
   const telLink = phone ? "tel:" + phone.replace(/\D/g, "") : null;
+  const smsLink = phone ? "sms:" + phone.replace(/\D/g, "") : null;
   const hasImage = service.image_url !== null && service.image_url !== "";
 
   return (
@@ -184,12 +191,17 @@ export default function ServiceDetailPage() {
         <p className="text-sm text-muted2 leading-relaxed mb-6">{service.description}</p>
 
         {!isOwnService && (
-          <div className="flex gap-3 mb-10">
-            {telLink && <a href={telLink} onClick={() => trackEvent("contact_call", serviceId)} className="flex-1 text-center py-3 rounded-lg text-sm font-bold bg-red-500 text-white">Call</a>}
-            {smsLink && <a href={smsLink} onClick={() => trackEvent("contact_sms", serviceId)} className="flex-1 text-center py-3 rounded-lg text-sm font-bold bg-blue-500 text-white">Text</a>}
-            {waLink && <a href={waLink} target="_blank" onClick={() => trackEvent("contact_whatsapp", serviceId)} className="flex-1 text-center py-3 rounded-lg text-sm font-bold bg-green-500 text-white">WhatsApp</a>}
+          <div className="mb-10">
+            <button onClick={startConversation} className="w-full py-3 rounded-lg gradient-bg text-white font-bold text-sm mb-3">Message on GetServiHub</button>
+            <div className="flex gap-3">
+              {telLink && <a href={telLink} onClick={() => trackEvent("contact_call", serviceId)} className="flex-1 text-center py-3 rounded-lg text-sm font-bold bg-red-500 text-white">Call</a>}
+              {smsLink && <a href={smsLink} onClick={() => trackEvent("contact_sms", serviceId)} className="flex-1 text-center py-3 rounded-lg text-sm font-bold bg-blue-500 text-white">Text</a>}
+              {waLink && <a href={waLink} target="_blank" onClick={() => trackEvent("contact_whatsapp", serviceId)} className="flex-1 text-center py-3 rounded-lg text-sm font-bold bg-green-500 text-white">WhatsApp</a>}
+            </div>
           </div>
-        )}<div className="border-t border-white/[.08] pt-8">
+        )}
+
+        <div className="border-t border-white/[.08] pt-8">
           <div className="flex items-center gap-3 mb-6">
             <h2 className="text-xl font-extrabold">Reviews</h2>
             {avgRating && <span className="text-sm text-amber-400 font-bold">{avgRating} stars ({reviews.length})</span>}
@@ -235,7 +247,9 @@ export default function ServiceDetailPage() {
                 {submitting ? "Submitting..." : "Submit Review"}
               </button>
             </div>
-          )}<div className="space-y-3">
+          )}
+
+          <div className="space-y-3">
             {reviews.map((r) => (
               <div key={r.id} className="bg-card border border-white/[.08] rounded-2xl p-4">
                 <div className="flex items-center gap-2.5 mb-2">
