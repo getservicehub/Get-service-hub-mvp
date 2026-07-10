@@ -18,29 +18,6 @@ function ReportForm() {
   const categories = [
     { id: "no_show", label: "Provider did not show up" },
     { id: "poor_quality", label: "Poor quality of work" },
-    { id: "payment_issue",
-mkdir -p src/app/report
-cat > src/app/report/page.tsx << 'PARTONE'
-"use client";
-
-import { useState, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
-
-function ReportForm() {
-  const searchParams = useSearchParams();
-  const serviceId = searchParams.get("service");
-
-  const [category, setCategory] = useState("");
-  const [description, setDescription] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const supabase = createClient();
-
-  const categories = [
-    { id: "no_show", label: "Provider did not show up" },
-    { id: "poor_quality", label: "Poor quality of work" },
     { id: "payment_issue", label: "Payment issue" },
     { id: "inappropriate", label: "Inappropriate behavior" },
     { id: "fraud", label: "Suspected fraud" },
