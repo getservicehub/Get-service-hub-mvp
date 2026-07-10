@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
-
+import NotificationBell from "./NotificationBell";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -59,6 +59,7 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-2.5 flex-shrink-0">
+           {user && <NotificationBell />}
             {user && (
               <>
                 <Link href="/dashboard" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">Dashboard</Link>
