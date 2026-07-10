@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { trackEvent } from "@/lib/tracking/events";
-type ServiceDetail = {
+import { useRouter } from "next/navigation";type ServiceDetail = {
   id: string;
   title: string;
   description: string;
@@ -27,7 +27,8 @@ type Review = {
 };
 
 export default function ServiceDetailPage() {
-  const params = useParams();
+ const router = useRouter();
+    const params = useParams();
   const serviceId = params.id as string;
   const supabase = createClient();
 
@@ -73,7 +74,35 @@ export default function ServiceDetailPage() {
     }
 
     setLoading(false);
-  };const submitReview = async () => {
+  const startConversation = async () => {
+    if (!userId) {
+      window.location.href = "/login";
+      return;
+    }
+
+    const { data: existing } = await supabase
+      .from("conversations")
+      .select("id")
+      .eq("client_id", userId)
+      .eq("provider_id", service?.provider_id)
+      .maybeSingle();
+
+    if (existing) {
+      router.push(`/messages/${existing.id}`);
+      return;
+    }
+
+    const { data: newConvo, error } = await supabase
+      .from("conversations")
+      .insert({ client_id: userId, provider_id: service?.provider_id, service_id: serviceId })
+      .select("id")
+      .single();
+
+    if (newConvo && !error) {
+      router.push(`/messages/${newConvo.id}`);
+    }
+  };
+};const submitReview = async () => {
     setReviewError("");
 
     if (rating === 0) {

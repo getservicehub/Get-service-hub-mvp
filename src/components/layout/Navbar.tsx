@@ -63,6 +63,7 @@ export default function Navbar() {
               <>
                 <Link href="/dashboard" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">Dashboard</Link>
                 <Link href="/favorites" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">Favorites</Link>
+                <Link href="/messages" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">Messages</Link>
                 <Link href="/account" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">Account</Link>
                 <span className="hidden md:inline text-sm text-muted2">Hi, {fullName || user.email}</span>
                 <button onClick={handleSignOut} className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg border border-white/20 text-white hover:bg-white/5 transition-all">Sign Out</button>
@@ -105,6 +106,7 @@ export default function Navbar() {
               <>
                 <Link href="/dashboard" onClick={closeDrawer} className="py-3 text-cyan-400 font-medium border-b border-white/[.06]">Dashboard</Link>
                 <Link href="/favorites" onClick={closeDrawer} className="py-3 text-cyan-400 font-medium border-b border-white/[.06]">Favorites</Link>
+                <Link href="/messages" onClick={closeDrawer} className="py-3 text-cyan-400 font-medium border-b border-white/[.06]">Messages</Link>
                 <Link href="/account" onClick={closeDrawer} className="py-3 text-cyan-400 font-medium border-b border-white/[.06]">Account</Link>
                 <button onClick={() => { closeDrawer(); handleSignOut(); }} className="py-3 text-left text-white font-medium mt-2">Sign Out</button>
               </>
