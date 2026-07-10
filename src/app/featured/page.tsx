@@ -23,7 +23,7 @@ export default async function FeaturedPage() {
     .order("created_at", { ascending: false });
 
   const premiumOnly = ((services as any) || []).filter((s: any) => s.plan === "premium" || s.plan === "premier");
-  const rotated = getRotatedWindow(premiumOnly, 4, 7);
+  const rotated = getRotatedWindow<any>(premiumOnly, 4, 7);
 
   return <FeaturedClient services={rotated} />;
 }
