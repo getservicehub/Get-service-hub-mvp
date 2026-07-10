@@ -7,8 +7,9 @@ import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
 import NotificationBell from "./NotificationBell";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+
 export default function Navbar() {
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
@@ -54,28 +55,28 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden md:flex items-center gap-1">
-            <Link href="/directory" className="px-3.5 py-2 rounded-lg text-sm font-medium text-muted2 hover:text-white hover:bg-white/5 transition-all">Browse Services</Link>
-            <Link href="/discover" className="px-3.5 py-2 rounded-lg text-sm font-medium text-muted2 hover:text-white hover:bg-white/5 transition-all">Discover</Link>
-            <Link href="/featured" className="px-3.5 py-2 rounded-lg text-sm font-medium text-muted2 hover:text-white hover:bg-white/5 transition-all">Featured</Link>
-            <Link href="/gallery" className="px-3.5 py-2 rounded-lg text-sm font-medium text-muted2 hover:text-white hover:bg-white/5 transition-all">Gallery</Link>
+            <Link href="/directory" className="px-3.5 py-2 rounded-lg text-sm font-medium text-muted2 hover:text-white hover:bg-white/5 transition-all">{t("nav_browse")}</Link>
+            <Link href="/discover" className="px-3.5 py-2 rounded-lg text-sm font-medium text-muted2 hover:text-white hover:bg-white/5 transition-all">{t("nav_discover")}</Link>
+            <Link href="/featured" className="px-3.5 py-2 rounded-lg text-sm font-medium text-muted2 hover:text-white hover:bg-white/5 transition-all">{t("nav_featured")}</Link>
+            <Link href="/gallery" className="px-3.5 py-2 rounded-lg text-sm font-medium text-muted2 hover:text-white hover:bg-white/5 transition-all">{t("nav_gallery")}</Link>
           </div>
 
           <div className="flex items-center gap-2.5 flex-shrink-0">
-           {user && <NotificationBell />}
+            {user && <NotificationBell />}
             {user && (
               <>
-                <Link href="/dashboard" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">Dashboard</Link>
-                <Link href="/favorites" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">Favorites</Link>
-                <Link href="/messages" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">Messages</Link>
-                <Link href="/account" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">Account</Link>
+                <Link href="/dashboard" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">{t("nav_dashboard")}</Link>
+                <Link href="/favorites" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">{t("nav_favorites")}</Link>
+                <Link href="/messages" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">{t("nav_messages")}</Link>
+                <Link href="/account" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">{t("nav_account")}</Link>
                 <span className="hidden md:inline text-sm text-muted2">Hi, {fullName || user.email}</span>
-                <button onClick={handleSignOut} className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg border border-white/20 text-white hover:bg-white/5 transition-all">Sign Out</button>
+                <button onClick={handleSignOut} className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg border border-white/20 text-white hover:bg-white/5 transition-all">{t("nav_signout")}</button>
               </>
             )}
             {!user && (
               <>
-                <Link href="/login" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg border border-cyan-400/30 text-cyan-400 hover:bg-cyan-400/10 transition-all">Sign In</Link>
-                <Link href="/register" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg gradient-bg text-white hover:opacity-90 transition-all">Get Started</Link>
+                <Link href="/login" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg border border-cyan-400/30 text-cyan-400 hover:bg-cyan-400/10 transition-all">{t("nav_signin")}</Link>
+                <Link href="/register" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg gradient-bg text-white hover:opacity-90 transition-all">{t("nav_getstarted")}</Link>
               </>
             )}
             <button onClick={() => setLanguage(language === "en" ? "es" : "en")} className="w-10 h-9 rounded-lg border border-white/20 text-xs font-bold text-white hover:bg-white/5 transition-all">
@@ -103,25 +104,25 @@ export default function Navbar() {
               <div className="text-sm text-white font-semibold mb-4 pb-4 border-b border-white/10">Hi, {fullName || user.email}</div>
             )}
 
-            <Link href="/directory" onClick={closeDrawer} className="py-3 text-white font-medium border-b border-white/[.06]">Browse Services</Link>
-            <Link href="/discover" onClick={closeDrawer} className="py-3 text-white font-medium border-b border-white/[.06]">Discover</Link>
-            <Link href="/featured" onClick={closeDrawer} className="py-3 text-white font-medium border-b border-white/[.06]">Featured</Link>
-            <Link href="/gallery" onClick={closeDrawer} className="py-3 text-white font-medium border-b border-white/[.06]">Gallery</Link>
+            <Link href="/directory" onClick={closeDrawer} className="py-3 text-white font-medium border-b border-white/[.06]">{t("nav_browse")}</Link>
+            <Link href="/discover" onClick={closeDrawer} className="py-3 text-white font-medium border-b border-white/[.06]">{t("nav_discover")}</Link>
+            <Link href="/featured" onClick={closeDrawer} className="py-3 text-white font-medium border-b border-white/[.06]">{t("nav_featured")}</Link>
+            <Link href="/gallery" onClick={closeDrawer} className="py-3 text-white font-medium border-b border-white/[.06]">{t("nav_gallery")}</Link>
 
             {user && (
               <>
-                <Link href="/dashboard" onClick={closeDrawer} className="py-3 text-cyan-400 font-medium border-b border-white/[.06]">Dashboard</Link>
-                <Link href="/favorites" onClick={closeDrawer} className="py-3 text-cyan-400 font-medium border-b border-white/[.06]">Favorites</Link>
-                <Link href="/messages" onClick={closeDrawer} className="py-3 text-cyan-400 font-medium border-b border-white/[.06]">Messages</Link>
-                <Link href="/account" onClick={closeDrawer} className="py-3 text-cyan-400 font-medium border-b border-white/[.06]">Account</Link>
-                <button onClick={() => { closeDrawer(); handleSignOut(); }} className="py-3 text-left text-white font-medium mt-2">Sign Out</button>
+                <Link href="/dashboard" onClick={closeDrawer} className="py-3 text-cyan-400 font-medium border-b border-white/[.06]">{t("nav_dashboard")}</Link>
+                <Link href="/favorites" onClick={closeDrawer} className="py-3 text-cyan-400 font-medium border-b border-white/[.06]">{t("nav_favorites")}</Link>
+                <Link href="/messages" onClick={closeDrawer} className="py-3 text-cyan-400 font-medium border-b border-white/[.06]">{t("nav_messages")}</Link>
+                <Link href="/account" onClick={closeDrawer} className="py-3 text-cyan-400 font-medium border-b border-white/[.06]">{t("nav_account")}</Link>
+                <button onClick={() => { closeDrawer(); handleSignOut(); }} className="py-3 text-left text-white font-medium mt-2">{t("nav_signout")}</button>
               </>
             )}
 
             {!user && (
               <div className="flex flex-col gap-3 mt-6">
-                <Link href="/login" onClick={closeDrawer} className="text-center py-3 rounded-lg border border-cyan-400/30 text-cyan-400 font-semibold text-sm">Sign In</Link>
-                <Link href="/register" onClick={closeDrawer} className="text-center py-3 rounded-lg gradient-bg text-white font-semibold text-sm">Get Started</Link>
+                <Link href="/login" onClick={closeDrawer} className="text-center py-3 rounded-lg border border-cyan-400/30 text-cyan-400 font-semibold text-sm">{t("nav_signin")}</Link>
+                <Link href="/register" onClick={closeDrawer} className="text-center py-3 rounded-lg gradient-bg text-white font-semibold text-sm">{t("nav_getstarted")}</Link>
               </div>
             )}
           </div>
