@@ -4,20 +4,8 @@ import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { trackEvent } from "@/lib/tracking/events";
+import { getServiceById, type ServiceCard } from "@/lib/services/queries";
 
-type ServiceDetail = {
-  id: string;
-  title: string;
-  description: string;
-  city: string;
-  emergency: boolean;
-  espanol: boolean;
-  price_from: number | null;
-  image_url: string | null;
-  provider_id: string;
-  profiles: { full_name: string; business_name: string; phone: string | null } | null;
-  categories: { name: string; icon: string } | null;
-};
 
 type Review = {
   id: string;
@@ -34,7 +22,7 @@ export default function ServiceDetailPage() {
   const router = useRouter();
   const supabase = createClient();
 
-  const [service, setService] = useState<ServiceDetail | null>(null);
+  const [service, setService] = useState<ServiceCard | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [userId, setUserId] = useState<string | null>(null);
   const [hasReviewed, setHasReviewed] = useState(false);
@@ -54,13 +42,8 @@ export default function ServiceDetailPage() {
     const currentUserId = authData.user?.id ?? null;
     setUserId(currentUserId);
 
-    const { data: serviceData } = await supabase
-      .from("services")
-      .select("id, title, description, city, emergency, espanol, price_from, image_url, provider_id, profiles(full_name, business_name, phone), categories(name, icon)")
-      .eq("id", serviceId)
-      .single();
-
-    if (serviceData) setService(serviceData as unknown as ServiceDetail);
+    const serviceData = await getServiceById(serviceId);
+    if (serviceData) setService(serviceData);
 
     const { data: reviewsData } = await supabase
       .from("reviews")
