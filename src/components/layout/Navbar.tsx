@@ -61,7 +61,7 @@ export default function Navbar() {
             <Link href="/gallery" className="px-3.5 py-2 rounded-lg text-sm font-medium text-muted2 hover:text-white hover:bg-white/5 transition-all">{t("nav_gallery")}</Link>
           </div>
 
-          <div className="flex items-center gap-2.5 flex-shrink-0">
+          <div className="flex items-center gap-1.5 flex-shrink-0">
             {user && <NotificationBell />}
             {user && (
               <>
