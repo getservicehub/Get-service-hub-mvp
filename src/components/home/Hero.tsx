@@ -168,7 +168,9 @@ export default function Hero() {
           <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleSearch()} placeholder="🔍  What service do you need?" className="flex-1 bg-transparent border-none outline-none px-5 py-4 text-[15px] text-white placeholder:text-muted2" />
           <button onClick={handleSearch} className="gradient-bg text-white font-semibold px-7 hover:opacity-90 transition-all">Search</button>
         </div>
-
+        <div className="text-xs text-muted2 mb-8 -mt-4">
+          Try: <span className="text-cyan-400">"my car won't start"</span>
+        </div>
         <div className="flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {categories.map((cat) => (
             <Link key={cat.id} href={`/directory?category=${encodeURIComponent(cat.name)}`} className="flex-shrink-0 flex items-center gap-2 bg-card border border-white/[.08] rounded-full px-4 py-2.5 hover:border-cyan-400/40 transition-all">

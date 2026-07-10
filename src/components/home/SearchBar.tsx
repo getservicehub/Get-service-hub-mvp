@@ -53,7 +53,9 @@ export default function SearchBar() {
             Search
           </button>
         </div>
-
+       <div className="text-xs text-muted2 mt-3 mb-1">
+          Try: <span className="text-cyan-400">"my car won't start"</span>
+        </div>
         <div className="flex flex-wrap gap-2 mt-4">
           {tags.map((tag) => (
             <button
