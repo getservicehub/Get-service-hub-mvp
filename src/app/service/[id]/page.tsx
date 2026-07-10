@@ -189,7 +189,9 @@ export default function ServiceDetailPage() {
         </div>
 
         <p className="text-sm text-muted2 leading-relaxed mb-6">{service.description}</p>
-
+        {!isOwnService && (
+          <a href={`/report?service=${serviceId}`} className="text-xs text-muted2 hover:text-white underline">Report an issue with this listing</a>
+        )}
         {!isOwnService && (
           <div className="mb-10">
             <button onClick={startConversation} className="w-full py-3 rounded-lg gradient-bg text-white font-bold text-sm mb-3">Message on GetServiHub</button>

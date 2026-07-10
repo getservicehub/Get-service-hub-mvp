@@ -29,6 +29,7 @@ export default function Footer() {
             <Link href="/about" className="text-xs text-muted2 hover:text-white">About Us</Link>
             <Link href="/trust-safety" className="text-xs text-muted2 hover:text-white">Trust & Safety</Link>
             <Link href="/contact" className="text-xs text-muted2 hover:text-white">Contact</Link>
+            <Link href="/report" className="text-xs text-muted2 hover:text-white">Report an Issue</Link>
             <Link href="/register" className="text-xs text-muted2 hover:text-white">List Your Business</Link>
           </div>
         </div>
