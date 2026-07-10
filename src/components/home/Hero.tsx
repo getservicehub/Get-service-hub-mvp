@@ -5,9 +5,12 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { matchCategory } from "@/lib/services/keywords";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
+
 type Category = { id: string; name: string; icon: string };
 
 export default function Hero() {
+  const { t } = useLanguage();
   const [user, setUser] = useState<{ id: string } | null>(null);
   const [role, setRole] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState("");
@@ -39,7 +42,7 @@ export default function Hero() {
     });
   }, [supabase]);
 
- const handleSearch = () => {
+  const handleSearch = () => {
     if (query.trim()) {
       const matchedCategory = matchCategory(query);
       if (matchedCategory) {
@@ -49,6 +52,7 @@ export default function Hero() {
       }
     }
   };
+
   if (!user) {
     return (
       <section className="relative overflow-hidden pt-[120px] pb-20 px-5">
@@ -57,27 +61,27 @@ export default function Hero() {
         <div className="relative max-w-[1140px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
           <div>
             <div className="inline-flex items-center gap-2 bg-cyan-400/[.08] border border-cyan-400/20 px-3.5 py-1.5 rounded-full text-xs font-semibold text-cyan-400 mb-6">
-              📍 San Diego&apos;s Local Services Marketplace
+              📍 {t("hero_eyebrow")}
             </div>
 
             <h1 className="text-4xl md:text-6xl font-black leading-[1.1] mb-5">
-              Find Trusted <span className="gradient-text">Local Pros</span> in Your Community
+              {t("hero_title_1")} <span className="gradient-text">{t("hero_title_2")}</span> {t("hero_title_3")}
             </h1>
 
             <p className="text-lg text-muted2 leading-relaxed mb-9">
-              Connect with verified local businesses in San Diego. English &amp; Spanish. No commissions. No middlemen. Just real people doing real work.
+              {t("hero_sub")}
             </p>
 
             <div className="flex gap-3 flex-wrap">
-              <Link href="/directory" className="inline-flex items-center gap-1.5 text-base font-semibold px-7 py-3.5 rounded-lg gradient-bg text-white hover:opacity-90 transition-all">🔍 Find a Pro</Link>
-              <Link href="/register" className="inline-flex items-center gap-1.5 text-base font-semibold px-7 py-3.5 rounded-lg border border-cyan-400/20 text-cyan-400 hover:bg-cyan-400/[.08] transition-all">List Your Business Free →</Link>
+              <Link href="/directory" className="inline-flex items-center gap-1.5 text-base font-semibold px-7 py-3.5 rounded-lg gradient-bg text-white hover:opacity-90 transition-all">🔍 {t("hero_cta_find")}</Link>
+              <Link href="/register" className="inline-flex items-center gap-1.5 text-base font-semibold px-7 py-3.5 rounded-lg border border-cyan-400/20 text-cyan-400 hover:bg-cyan-400/[.08] transition-all">{t("hero_cta_list")} →</Link>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mt-12 pt-9 border-t border-white/[.08]">
-              <div><div className="text-2xl font-extrabold gradient-text">500+</div><div className="text-xs text-muted2 mt-0.5">Verified Pros</div></div>
-              <div><div className="text-2xl font-extrabold gradient-text">12K+</div><div className="text-xs text-muted2 mt-0.5">Happy Clients</div></div>
-              <div><div className="text-2xl font-extrabold gradient-text">$0</div><div className="text-xs text-muted2 mt-0.5">Commission Fees</div></div>
-              <div><div className="text-2xl font-extrabold gradient-text">4.9★</div><div className="text-xs text-muted2 mt-0.5">Avg. Rating</div></div>
+              <div><div className="text-2xl font-extrabold gradient-text">500+</div><div className="text-xs text-muted2 mt-0.5">{t("hero_stat_pros")}</div></div>
+              <div><div className="text-2xl font-extrabold gradient-text">12K+</div><div className="text-xs text-muted2 mt-0.5">{t("hero_stat_clients")}</div></div>
+              <div><div className="text-2xl font-extrabold gradient-text">$0</div><div className="text-xs text-muted2 mt-0.5">{t("hero_stat_commission")}</div></div>
+              <div><div className="text-2xl font-extrabold gradient-text">4.9★</div><div className="text-xs text-muted2 mt-0.5">{t("hero_stat_rating")}</div></div>
             </div>
           </div>
 
@@ -109,34 +113,36 @@ export default function Hero() {
         </div>
       </section>
     );
-  }if (role === "provider") {
+  }
+
+  if (role === "provider") {
     return (
       <section className="relative overflow-hidden pt-[120px] pb-16 px-5">
         <div className="absolute -top-[100px] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse,rgba(0,87,231,.18)_0%,transparent_70%)] pointer-events-none" />
 
         <div className="relative max-w-[1140px] mx-auto">
           <div className="inline-flex items-center gap-2 bg-cyan-400/[.08] border border-cyan-400/20 px-3.5 py-1.5 rounded-full text-xs font-semibold text-cyan-400 mb-5">
-            🔧 Provider Dashboard
+            🔧 {t("hero_provider_dashboard")}
           </div>
 
           <h1 className="text-3xl md:text-5xl font-black leading-[1.1] mb-3">
-            Welcome back, <span className="gradient-text">{displayName}</span>
+            {t("hero_welcome")}, <span className="gradient-text">{displayName}</span>
           </h1>
 
-          <p className="text-base text-muted2 mb-8">Manage your services and grow your business on GetServiHub.</p>
+          <p className="text-base text-muted2 mb-8">{t("hero_provider_sub")}</p>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <div className="bg-card border border-white/[.08] rounded-2xl p-5">
               <div className="text-3xl font-extrabold gradient-text">{serviceCount}</div>
-              <div className="text-xs text-muted2 mt-1">Active Services</div>
+              <div className="text-xs text-muted2 mt-1">{t("stat_active_services")}</div>
             </div>
             <div className="bg-card border border-white/[.08] rounded-2xl p-5">
               <div className="text-3xl font-extrabold gradient-text">$0</div>
-              <div className="text-xs text-muted2 mt-1">Commission Paid</div>
+              <div className="text-xs text-muted2 mt-1">{t("stat_commission_paid")}</div>
             </div>
             <div className="bg-card border border-white/[.08] rounded-2xl p-5">
               <div className="text-3xl font-extrabold gradient-text">Basic</div>
-              <div className="text-xs text-muted2 mt-1">Current Plan</div>
+              <div className="text-xs text-muted2 mt-1">{t("stat_current_plan")}</div>
             </div>
             <div className="bg-card border border-white/[.08] rounded-2xl p-5">
               <div className="text-3xl font-extrabold gradient-text">SD</div>
@@ -145,32 +151,36 @@ export default function Hero() {
           </div>
 
           <div className="flex gap-3 flex-wrap">
-            <Link href="/dashboard/new-service" className="inline-flex items-center gap-1.5 text-base font-semibold px-7 py-3.5 rounded-lg gradient-bg text-white hover:opacity-90 transition-all">+ Publish New Service</Link>
-            <Link href="/dashboard" className="inline-flex items-center gap-1.5 text-base font-semibold px-7 py-3.5 rounded-lg border border-cyan-400/20 text-cyan-400 hover:bg-cyan-400/[.08] transition-all">Go to Dashboard →</Link>
+            <Link href="/dashboard/new-service" className="inline-flex items-center gap-1.5 text-base font-semibold px-7 py-3.5 rounded-lg gradient-bg text-white hover:opacity-90 transition-all">+ {t("hero_cta_publish")}</Link>
+            <Link href="/dashboard" className="inline-flex items-center gap-1.5 text-base font-semibold px-7 py-3.5 rounded-lg border border-cyan-400/20 text-cyan-400 hover:bg-cyan-400/[.08] transition-all">{t("hero_cta_dashboard")} →</Link>
           </div>
         </div>
       </section>
     );
-  }return (
+  }
+
+  return (
     <section className="relative overflow-hidden pt-[120px] pb-16 px-5">
       <div className="absolute -top-[100px] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse,rgba(0,87,231,.18)_0%,transparent_70%)] pointer-events-none" />
 
       <div className="relative max-w-[1140px] mx-auto">
         <div className="inline-flex items-center gap-2 bg-cyan-400/[.08] border border-cyan-400/20 px-3.5 py-1.5 rounded-full text-xs font-semibold text-cyan-400 mb-5">
-          👋 Welcome back{displayName ? ", " + displayName : ""}
+          👋 {t("hero_welcome")}{displayName ? ", " + displayName : ""}
         </div>
 
         <h1 className="text-3xl md:text-5xl font-black leading-[1.1] mb-8">
-          What do you need <span className="gradient-text">today?</span>
+          {t("hero_what_need")}
         </h1>
 
-        <div className="flex bg-card border border-white/[.14] rounded-xl overflow-hidden max-w-[600px] mb-8">
-          <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleSearch()} placeholder="🔍  What service do you need?" className="flex-1 bg-transparent border-none outline-none px-5 py-4 text-[15px] text-white placeholder:text-muted2" />
-          <button onClick={handleSearch} className="gradient-bg text-white font-semibold px-7 hover:opacity-90 transition-all">Search</button>
+        <div className="flex bg-card border border-white/[.14] rounded-xl overflow-hidden max-w-[600px] mb-3">
+          <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleSearch()} placeholder={"🔍  " + t("search_placeholder")} className="flex-1 bg-transparent border-none outline-none px-5 py-4 text-[15px] text-white placeholder:text-muted2" />
+          <button onClick={handleSearch} className="gradient-bg text-white font-semibold px-7 hover:opacity-90 transition-all">{t("search_button")}</button>
         </div>
-        <div className="text-xs text-muted2 mb-8 -mt-4">
-          Try: <span className="text-cyan-400">"my car won't start"</span>
+
+        <div className="text-xs text-muted2 mb-8">
+          {t("search_example")} <span className="text-cyan-400">"{t("search_example_text")}"</span>
         </div>
+
         <div className="flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {categories.map((cat) => (
             <Link key={cat.id} href={`/directory?category=${encodeURIComponent(cat.name)}`} className="flex-shrink-0 flex items-center gap-2 bg-card border border-white/[.08] rounded-full px-4 py-2.5 hover:border-cyan-400/40 transition-all">

@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { matchCategory } from "@/lib/services/keywords";
+
 const tags = [
   { label: "🔧 Mobile Mechanic", value: "Mobile Mechanic" },
   { label: "🚗 Tow Service", value: "Tow Service" },
@@ -14,10 +16,11 @@ const tags = [
 ];
 
 export default function SearchBar() {
+  const { t } = useLanguage();
   const [query, setQuery] = useState("");
   const router = useRouter();
 
- const handleSearch = () => {
+  const handleSearch = () => {
     if (query.trim()) {
       const matchedCategory = matchCategory(query);
       if (matchedCategory) {
@@ -26,7 +29,7 @@ export default function SearchBar() {
         router.push(`/directory?q=${encodeURIComponent(query.trim())}`);
       }
     }
-  }; 
+  };
 
   return (
     <div className="bg-bg2 py-10 px-5">
@@ -37,7 +40,7 @@ export default function SearchBar() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-            placeholder="🔍  What service do you need?"
+            placeholder={"🔍  " + t("search_placeholder")}
             className="flex-1 bg-transparent border-none outline-none px-5 py-4 text-[15px] text-white placeholder:text-muted2"
           />
           <div className="w-px bg-white/[.14]" />
@@ -50,12 +53,14 @@ export default function SearchBar() {
             onClick={handleSearch}
             className="gradient-bg text-white font-semibold px-7 hover:opacity-90 transition-all"
           >
-            Search
+            {t("search_button")}
           </button>
         </div>
-       <div className="text-xs text-muted2 mt-3 mb-1">
-          Try: <span className="text-cyan-400">"my car won't start"</span>
+
+        <div className="text-xs text-muted2 mt-3 mb-1">
+          {t("search_example")} <span className="text-cyan-400">"{t("search_example_text")}"</span>
         </div>
+
         <div className="flex flex-wrap gap-2 mt-4">
           {tags.map((tag) => (
             <button

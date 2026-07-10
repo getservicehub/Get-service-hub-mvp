@@ -8,6 +8,18 @@ export const translations = {
     nav_favorites: "Favorites",
     nav_account: "Account",
     nav_messages: "Messages",
+rm -f src/lib/i18n/translations.ts
+cat > src/lib/i18n/translations.ts << 'EOF'
+export const translations = {
+  en: {
+    nav_browse: "Browse Services",
+    nav_discover: "Discover",
+    nav_featured: "Featured",
+    nav_gallery: "Gallery",
+    nav_dashboard: "Dashboard",
+    nav_favorites: "Favorites",
+    nav_account: "Account",
+    nav_messages: "Messages",
     nav_signin: "Sign In",
     nav_getstarted: "Get Started",
     nav_signout: "Sign Out",
@@ -23,6 +35,16 @@ export const translations = {
     hero_stat_clients: "Happy Clients",
     hero_stat_commission: "Commission Fees",
     hero_stat_rating: "Avg. Rating",
+
+    hero_welcome: "Welcome back",
+    hero_what_need: "What do you need today?",
+    hero_provider_dashboard: "Provider Dashboard",
+    hero_provider_sub: "Manage your services and grow your business on GetServiHub.",
+    stat_active_services: "Active Services",
+    stat_commission_paid: "Commission Paid",
+    stat_current_plan: "Current Plan",
+    hero_cta_publish: "Publish New Service",
+    hero_cta_dashboard: "Go to Dashboard",
 
     search_placeholder: "What service do you need?",
     search_button: "Search",
@@ -75,6 +97,16 @@ export const translations = {
     hero_stat_clients: "Clientes Satisfechos",
     hero_stat_commission: "Comisiones",
     hero_stat_rating: "Calificación Promedio",
+
+    hero_welcome: "Bienvenido de nuevo",
+    hero_what_need: "¿Qué necesitas hoy?",
+    hero_provider_dashboard: "Panel de Proveedor",
+    hero_provider_sub: "Administra tus servicios y haz crecer tu negocio en GetServiHub.",
+    stat_active_services: "Servicios Activos",
+    stat_commission_paid: "Comisión Pagada",
+    stat_current_plan: "Plan Actual",
+    hero_cta_publish: "Publicar Nuevo Servicio",
+    hero_cta_dashboard: "Ir al Panel",
 
     search_placeholder: "¿Qué servicio necesitas?",
     search_button: "Buscar",

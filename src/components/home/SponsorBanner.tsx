@@ -1,6 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function SponsorBanner() {
+  const { t } = useLanguage();
+
   return (
     <div className="max-w-[1140px] mx-auto px-5 py-6">
       <div className="relative bg-card border border-amber-400/20 rounded-2xl overflow-hidden">
@@ -14,12 +19,12 @@ export default function SponsorBanner() {
           </div>
 
           <div className="flex-1 text-center md:text-left">
-            <div className="text-lg font-extrabold mb-1">Want your business seen by thousands?</div>
-            <div className="text-sm text-muted2">Premier spots put you at the top of every category, every day. Limited spots available in San Diego.</div>
+            <div className="text-lg font-extrabold mb-1">{t("sponsor_title")}</div>
+            <div className="text-sm text-muted2">{t("sponsor_sub")}</div>
           </div>
 
           <Link href="/register" className="flex-shrink-0 px-6 py-3 rounded-lg gradient-bg text-white font-bold text-sm whitespace-nowrap hover:opacity-90 transition-all">
-            Claim a Spot →
+            {t("sponsor_cta")} →
           </Link>
         </div>
       </div>
