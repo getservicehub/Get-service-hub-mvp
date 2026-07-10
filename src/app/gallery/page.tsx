@@ -84,6 +84,7 @@ export default function GalleryPage() {
             const phone = post.profiles?.phone;
             const waLink = phone ? "https://wa.me/1" + phone.replace(/\D/g, "") : null;
             const telLink = phone ? "tel:" + phone.replace(/\D/g, "") : null;
+            const smsLink = phone ? "sms:" + phone.replace(/\D/g, "") : null;
 
             return (
               <div key={post.id} className="bg-card border border-white/[.08] rounded-[20px] overflow-hidden">
@@ -118,6 +119,7 @@ export default function GalleryPage() {
                 {!isOwnPost && telLink && (
                   <div className="flex gap-2 px-4 pb-4">
                     <a href={telLink} className="flex-1 text-center py-2 rounded-lg text-xs font-bold bg-red-500 text-white">Call</a>
+                    <a href={smsLink || "#"} className="flex-1 text-center py-2 rounded-lg text-xs font-bold bg-blue-500 text-white">Text</a>
                     <a href={waLink || "#"} target="_blank" className="flex-1 text-center py-2 rounded-lg text-xs font-bold bg-green-500 text-white">WhatsApp</a>
                   </div>
                 )}

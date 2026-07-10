@@ -97,7 +97,7 @@ export default function DiscoverPage() {
             const isLiked = liked.includes(s.id);
             const isOwnService = userId !== null && s.provider_id === userId;
             const name = getProviderName(s);
-            const { waLink } = getContactLinks(s);
+            const { waLink, smsLink } = getContactLinks(s);
             const hasImage = s.image_url !== null && s.image_url !== "";
 
             return (
@@ -121,6 +121,9 @@ export default function DiscoverPage() {
                     )}
                     {isOwnService && (
                       <span className="flex-1 py-1.5 rounded-lg text-[11px] font-bold bg-white/5 text-muted2 text-center">Your service</span>
+                    )}
+                    {smsLink && !isOwnService && (
+                      <a href={smsLink} onClick={(e) => e.stopPropagation()} className="flex-1 py-1.5 rounded-lg text-[11px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20 text-center">Text</a>
                     )}
                     {waLink && !isOwnService && (
                       <a href={waLink} target="_blank" onClick={(e) => e.stopPropagation()} className="flex-1 py-1.5 rounded-lg text-[11px] font-bold bg-green-500/10 text-green-400 border border-green-500/20 text-center">Chat</a>

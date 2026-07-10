@@ -36,7 +36,7 @@ export default function FeaturedPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {services.map((s) => {
             const name = getProviderName(s);
-            const { telLink, waLink } = getContactLinks(s);
+            const { telLink, waLink, smsLink } = getContactLinks(s);
             const hasImage = s.image_url !== null && s.image_url !== "";
 
             return (
@@ -62,6 +62,7 @@ export default function FeaturedPage() {
                   <div className="flex gap-2">
                     {telLink && <a href={telLink} className="flex-1 text-center py-2 rounded-lg text-xs font-bold bg-red-500 text-white">Call</a>}
                     {!telLink && <span className="flex-1 text-center py-2 rounded-lg text-xs font-bold bg-white/5 text-muted2">No phone</span>}
+                    {smsLink && <a href={smsLink} className="flex-1 text-center py-2 rounded-lg text-xs font-bold bg-blue-500 text-white">Text</a>}
                     {waLink && <a href={waLink} target="_blank" className="flex-1 text-center py-2 rounded-lg text-xs font-bold bg-green-500 text-white">WhatsApp</a>}
                   </div>
                 </div>
