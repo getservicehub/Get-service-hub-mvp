@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { SAN_DIEGO_COUNTY_CITIES } from "@/lib/services/cities";
 
 type Category = { id: string; name: string; icon: string };
 
@@ -88,7 +89,9 @@ export default function NewServicePage() {
     setSuccess(true);
     setLoading(false);
     setTimeout(() => router.push("/dashboard"), 1500);
-  };if (success) {
+  };
+
+  if (success) {
     return (
       <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5 flex items-center justify-center">
         <div className="max-w-[400px] text-center">
@@ -143,7 +146,11 @@ export default function NewServicePage() {
 
           <div>
             <label className="block text-xs font-semibold text-muted2 mb-1.5">City</label>
-            <input type="text" required value={city} onChange={(e) => setCity(e.target.value)} className="w-full px-4 py-3 bg-bg2 border border-white/20 rounded-lg text-white text-sm outline-none focus:border-cyan-400" />
+            <select required value={city} onChange={(e) => setCity(e.target.value)} className="w-full px-4 py-3 bg-bg2 border border-white/20 rounded-lg text-white text-sm outline-none focus:border-cyan-400">
+              {SAN_DIEGO_COUNTY_CITIES.map((c) => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
           </div>
 
           <div>
