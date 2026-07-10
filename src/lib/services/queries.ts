@@ -49,5 +49,7 @@ export function getContactLinks(service: ServiceCard) {
   return {
     telLink: phone ? "tel:" + phone.replace(/\D/g, "") : null,
     waLink: phone ? "https://wa.me/1" + phone.replace(/\D/g, "") : null,
+    smsLink: phone ? "sms:" + phone.replace(/\D/g, "") : null,
   };
 }
+

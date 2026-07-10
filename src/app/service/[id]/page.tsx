@@ -130,6 +130,7 @@ export default function ServiceDetailPage() {
   const name = service.profiles?.business_name || service.profiles?.full_name || "Provider";
   const phone = service.profiles?.phone;
   const waLink = phone ? "https://wa.me/1" + phone.replace(/\D/g, "") : null;
+  const smsLink = phone ? "sms:" + phone.replace(/\D/g, "") : null;
   const telLink = phone ? "tel:" + phone.replace(/\D/g, "") : null;
   const hasImage = service.image_url !== null && service.image_url !== "";
 
@@ -155,7 +156,8 @@ export default function ServiceDetailPage() {
 
         {!isOwnService && (
           <div className="flex gap-3 mb-10">
-          {telLink && <a href={telLink} onClick={() => trackEvent("contact_call", serviceId)} className="flex-1 text-center py-3 rounded-lg text-sm font-bold bg-red-500 text-white">Call</a>}  
+            {telLink && <a href={telLink} onClick={() => trackEvent("contact_call", serviceId)} className="flex-1 text-center py-3 rounded-lg text-sm font-bold bg-red-500 text-white">Call</a>}
+            {smsLink && <a href={smsLink} onClick={() => trackEvent("contact_sms", serviceId)} className="flex-1 text-center py-3 rounded-lg text-sm font-bold bg-blue-500 text-white">Text</a>}
             {waLink && <a href={waLink} target="_blank" onClick={() => trackEvent("contact_whatsapp", serviceId)} className="flex-1 text-center py-3 rounded-lg text-sm font-bold bg-green-500 text-white">WhatsApp</a>}
           </div>
         )}<div className="border-t border-white/[.08] pt-8">
