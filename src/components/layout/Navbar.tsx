@@ -50,9 +50,14 @@ export default function Navbar() {
     <>
       <nav className={scrolled ? "fixed top-0 left-0 right-0 z-[100] px-6 transition-all duration-300 bg-[#060D1A]/97 backdrop-blur-2xl shadow-lg" : "fixed top-0 left-0 right-0 z-[100] px-6 transition-all duration-300 bg-transparent"}>
         <div className="max-w-[1140px] mx-auto flex items-center justify-between h-[72px]">
-          <Link href="/" className="flex items-center flex-shrink-0">
-            <Image src="/logo-horizontal.png" alt="GetServiHub" width={180} height={40} className="h-14 w-auto" priority />
-          </Link>
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <Link href="/" className="flex items-center">
+              <Image src="/logo-horizontal.png" alt="GetServiHub" width={180} height={40} className="h-14 w-auto" priority />
+            </Link>
+            <button onClick={() => setLanguage(language === "en" ? "es" : "en")} className="w-9 h-8 rounded-lg border border-white/20 text-[11px] font-bold text-white hover:bg-white/5 transition-all flex-shrink-0">
+              {language === "en" ? "ES" : "EN"}
+            </button>
+          </div>
 
           <div className="hidden md:flex items-center gap-1">
             <Link href="/directory" className="px-3.5 py-2 rounded-lg text-sm font-medium text-muted2 hover:text-white hover:bg-white/5 transition-all">{t("nav_browse")}</Link>
@@ -69,7 +74,7 @@ export default function Navbar() {
                 <Link href="/favorites" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">{t("nav_favorites")}</Link>
                 <Link href="/messages" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">{t("nav_messages")}</Link>
                 <Link href="/account" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">{t("nav_account")}</Link>
-                <span className="hidden md:inline text-sm text-muted2 max-w-[120px] truncate">Hi, {fullName || user.email}</span>
+                <span className="hidden md:inline text-sm text-muted2 max-w-[100px] truncate">Hi, {fullName || user.email}</span>
                 <button onClick={handleSignOut} className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg border border-white/20 text-white hover:bg-white/5 transition-all">{t("nav_signout")}</button>
               </>
             )}
@@ -79,9 +84,6 @@ export default function Navbar() {
                 <Link href="/register" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg gradient-bg text-white hover:opacity-90 transition-all">{t("nav_getstarted")}</Link>
               </>
             )}
-            <button onClick={() => setLanguage(language === "en" ? "es" : "en")} className="w-10 h-9 rounded-lg border border-white/20 text-xs font-bold text-white hover:bg-white/5 transition-all">
-              {language === "en" ? "ES" : "EN"}
-            </button>
             <button onClick={() => setDrawerOpen(true)} className="md:hidden flex flex-col gap-1.5 p-1.5">
               <span className="w-6 h-0.5 bg-white rounded-full" />
               <span className="w-6 h-0.5 bg-white rounded-full" />
@@ -101,7 +103,7 @@ export default function Navbar() {
             </div>
 
             {user && (
-              <div className="text-sm text-white font-semibold mb-4 pb-4 border-b border-white/10">Hi, {fullName || user.email}</div>
+              <div className="text-sm text-white font-semibold mb-4 pb-4 border-b border-white/10 truncate">Hi, {fullName || user.email}</div>
             )}
 
             <Link href="/directory" onClick={closeDrawer} className="py-3 text-white font-medium border-b border-white/[.06]">{t("nav_browse")}</Link>
