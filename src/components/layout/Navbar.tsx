@@ -6,7 +6,9 @@ import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
 import NotificationBell from "./NotificationBell";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 export default function Navbar() {
+  const { language, setLanguage } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
@@ -76,6 +78,9 @@ export default function Navbar() {
                 <Link href="/register" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg gradient-bg text-white hover:opacity-90 transition-all">Get Started</Link>
               </>
             )}
+            <button onClick={() => setLanguage(language === "en" ? "es" : "en")} className="w-10 h-9 rounded-lg border border-white/20 text-xs font-bold text-white hover:bg-white/5 transition-all">
+              {language === "en" ? "ES" : "EN"}
+            </button>
             <button onClick={() => setDrawerOpen(true)} className="md:hidden flex flex-col gap-1.5 p-1.5">
               <span className="w-6 h-0.5 bg-white rounded-full" />
               <span className="w-6 h-0.5 bg-white rounded-full" />
