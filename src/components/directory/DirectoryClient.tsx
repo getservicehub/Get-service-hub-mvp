@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { getProviderName, type ServiceCard } from "@/lib/services/queries";
+import StarRating from "@/components/ui/StarRating";
 
 type Category = { id: string; name: string; icon: string };
 
@@ -69,14 +70,13 @@ export default function DirectoryClient({ initialServices, initialCategories, in
                   {!hasImage && <span>{service.categories?.icon || "⚡"}</span>}
                 </div>
                 <div className="p-4">
-                  <div className="flex items-center justify-between mb-1">
-                    <div className="text-[15px] font-extrabold">{getProviderName(service)}</div>
-                    {service.avg_rating && (
-                      <div className="flex items-center gap-1 text-amber-400 text-xs font-bold flex-shrink-0">
-                        ★ {service.avg_rating} <span className="text-muted2 font-normal">({service.review_count})</span>
-                      </div>
-                    )}
-                  </div>
+                  <div className="text-[15px] font-extrabold mb-1">{getProviderName(service)}</div>
+                  {service.avg_rating && (
+                    <div className="flex items-center gap-1.5 mb-1.5">
+                      <StarRating rating={service.avg_rating} size="text-xs" />
+                      <span className="text-[11px] text-muted2">{service.avg_rating} ({service.review_count})</span>
+                    </div>
+                  )}
                   <div className="text-xs text-muted2 mb-2">{service.title} - {service.city}</div>
                   <div className="text-[13px] text-muted2 mb-3">{service.description}</div>
                   <div className="flex gap-2 flex-wrap">
