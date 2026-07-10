@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import DirectoryClient from "@/components/directory/DirectoryClient";
 import type { Metadata } from "next";
-
+export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Browse All Pros | GetServiHub",
   description: "Find verified local service professionals in San Diego. Mobile mechanics, plumbers, electricians, cleaners, and more. English & Spanish. No commission.",
