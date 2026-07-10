@@ -30,8 +30,17 @@ export default async function DirectoryPage({
     .order("created_at", { ascending: false });
 
   const { data: categories } = await supabase.from("categories").select("id, name, icon").order("name");
+  const { data: ratings } = await supabase.from("service_ratings").select("service_id, avg_rating, review_count");
 
-  const allServices = (services as any) || [];
+  const allServices = ((services as any) || []).map((s: any) => {
+    const rating = ratings?.find((r) => r.service_id === s.id);
+    return {
+      ...s,
+      avg_rating: rating?.avg_rating || null,
+      review_count: rating?.review_count || 0,
+    };
+  });
+
   const cities = Array.from(new Set(allServices.map((s: any) => s.city).filter(Boolean))).sort() as string[];
 
   return (
