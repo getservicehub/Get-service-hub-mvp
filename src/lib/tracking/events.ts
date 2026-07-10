@@ -5,6 +5,7 @@ type EventType =
   | "click"
   | "contact_call"
   | "contact_whatsapp"
+  | "contact_sms"
   | "favorite_add"
   | "favorite_remove"
   | "review_submit";
