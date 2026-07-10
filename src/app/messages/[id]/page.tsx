@@ -59,10 +59,10 @@ export default function ChatThreadPage() {
       if (profile) setOtherName(profile.business_name || profile.full_name || "User");
     }
 
-    const { data: msgs } = await supabase.from("messages").select("id, sender_id, content, created_at").eq("conversation_id", conversationId).order("created_at", { ascending: true });
+   const { data: msgs } = await supabase.from("messages").select("id, sender_id, content, created_at, read_at").eq("conversation_id", conversationId).order("created_at", { ascending: true });
 
     if (msgs) setMessages(msgs);
-    setLoading(false);
+    setLoading(false);await supabase.from("messages").update({ read_at: new Date().toISOString() }).eq("conversation_id", conversationId).neq("sender_id", user.id).is("read_at", null);
   };
 
   const sendMessage = async () => {
@@ -101,9 +101,12 @@ export default function ChatThreadPage() {
             const isMine = m.sender_id === userId;
             return (
               <div key={m.id} className={isMine ? "flex justify-end" : "flex justify-start"}>
-                <div className={isMine ? "max-w-[75%] bg-blue-600 text-white rounded-2xl rounded-br-sm px-4 py-2.5 text-sm" : "max-w-[75%] bg-white/10 text-white rounded-2xl rounded-bl-sm px-4 py-2.5 text-sm"}>
+             <div className={isMine ? "max-w-[75%] bg-blue-600 text-white rounded-2xl rounded-br-sm px-4 py-2.5 text-sm" : "max-w-[75%] bg-white/10 text-white rounded-2xl rounded-bl-sm px-4 py-2.5 text-sm"}>
                   {m.content}
-                </div>
+                  {isMine && (
+                    <span className="text-[10px] opacity-60 ml-2">{(m as any).read_at ? "✓✓ Read" : "✓ Sent"}</span>
+                  )}
+                </div>   
               </div>
             );
           })}
