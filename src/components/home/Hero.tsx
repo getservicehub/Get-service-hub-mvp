@@ -91,10 +91,10 @@ export default function Hero() {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mt-12 pt-9 border-t border-white/[.08]">
-              <div><div className="text-2xl font-extrabold gradient-text">500+</div><div className="text-xs text-muted2 mt-0.5">{t("hero_stat_pros")}</div></div>
-              <div><div className="text-2xl font-extrabold gradient-text">12K+</div><div className="text-xs text-muted2 mt-0.5">{t("hero_stat_clients")}</div></div>
-              <div><div className="text-2xl font-extrabold gradient-text">$0</div><div className="text-xs text-muted2 mt-0.5">{t("hero_stat_commission")}</div></div>
-              <div><div className="text-2xl font-extrabold gradient-text">4.9★</div><div className="text-xs text-muted2 mt-0.5">{t("hero_stat_rating")}</div></div>
+              <div><div className="text-xl">🌐</div><div className="text-xs text-muted2 mt-1 font-semibold">{t("hero_stat_pros")}</div></div>
+              <div><div className="text-xl">💰</div><div className="text-xs text-muted2 mt-1 font-semibold">{t("hero_stat_clients")}</div></div>
+              <div><div className="text-xl">📍</div><div className="text-xs text-muted2 mt-1 font-semibold">{t("hero_stat_commission")}</div></div>
+              <div><div className="text-xl">⚖️</div><div className="text-xs text-muted2 mt-1 font-semibold">{t("hero_stat_rating")}</div></div>
             </div>
           </div>
 
