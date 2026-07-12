@@ -47,37 +47,40 @@ export default function SponsorBanner() {
 
   return (
     <div className="max-w-[1140px] mx-auto px-5 py-6">
-      <div className="relative bg-card border border-amber-400/20 rounded-2xl overflow-hidden">
-        <div className="absolute top-3 left-3 text-[10px] font-bold tracking-[1.5px] uppercase text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full z-10">
-          Sponsored
+      <div className="relative bg-gradient-to-br from-[#0D1A2E] via-[#0D1A2E] to-[#1a1206] border border-amber-400/30 rounded-3xl overflow-hidden shadow-[0_0_60px_rgba(245,158,11,.08)]">
+        <div className="absolute -top-20 -right-20 w-[300px] h-[300px] bg-[radial-gradient(circle,rgba(245,158,11,.15)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute top-4 left-4 flex items-center gap-1.5 text-[10px] font-bold tracking-[1.5px] uppercase text-amber-400 bg-amber-400/10 border border-amber-400/20 px-3 py-1.5 rounded-full z-10">
+          ⭐ Sponsored
         </div>
 
-        <div className="flex flex-col md:flex-row items-center gap-6 p-6 md:p-8 min-h-[140px]">
-          <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center flex-shrink-0 p-2">
-            <Image src="/logo-icon.png" alt="GetServiHub" width={48} height={48} className="w-full h-full object-contain" />
+        <div className="relative flex flex-col md:flex-row items-center gap-8 p-8 md:p-10 min-h-[180px]">
+          <div className="flex-shrink-0">
+            <Image src="/logo-full.png" alt="GetServiHub" width={220} height={110} className="h-24 md:h-28 w-auto" />
           </div>
+
+          <div className="hidden md:block w-px h-20 bg-amber-400/20" />
 
           <div className="flex-1 text-center md:text-left transition-opacity duration-500" key={slideIndex}>
-            <div className="text-lg font-extrabold mb-1">{current.title}</div>
-            <div className="text-sm text-muted2">{current.sub}</div>
+            <div className="text-2xl md:text-3xl font-black mb-2 leading-tight">{current.title}</div>
+            <div className="text-sm text-muted2 max-w-[440px]">{current.sub}</div>
           </div>
 
-          <Link href={ctaLink} className="flex-shrink-0 px-6 py-3 rounded-lg gradient-bg text-white font-bold text-sm whitespace-nowrap hover:opacity-90 transition-all">
+          <Link href={ctaLink} className="flex-shrink-0 px-8 py-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-[#1a1206] font-black text-sm whitespace-nowrap hover:opacity-90 hover:scale-105 transition-all shadow-lg">
             {t("sponsor_cta")} →
           </Link>
         </div>
 
-        <div className="flex justify-center gap-1.5 pb-4">
+        <div className="relative flex justify-center gap-1.5 pb-5">
           {slides.map((_, i) => (
             <button
               key={i}
               onClick={() => setSlideIndex(i)}
-              className={i === slideIndex ? "w-5 h-1.5 rounded-full bg-amber-400 transition-all" : "w-1.5 h-1.5 rounded-full bg-white/20 transition-all"}
+              className={i === slideIndex ? "w-6 h-1.5 rounded-full bg-amber-400 transition-all" : "w-1.5 h-1.5 rounded-full bg-white/20 transition-all"}
             />
           ))}
         </div>
 
-        <div className="text-center text-[11px] text-cyan-400/70 pb-3">{t("sponsor_disclaimer")}</div>
+        <div className="relative text-center text-[11px] text-amber-400/60 pb-4">{t("sponsor_disclaimer")}</div>
       </div>
     </div>
   );
