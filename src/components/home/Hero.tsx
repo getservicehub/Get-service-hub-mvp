@@ -99,28 +99,22 @@ export default function Hero() {
           </div>
 
           <div className="hidden md:block relative h-[480px]">
-            <div className="absolute top-5 left-0 w-[210px] bg-card border border-white/10 rounded-2xl p-4 shadow-2xl">
-              <div className="flex items-center gap-2.5 mb-2.5">
-                <div className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center font-extrabold text-white flex-shrink-0">R</div>
-                <div><div className="text-[13px] font-bold">Ramirez Mechanics</div><div className="text-[11px] text-muted2">Mobile Mechanic</div></div>
-              </div>
-              <div className="text-xs">⭐⭐⭐⭐⭐ 4.9</div>
+            <div className="absolute top-5 left-0 w-[200px] bg-card border border-white/10 rounded-2xl p-5 shadow-2xl">
+              <div className="text-3xl mb-2">🔍</div>
+              <div className="text-base font-extrabold mb-0.5">{t("value_card_1_title")}</div>
+              <div className="text-[11px] text-muted2">{t("value_card_1_sub")}</div>
             </div>
 
-            <div className="absolute top-[180px] right-0 w-[210px] bg-card border border-white/10 rounded-2xl p-4 shadow-2xl">
-              <div className="flex items-center gap-2.5 mb-2.5">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center font-extrabold text-white flex-shrink-0">V</div>
-                <div><div className="text-[13px] font-bold">Verde Landscaping</div><div className="text-[11px] text-muted2">Landscaping</div></div>
-              </div>
-              <div className="text-xs">⭐⭐⭐⭐⭐ 4.8</div>
+            <div className="absolute top-[190px] right-0 w-[200px] bg-card border border-white/10 rounded-2xl p-5 shadow-2xl">
+              <div className="text-3xl mb-2">📈</div>
+              <div className="text-base font-extrabold mb-0.5">{t("value_card_2_title")}</div>
+              <div className="text-[11px] text-muted2">{t("value_card_2_sub")}</div>
             </div>
 
-            <div className="absolute bottom-10 left-10 w-[210px] bg-card border border-white/10 rounded-2xl p-4 shadow-2xl">
-              <div className="flex items-center gap-2.5 mb-2.5">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center font-extrabold text-white flex-shrink-0">E</div>
-                <div><div className="text-[13px] font-bold">Elite Auto Detail</div><div className="text-[11px] text-muted2">Auto Detailing</div></div>
-              </div>
-              <div className="text-xs">⭐⭐⭐⭐⭐ 4.9</div>
+            <div className="absolute bottom-10 left-14 w-[200px] bg-card border border-white/10 rounded-2xl p-5 shadow-2xl">
+              <div className="text-3xl mb-2">🌐</div>
+              <div className="text-base font-extrabold mb-0.5">{t("value_card_3_title")}</div>
+              <div className="text-[11px] text-muted2">{t("value_card_3_sub")}</div>
             </div>
           </div>
         </div>
