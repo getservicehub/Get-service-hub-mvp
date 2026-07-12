@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import { matchCategory } from "@/lib/services/keywords";
 import { getCities } from "@/lib/services/queries";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { CategoryIcon } from "@/lib/services/categoryIcons";
 
 type Category = { id: string; name: string; icon: string };
 
@@ -198,7 +199,7 @@ export default function Hero() {
         <div className="flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {categories.map((cat) => (
             <Link key={cat.id} href={`/directory?category=${encodeURIComponent(cat.name)}`} className="flex-shrink-0 flex items-center gap-2 bg-card border border-white/[.08] rounded-full px-4 py-2.5 hover:border-cyan-400/40 transition-all">
-              <span className="text-lg">{cat.icon}</span>
+              <CategoryIcon name={cat.name} className="w-4 h-4" />
               <span className="text-[13px] font-semibold whitespace-nowrap">{cat.name}</span>
             </Link>
           ))}

@@ -4,15 +4,16 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { matchCategory } from "@/lib/services/keywords";
+import { CategoryIcon } from "@/lib/services/categoryIcons";
 
 const tags = [
-  { label: "🔧 Mobile Mechanic", value: "Mobile Mechanic" },
-  { label: "🚗 Tow Service", value: "Tow Service" },
-  { label: "✨ Auto Detailing", value: "Auto Detailing" },
-  { label: "🌿 Landscaping", value: "Landscaping" },
-  { label: "🏠 House Cleaning", value: "Cleaning" },
-  { label: "🎨 Painting", value: "Painting" },
-  { label: "🔨 Remodeling", value: "Remodeling" },
+  "Mobile Mechanic",
+  "Tow Service",
+  "Auto Detailing",
+  "Landscaping",
+  "Cleaning",
+  "Painting",
+  "Remodeling",
 ];
 
 export default function SearchBar() {
@@ -62,13 +63,14 @@ export default function SearchBar() {
         </div>
 
         <div className="flex flex-wrap gap-2 mt-4">
-          {tags.map((tag) => (
+          {tags.map((tagName) => (
             <button
-              key={tag.value}
-              onClick={() => router.push(`/directory?category=${encodeURIComponent(tag.value)}`)}
-              className="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-500/10 border border-white/20 text-blue-300 hover:bg-blue-500/20 hover:text-cyan-400 transition-all"
+              key={tagName}
+              onClick={() => router.push(`/directory?category=${encodeURIComponent(tagName)}`)}
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-500/10 border border-white/20 text-blue-300 hover:bg-blue-500/20 hover:text-cyan-400 transition-all"
             >
-              {tag.label}
+              <CategoryIcon name={tagName} className="w-3.5 h-3.5" />
+              {tagName}
             </button>
           ))}
         </div>
