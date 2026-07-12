@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { CategoryIcon } from "@/lib/services/categoryIcons";
 
 type Category = { id: string; name: string; icon: string };
 
@@ -39,7 +40,9 @@ export default function Categories() {
               onClick={() => router.push(`/directory?category=${encodeURIComponent(cat.name)}`)}
               className="bg-card border border-white/[.08] rounded-2xl p-6 text-center hover:border-white/20 hover:-translate-y-1 hover:bg-[#0D1A2E]/90 transition-all"
             >
-              <div className="text-4xl mb-3">{cat.icon}</div>
+              <div className="flex justify-center mb-3 text-cyan-400">
+                <CategoryIcon name={cat.name} className="w-8 h-8" />
+              </div>
               <div className="text-[13px] font-bold mb-1">{cat.name}</div>
             </button>
           ))}
