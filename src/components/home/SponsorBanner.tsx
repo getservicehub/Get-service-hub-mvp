@@ -21,6 +21,7 @@ export default function SponsorBanner() {
           <div className="flex-1 text-center md:text-left">
             <div className="text-lg font-extrabold mb-1">{t("sponsor_title")}</div>
             <div className="text-sm text-muted2">{t("sponsor_sub")}</div>
+            <div className="text-[11px] text-cyan-400/70 mt-1.5">{t("sponsor_disclaimer")}</div>
           </div>
 
           <Link href="/register" className="flex-shrink-0 px-6 py-3 rounded-lg gradient-bg text-white font-bold text-sm whitespace-nowrap hover:opacity-90 transition-all">
