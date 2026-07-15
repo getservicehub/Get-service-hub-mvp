@@ -5,10 +5,9 @@ import { usePathname } from "next/navigation";
 
 const items = [
   { href: "/", label: "Home", icon: "🏠" },
-  { href: "/discover", label: "Discover Pros", icon: "🔭" },
-  { href: "/featured", label: "Featured Pros", icon: "⭐" },
+  { href: "/find", label: "Find Pros", icon: "🔍" },
+  { href: "/featured", label: "Featured", icon: "⭐" },
   { href: "/gallery", label: "Work Gallery", icon: "📸" },
-  { href: "/find", label: "Directory", icon: "🗂️" },
 ];
 
 export default function Sidebar() {
