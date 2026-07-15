@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import DirectoryClient from "@/components/find/DirectoryClient";
+import { getRotatedWindow } from "@/lib/services/rotation";
 import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 const SERVICE_SELECT =
   "id, title, description, city, price_from, emergency, espanol, image_url, provider_id, plan, profiles(full_name, business_name, phone), categories(name, icon)";
 
-export default async function DirectoryPage({
+export default async function FindPage({
   searchParams,
 }: {
   searchParams: Promise<{ category?: string; city?: string }>;
@@ -41,11 +42,15 @@ export default async function DirectoryPage({
     };
   });
 
+  const paidPlans = allServices.filter((s: any) => s.plan === "pro" || s.plan === "premium" || s.plan === "premier");
+  const sponsored = getRotatedWindow<any>(paidPlans, 4, 1);
+
   const cities = Array.from(new Set(allServices.map((s: any) => s.city).filter(Boolean))).sort() as string[];
 
   return (
     <DirectoryClient
       initialServices={allServices}
+      sponsored={sponsored}
       initialCategories={categories || []}
       initialFilter={initialFilter}
       initialCity={initialCity}

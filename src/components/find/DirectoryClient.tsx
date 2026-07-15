@@ -14,13 +14,14 @@ type ServiceWithRating = ServiceCard & {
 
 type Props = {
   initialServices: ServiceWithRating[];
+  sponsored: ServiceWithRating[];
   initialCategories: Category[];
   initialFilter: string;
   initialCity: string;
   cities: string[];
 };
 
-export default function DirectoryClient({ initialServices, initialCategories, initialFilter, initialCity, cities }: Props) {
+export default function DirectoryClient({ initialServices, sponsored, initialCategories, initialFilter, initialCity, cities }: Props) {
   const [filter, setFilter] = useState(initialFilter);
   const [cityFilter, setCityFilter] = useState(initialCity);
 
@@ -33,8 +34,32 @@ export default function DirectoryClient({ initialServices, initialCategories, in
   return (
     <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5">
       <div className="max-w-[1140px] mx-auto">
-        <div className="text-xs font-bold tracking-[2px] uppercase text-cyan-400 mb-3">Directory</div>
-        <h1 className="text-3xl md:text-4xl font-extrabold mb-8">Browse All Pros</h1>
+
+        {sponsored.length > 0 && (
+          <div className="mb-10">
+            <div className="text-[10px] font-bold tracking-[2px] uppercase text-amber-400 mb-4">Sponsored</div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {sponsored.map((s) => {
+                const hasImage = s.image_url !== null && s.image_url !== "";
+                return (
+                  <a key={s.id} href={`/service/${s.id}`} className="block bg-card border border-amber-400/20 rounded-2xl overflow-hidden hover:border-amber-400/40 transition-all">
+                    <div className="w-full h-[100px] flex items-center justify-center text-cyan-400 bg-gradient-to-br from-[#0A1628] to-[#0D1A2E] overflow-hidden">
+                      {hasImage && <img src={s.image_url as string} alt={s.title} className="w-full h-full object-cover" />}
+                      {!hasImage && <CategoryIcon name={s.categories?.name || ""} className="w-8 h-8" />}
+                    </div>
+                    <div className="p-3">
+                      <div className="text-[12px] font-bold truncate">{getProviderName(s)}</div>
+                      <div className="text-[10px] text-muted2 truncate">{s.title}</div>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        <div className="text-xs font-bold tracking-[2px] uppercase text-cyan-400 mb-3">Find Local Pros</div>
+        <h1 className="text-3xl md:text-4xl font-extrabold mb-8">Browse All Professionals</h1>
 
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <select value={cityFilter} onChange={(e) => setCityFilter(e.target.value)} className="px-4 py-2.5 bg-card border border-white/20 rounded-lg text-sm text-white max-w-[220px]">
