@@ -1,6 +1,6 @@
 export const translations = {
   en: {
-    nav_browse: "Browse Services",
+    nav_browse: "Find",
     nav_discover: "Discover",
     nav_featured: "Featured",
     nav_gallery: "Gallery",
@@ -63,7 +63,7 @@ export const translations = {
     footer_rights: "All rights reserved.",
   },
   es: {
-    nav_browse: "Buscar Servicios",
+    nav_browse: "Buscar",
     nav_discover: "Descubrir",
     nav_featured: "Destacados",
     nav_gallery: "Galeria",

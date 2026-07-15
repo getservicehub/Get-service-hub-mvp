@@ -25,9 +25,9 @@ export default function SearchBar() {
     if (query.trim()) {
       const matchedCategory = matchCategory(query);
       if (matchedCategory) {
-        router.push(`/directory?category=${encodeURIComponent(matchedCategory)}`);
+        router.push(`/find?category=${encodeURIComponent(matchedCategory)}`);
       } else {
-        router.push(`/directory?q=${encodeURIComponent(query.trim())}`);
+        router.push(`/find?q=${encodeURIComponent(query.trim())}`);
       }
     }
   };
@@ -66,7 +66,7 @@ export default function SearchBar() {
           {tags.map((tagName) => (
             <button
               key={tagName}
-              onClick={() => router.push(`/directory?category=${encodeURIComponent(tagName)}`)}
+              onClick={() => router.push(`/find?category=${encodeURIComponent(tagName)}`)}
               className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-500/10 border border-white/20 text-blue-300 hover:bg-blue-500/20 hover:text-cyan-400 transition-all"
             >
               <CategoryIcon name={tagName} className="w-3.5 h-3.5" />

@@ -37,7 +37,7 @@ export default function Categories() {
           {categories.map((cat) => (
             <button
               key={cat.id}
-              onClick={() => router.push(`/directory?category=${encodeURIComponent(cat.name)}`)}
+              onClick={() => router.push(`/find?category=${encodeURIComponent(cat.name)}`)}
               className="bg-card border border-white/[.08] rounded-2xl p-6 text-center hover:border-white/20 hover:-translate-y-1 hover:bg-[#0D1A2E]/90 transition-all"
             >
               <div className="flex justify-center mb-3 text-cyan-400">

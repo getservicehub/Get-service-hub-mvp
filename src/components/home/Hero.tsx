@@ -64,7 +64,7 @@ export default function Hero() {
       params.set("city", selectedCity);
     }
 
-    router.push(`/directory?${params.toString()}`);
+    router.push(`/find?${params.toString()}`);
   };
 
   if (!user) {
@@ -87,7 +87,7 @@ export default function Hero() {
             </p>
 
             <div className="flex gap-3 flex-wrap">
-              <Link href="/directory" className="inline-flex items-center gap-1.5 text-base font-semibold px-7 py-3.5 rounded-lg gradient-bg text-white hover:opacity-90 transition-all">🔍 {t("hero_cta_find")}</Link>
+              <Link href="/find" className="inline-flex items-center gap-1.5 text-base font-semibold px-7 py-3.5 rounded-lg gradient-bg text-white hover:opacity-90 transition-all">🔍 {t("hero_cta_find")}</Link>
               <Link href="/register" className="inline-flex items-center gap-1.5 text-base font-semibold px-7 py-3.5 rounded-lg border border-cyan-400/20 text-cyan-400 hover:bg-cyan-400/[.08] transition-all">{t("hero_cta_list")} →</Link>
             </div>
 
@@ -198,7 +198,7 @@ export default function Hero() {
 
         <div className="flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {categories.map((cat) => (
-            <Link key={cat.id} href={`/directory?category=${encodeURIComponent(cat.name)}`} className="flex-shrink-0 flex items-center gap-2 bg-card border border-white/[.08] rounded-full px-4 py-2.5 hover:border-cyan-400/40 transition-all">
+            <Link key={cat.id} href={`/find?category=${encodeURIComponent(cat.name)}`} className="flex-shrink-0 flex items-center gap-2 bg-card border border-white/[.08] rounded-full px-4 py-2.5 hover:border-cyan-400/40 transition-all">
               <CategoryIcon name={cat.name} className="w-4 h-4" />
               <span className="text-[13px] font-semibold whitespace-nowrap">{cat.name}</span>
             </Link>

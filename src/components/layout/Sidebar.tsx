@@ -8,7 +8,7 @@ const items = [
   { href: "/discover", label: "Discover Pros", icon: "🔭" },
   { href: "/featured", label: "Featured Pros", icon: "⭐" },
   { href: "/gallery", label: "Work Gallery", icon: "📸" },
-  { href: "/directory", label: "Directory", icon: "🗂️" },
+  { href: "/find", label: "Directory", icon: "🗂️" },
 ];
 
 export default function Sidebar() {

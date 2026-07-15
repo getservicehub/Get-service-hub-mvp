@@ -60,7 +60,7 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:flex items-center gap-1">
-            <Link href="/directory" className="px-3.5 py-2 rounded-lg text-sm font-medium text-muted2 hover:text-white hover:bg-white/5 transition-all">{t("nav_browse")}</Link>
+            <Link href="/find" className="px-3.5 py-2 rounded-lg text-sm font-medium text-muted2 hover:text-white hover:bg-white/5 transition-all">{t("nav_browse")}</Link>
             <Link href="/discover" className="px-3.5 py-2 rounded-lg text-sm font-medium text-muted2 hover:text-white hover:bg-white/5 transition-all">{t("nav_discover")}</Link>
             <Link href="/featured" className="px-3.5 py-2 rounded-lg text-sm font-medium text-muted2 hover:text-white hover:bg-white/5 transition-all">{t("nav_featured")}</Link>
             <Link href="/gallery" className="px-3.5 py-2 rounded-lg text-sm font-medium text-muted2 hover:text-white hover:bg-white/5 transition-all">{t("nav_gallery")}</Link>
@@ -106,7 +106,7 @@ export default function Navbar() {
               <div className="text-sm text-white font-semibold mb-4 pb-4 border-b border-white/10 truncate">Hi, {fullName || user.email}</div>
             )}
 
-            <Link href="/directory" onClick={closeDrawer} className="py-3 text-white font-medium border-b border-white/[.06]">{t("nav_browse")}</Link>
+            <Link href="/find" onClick={closeDrawer} className="py-3 text-white font-medium border-b border-white/[.06]">{t("nav_browse")}</Link>
             <Link href="/discover" onClick={closeDrawer} className="py-3 text-white font-medium border-b border-white/[.06]">{t("nav_discover")}</Link>
             <Link href="/featured" onClick={closeDrawer} className="py-3 text-white font-medium border-b border-white/[.06]">{t("nav_featured")}</Link>
             <Link href="/gallery" onClick={closeDrawer} className="py-3 text-white font-medium border-b border-white/[.06]">{t("nav_gallery")}</Link>

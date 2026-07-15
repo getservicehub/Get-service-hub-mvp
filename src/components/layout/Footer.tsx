@@ -19,7 +19,7 @@ export default function Footer() {
         <div>
           <div className="text-[11px] font-bold tracking-[1.5px] uppercase text-muted2 mb-4">{t("footer_explore")}</div>
           <div className="flex flex-col gap-2.5">
-            <Link href="/directory" className="text-xs text-muted2 hover:text-white">{t("nav_browse")}</Link>
+            <Link href="/find" className="text-xs text-muted2 hover:text-white">{t("nav_browse")}</Link>
             <Link href="/discover" className="text-xs text-muted2 hover:text-white">{t("nav_discover")}</Link>
             <Link href="/featured" className="text-xs text-muted2 hover:text-white">{t("nav_featured")}</Link>
             <Link href="/gallery" className="text-xs text-muted2 hover:text-white">{t("nav_gallery")}</Link>
