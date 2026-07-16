@@ -106,6 +106,7 @@ export default function DirectoryClient({ initialServices, sponsored, initialCat
                   <div className="text-xs text-muted2 mb-2">{service.title} - {service.city}</div>
                   <div className="text-[13px] text-muted2 mb-3">{service.description}</div>
                   <div className="flex gap-2 flex-wrap">
+                    {(service.plan === "premium" || service.plan === "premier") && <span className="text-[11px] px-2 py-0.5 rounded-full bg-amber-400/15 text-amber-400 font-bold">{service.plan === "premier" ? "Premier" : "Premium"}</span>}
                     {service.emergency && <span className="text-[11px] px-2 py-0.5 rounded-full bg-red-500/15 text-red-400 font-bold">Emergency</span>}
                     {service.espanol && <span className="text-[11px] px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-400 font-bold">Se habla espanol</span>}
                     {service.price_from && <span className="text-[11px] px-2 py-0.5 rounded-full bg-green-500/15 text-green-400 font-bold">From ${service.price_from}</span>}
