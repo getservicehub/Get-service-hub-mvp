@@ -10,13 +10,13 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/directory",
+        destination: "/find",
+        permanent: true,
+      },
       {
         source: "/featured",
         destination: "/premier-partners",
-        permanent: true,
-      },
-        source: "/directory",
-        destination: "/find",
         permanent: true,
       },
     ];
