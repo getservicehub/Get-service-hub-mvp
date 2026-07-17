@@ -13,6 +13,8 @@ export default function UpgradePage() {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [waitlisted, setWaitlisted] = useState(false);
+  const [eliteSpotsLeft, setEliteSpotsLeft] = useState(5);
   const supabase = createClient();
 
   useEffect(() => {
@@ -35,6 +37,9 @@ export default function UpgradePage() {
     const { data: requests } = await supabase.from("plan_requests").select("id").eq("provider_id", user.id).eq("status", "pending");
     if (requests && requests.length > 0) setPendingRequest(true);
 
+    const { count: eliteCount } = await supabase.from("services").select("id", { count: "exact", head: true }).eq("plan", "premier");
+    setEliteSpotsLeft(Math.max(0, 5 - (eliteCount || 0)));
+
     setLoading(false);
   };
 
@@ -44,6 +49,19 @@ export default function UpgradePage() {
 
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
+
+    if (selectedPlan === "premier" && eliteSpotsLeft <= 0) {
+      const { error } = await supabase.from("elite_waitlist").insert({
+        provider_id: user.id,
+        service_id: selectedServiceId,
+      });
+
+      if (!error || error.code === "23505") {
+        setWaitlisted(true);
+      }
+      setSubmitting(false);
+      return;
+    }
 
     const { error } = await supabase.from("plan_requests").insert({
       provider_id: user.id,
@@ -59,8 +77,8 @@ export default function UpgradePage() {
 
   const plans = [
     { id: "pro", name: "Pro", price: "$29", desc: "Featured badge + priority placement", color: "border-cyan-400/30" },
-    { id: "premium", name: "Premium", price: "$59", desc: "Weekly rotation in Featured (top results)", color: "border-blue-400/30" },
-    { id: "premier", name: "Premier", price: "$199", desc: "Only 3 spots total. Maximum exclusivity.", color: "border-amber-400/30" },
+    { id: "premium", name: "Plus", price: "$59", desc: "Weekly rotation in Find results", color: "border-blue-400/30" },
+    { id: "premier", name: "Elite", price: "$199", desc: eliteSpotsLeft > 0 ? `Only ${eliteSpotsLeft} of 5 spots left. Maximum exclusivity.` : "All 5 spots taken. Join the waitlist.", color: "border-amber-400/30" },
   ];
 
   if (loading) {
@@ -77,6 +95,20 @@ export default function UpgradePage() {
         <div className="max-w-[700px] mx-auto text-center py-16">
           <div className="text-5xl mb-4">📋</div>
           <div className="text-muted2 text-sm">Publish a service first before upgrading your plan.</div>
+        </div>
+      </main>
+    );
+  }
+
+  if (waitlisted) {
+    return (
+      <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5 flex items-center justify-center">
+        <div className="max-w-[440px] text-center">
+          <div className="text-5xl mb-5">📝</div>
+          <h1 className="text-2xl font-extrabold mb-3">You're on the Waitlist</h1>
+          <p className="text-muted2 text-sm leading-relaxed">
+            All 5 Elite spots are currently taken. We will notify you the moment one becomes available.
+          </p>
         </div>
       </main>
     );
@@ -124,7 +156,7 @@ export default function UpgradePage() {
         </div>
 
         <button onClick={submitRequest} disabled={!selectedPlan || submitting} className="w-full py-3.5 rounded-lg gradient-bg text-white font-bold text-sm disabled:opacity-50">
-          {submitting ? "Submitting..." : "Request Upgrade"}
+          {submitting ? "Submitting..." : selectedPlan === "premier" && eliteSpotsLeft <= 0 ? "Join Waitlist" : "Request Upgrade"}
         </button>
       </div>
     </main>
