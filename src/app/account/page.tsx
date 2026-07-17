@@ -10,6 +10,8 @@ export default function AccountPage() {
   const [businessName, setBusinessName] = useState("");
   const [serviceType, setServiceType] = useState("");
   const [phone, setPhone] = useState("");
+  const [licenseNumber, setLicenseNumber] = useState("");
+  const [isVerified, setIsVerified] = useState(false);
   const [city, setCity] = useState("San Diego");
   const [currentAvatarUrl, setCurrentAvatarUrl] = useState<string | null>(null);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
@@ -36,7 +38,7 @@ export default function AccountPage() {
 
     const { data } = await supabase
       .from("profiles")
-      .select("role, full_name, business_name, service_type, phone, city, avatar_url")
+      .select("role, full_name, business_name, service_type, phone, city, avatar_url, license_number, is_verified")
       .eq("id", user.id)
       .single();
 
@@ -46,6 +48,8 @@ export default function AccountPage() {
       setBusinessName(data.business_name || "");
       setServiceType(data.service_type || "");
       setPhone(data.phone || "");
+      setLicenseNumber(data.license_number || "");
+      setIsVerified(data.is_verified || false);
       setCity(data.city || "San Diego");
       setCurrentAvatarUrl(data.avatar_url);
     }
@@ -98,6 +102,7 @@ export default function AccountPage() {
         phone,
         city,
         avatar_url: avatarUrl,
+        license_number: licenseNumber,
       })
       .eq("id", user.id);
 
@@ -169,6 +174,12 @@ export default function AccountPage() {
               <div>
                 <label className="block text-xs font-semibold text-muted2 mb-1.5">Service Type</label>
                 <input type="text" value={serviceType} onChange={(e) => setServiceType(e.target.value)} className="w-full px-4 py-3 bg-bg2 border border-white/20 rounded-lg text-white text-sm outline-none focus:border-cyan-400" />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-muted2 mb-1.5">License Number (optional)</label>
+                <input type="text" value={licenseNumber} onChange={(e) => setLicenseNumber(e.target.value)} placeholder="e.g. CSLB #1234567" className="w-full px-4 py-3 bg-bg2 border border-white/20 rounded-lg text-white text-sm outline-none focus:border-cyan-400" />
+                {isVerified && <div className="text-[11px] text-green-400 font-bold mt-1.5">✓ Verified</div>}
+                {!isVerified && licenseNumber && <div className="text-[11px] text-muted2 mt-1.5">Pending verification</div>}
               </div>
             </>
           )}
