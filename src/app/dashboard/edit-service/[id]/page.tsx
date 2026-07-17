@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import PhotoGalleryManager from "@/components/dashboard/PhotoGalleryManager";
 
 type Category = { id: string; name: string; icon: string };
 
@@ -21,6 +22,7 @@ export default function EditServicePage() {
   const [emergency, setEmergency] = useState(false);
   const [espanol, setEspanol] = useState(true);
   const [currentImageUrl, setCurrentImageUrl] = useState<string | null>(null);
+  const [servicePlan, setServicePlan] = useState("basic");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [pageLoading, setPageLoading] = useState(true);
@@ -35,7 +37,7 @@ export default function EditServicePage() {
 
     supabase
       .from("services")
-      .select("title, description, category_id, city, price_from, emergency, espanol, image_url")
+      .select("title, description, category_id, city, price_from, emergency, espanol, image_url, plan")
       .eq("id", serviceId)
       .single()
       .then(({ data, error: fetchError }) => {
@@ -52,6 +54,7 @@ export default function EditServicePage() {
         setEmergency(data.emergency);
         setEspanol(data.espanol);
         setCurrentImageUrl(data.image_url);
+        setServicePlan(data.plan || "basic");
         setPageLoading(false);
       });
   }, [serviceId, supabase]);const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -203,6 +206,8 @@ export default function EditServicePage() {
             {saving ? "Saving..." : "Save Changes"}
           </button>
         </form>
+
+        {(servicePlan === "premium" || servicePlan === "premier") && <PhotoGalleryManager serviceId={serviceId} />}
       </div>
     </main>
   );
