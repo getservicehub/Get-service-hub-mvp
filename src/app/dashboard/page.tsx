@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { CategoryIcon } from "@/lib/services/categoryIcons";
 
 type Service = {
   id: string;
@@ -11,6 +10,7 @@ type Service = {
   description: string;
   city: string;
   is_active: boolean;
+  plan: string;
   image_url: string | null;
   categories: { name: string; icon: string } | null;
 };
@@ -21,9 +21,17 @@ type Profile = {
   role: string;
 };
 
+type Analytics = {
+  service_id: string;
+  total_contacts: number;
+  favorites: number;
+  total_events: number;
+};
+
 export default function DashboardPage() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [services, setServices] = useState<Service[]>([]);
+  const [analytics, setAnalytics] = useState<Analytics[]>([]);
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const supabase = createClient();
@@ -44,11 +52,20 @@ export default function DashboardPage() {
 
     const { data: servicesData } = await supabase
       .from("services")
-      .select("id, title, description, city, is_active, image_url, categories(name, icon)")
+      .select("id, title, description, city, is_active, plan, image_url, categories(name, icon)")
       .eq("provider_id", user.id)
       .order("created_at", { ascending: false });
 
-    if (servicesData) setServices(servicesData as unknown as Service[]);
+    if (servicesData) {
+      setServices(servicesData as unknown as Service[]);
+
+      const premiumIds = (servicesData as any[]).filter((s) => s.plan === "premium" || s.plan === "premier").map((s) => s.id);
+      if (premiumIds.length > 0) {
+        const { data: analyticsData } = await supabase.from("service_analytics").select("service_id, total_contacts, favorites, total_events").in("service_id", premiumIds);
+        if (analyticsData) setAnalytics(analyticsData);
+      }
+    }
+
     setLoading(false);
   };
 
@@ -63,7 +80,9 @@ export default function DashboardPage() {
   const toggleActive = async (id: string, current: boolean) => {
     await supabase.from("services").update({ is_active: !current }).eq("id", id);
     setServices((prev) => prev.map((s) => (s.id === id ? { ...s, is_active: !current } : s)));
-  };if (loading) {
+  };
+
+  if (loading) {
     return (
       <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5">
         <div className="max-w-[900px] mx-auto text-muted2 text-sm">Loading dashboard...</div>
@@ -78,9 +97,10 @@ export default function DashboardPage() {
         <h1 className="text-3xl font-extrabold mb-1">Welcome, {profile?.business_name || profile?.full_name}</h1>
         <p className="text-sm text-muted2 mb-8">Manage your published services</p>
 
-        <div className="flex justify-between items-center mb-6">
-          <div className="text-sm text-muted2">{services.length} service{services.length !== 1 ? "s" : ""} published</div>
+        <div className="flex flex-wrap gap-3 mb-6">
           <Link href="/dashboard/new-service" className="px-5 py-2.5 rounded-lg gradient-bg text-white font-semibold text-sm">+ New Service</Link>
+          <Link href="/dashboard/new-post" className="px-5 py-2.5 rounded-lg border border-cyan-400/30 text-cyan-400 font-semibold text-sm">📸 Post to Gallery</Link>
+          <Link href="/dashboard/upgrade" className="px-5 py-2.5 rounded-lg border border-amber-400/30 text-amber-400 font-semibold text-sm">👑 Upgrade Plan</Link>
         </div>
 
         {services.length === 0 && (
@@ -92,33 +112,58 @@ export default function DashboardPage() {
         )}
 
         <div className="space-y-3">
-          {services.map((s) => (
-            <div key={s.id} className="bg-card border border-white/[.08] rounded-2xl p-5 flex items-center gap-4">
-              <div className="w-14 h-14 rounded-xl overflow-hidden flex items-center justify-center text-2xl bg-gradient-to-br from-[#0A1628] to-[#0D1A2E] flex-shrink-0">
-                {s.image_url ? <img src={s.image_url} alt={s.title} className="w-full h-full object-cover" /> : <CategoryIcon name={s.categories?.name || ""} className="w-6 h-6" />}
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="text-[15px] font-bold">{s.title}</div>
-                <div className="text-xs text-muted2">{s.categories?.name} - {s.city}</div>
-                <div className="mt-1">
-                  <span className={s.is_active ? "text-[11px] font-bold text-green-400" : "text-[11px] font-bold text-muted2"}>
-                    {s.is_active ? "Active" : "Paused"}
-                  </span>
+          {services.map((s) => {
+            const isPremiumTier = s.plan === "premium" || s.plan === "premier";
+            const stats = analytics.find((a) => a.service_id === s.id);
+
+            return (
+              <div key={s.id} className="bg-card border border-white/[.08] rounded-2xl p-5">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-xl overflow-hidden flex items-center justify-center text-2xl bg-gradient-to-br from-[#0A1628] to-[#0D1A2E] flex-shrink-0">
+                    {s.image_url ? <img src={s.image_url} alt={s.title} className="w-full h-full object-cover" /> : (s.categories?.icon || "⚡")}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[15px] font-bold">{s.title}</div>
+                    <div className="text-xs text-muted2">{s.categories?.name} - {s.city}</div>
+                    <div className="mt-1">
+                      <span className={s.is_active ? "text-[11px] font-bold text-green-400" : "text-[11px] font-bold text-muted2"}>
+                        {s.is_active ? "Active" : "Paused"}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 flex-shrink-0">
+                    <Link href={`/dashboard/edit-service/${s.id}`} className="px-3 py-2 rounded-lg text-xs font-bold border border-cyan-400/30 text-cyan-400">Edit</Link>
+                    <button onClick={() => toggleActive(s.id, s.is_active)} className="px-3 py-2 rounded-lg text-xs font-bold border border-white/20 text-white">
+                      {s.is_active ? "Pause" : "Activate"}
+                    </button>
+                    <button onClick={() => handleDelete(s.id)} disabled={deletingId === s.id} className="px-3 py-2 rounded-lg text-xs font-bold bg-red-500/10 text-red-400 border border-red-500/20">
+                      {deletingId === s.id ? "..." : "Delete"}
+                    </button>
+                  </div>
                 </div>
+
+                {isPremiumTier && (
+                  <div className="mt-4 pt-4 border-t border-amber-400/10 flex items-center gap-6">
+                    <div className="text-[10px] font-bold tracking-[1px] uppercase text-amber-400">📊 Analytics</div>
+                    <div className="flex gap-5">
+                      <div>
+                        <div className="text-sm font-extrabold">{stats?.total_events || 0}</div>
+                        <div className="text-[10px] text-muted2">Views</div>
+                      </div>
+                      <div>
+                        <div className="text-sm font-extrabold">{stats?.total_contacts || 0}</div>
+                        <div className="text-[10px] text-muted2">Contacts</div>
+                      </div>
+                      <div>
+                        <div className="text-sm font-extrabold">{stats?.favorites || 0}</div>
+                        <div className="text-[10px] text-muted2">Favorites</div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
-              <div className="flex gap-2 flex-shrink-0">
-             <Link href={`/dashboard/edit-service/${s.id}`} className="px-3 py-2 rounded-lg text-xs font-bold border border-cyan-400/30 text-cyan-400">Edit</Link>   
-               <Link href="/dashboard/new-post" className="px-5 py-2.5 rounded-lg border border-cyan-400/30 text-cyan-400 font-semibold text-sm">📸 Post to Gallery</Link> 
-                <Link href="/dashboard/upgrade" className="px-5 py-2.5 rounded-lg border border-amber-400/30 text-amber-400 font-semibold text-sm">👑 Upgrade Plan</Link>
-                <button onClick={() => toggleActive(s.id, s.is_active)} className="px-3 py-2 rounded-lg text-xs font-bold border border-white/20 text-white">
-                  {s.is_active ? "Pause" : "Activate"}
-                </button>
-                <button onClick={() => handleDelete(s.id)} disabled={deletingId === s.id} className="px-3 py-2 rounded-lg text-xs font-bold bg-red-500/10 text-red-400 border border-red-500/20">
-                  {deletingId === s.id ? "..." : "Delete"}
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </main>
