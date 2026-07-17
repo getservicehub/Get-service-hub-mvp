@@ -11,7 +11,7 @@ export type ServiceCard = {
   image_url: string | null;
   provider_id: string;
   plan: string;
-  profiles: { full_name: string; business_name: string; phone: string | null } | null;
+  profiles: { full_name: string; business_name: string; phone: string | null; is_verified: boolean } | null;
   categories: { name: string; icon: string } | null;
 };
 

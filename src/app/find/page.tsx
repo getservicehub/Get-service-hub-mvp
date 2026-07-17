@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 const SERVICE_SELECT =
-  "id, title, description, city, price_from, emergency, espanol, image_url, provider_id, plan, profiles(full_name, business_name, phone), categories(name, icon)";
+  "id, title, description, city, price_from, emergency, espanol, image_url, provider_id, plan, profiles(full_name, business_name, phone, is_verified), categories(name, icon)";
 
 export default async function FindPage({
   searchParams,
