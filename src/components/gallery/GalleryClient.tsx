@@ -9,7 +9,7 @@ type Post = {
   caption: string | null;
   provider_id: string;
   created_at: string;
-  profiles: { full_name: string; business_name: string; phone: string | null } | null;
+  profiles: { full_name: string; business_name: string; phone: string | null; avatar_url: string | null } | null;
 };
 
 type Props = {
@@ -126,8 +126,8 @@ export default function GalleryClient({ posts }: Props) {
               <div key={post.id} className="bg-card border border-white/[.08] rounded-[20px] overflow-hidden">
                 <div className="flex items-center justify-between px-4 py-3.5">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-[38px] h-[38px] rounded-full gradient-bg flex items-center justify-center font-extrabold text-white text-[15px]">
-                      {name[0]}
+                    <div className="w-[38px] h-[38px] rounded-full gradient-bg flex items-center justify-center font-extrabold text-white text-[15px] overflow-hidden">
+                      {post.profiles?.avatar_url ? <img src={post.profiles.avatar_url} alt={name} className="w-full h-full object-cover" /> : name[0]}
                     </div>
                     <div className="text-[13px] font-bold">{name}</div>
                   </div>
@@ -144,7 +144,7 @@ export default function GalleryClient({ posts }: Props) {
 
                 <div className="flex items-center gap-3 px-4 pt-3">
                   {!isOwnPost && (
-                    <button onClick={() => toggleLike(post.id)} className={isLiked ? "text-red-500 text-xl" : "text-muted2 text-xl"}>
+                    <button onClick={() => toggleLike(post.id)} className={isLiked ? "px-4 py-1.5 rounded-full text-xs font-bold bg-red-500 text-white" : "px-4 py-1.5 rounded-full text-xs font-bold border border-white/20 text-muted2"}>
                       {isLiked ? "Liked" : "Like"}
                     </button>
                   )}
