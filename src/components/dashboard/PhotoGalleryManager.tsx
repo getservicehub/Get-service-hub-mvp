@@ -86,7 +86,7 @@ export default function PhotoGalleryManager({ serviceId }: Props) {
         ))}
       </div>
 
-      <input type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={handleUpload} disabled={uploading} className="text-xs text-muted2 w-full" />
+      <label className="inline-block px-4 py-2 rounded-lg gradient-bg text-white text-xs font-bold cursor-pointer hover:opacity-90 transition-all">Add Photos<input type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={handleUpload} disabled={uploading} className="hidden" /></label>
       {uploading && <div className="text-xs text-muted2 mt-2">Uploading...</div>}
     </div>
   );

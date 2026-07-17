@@ -141,7 +141,7 @@ export default function AccountPage() {
             </div>
             <div>
               <label className="block text-xs font-semibold text-muted2 mb-1.5">Profile Photo</label>
-              <input type="file" accept="image/jpeg,image/png,image/webp" onChange={handleAvatarChange} className="text-xs text-muted2" />
+              <label className="inline-block px-4 py-2 rounded-lg gradient-bg text-white text-xs font-bold cursor-pointer hover:opacity-90 transition-all">Choose Photo<input type="file" accept="image/jpeg,image/png,image/webp" onChange={handleAvatarChange} className="hidden" /></label>
             </div>
           </div>
 
