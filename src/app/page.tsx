@@ -6,6 +6,7 @@ import Hero from "@/components/home/Hero";
 import SponsorBanner from "@/components/home/SponsorBanner";
 import SearchBar from "@/components/home/SearchBar";
 import Categories from "@/components/home/Categories";
+import PlansShowcase from "@/components/home/PlansShowcase";
 
 export default function Home() {
   const [showSearchBar, setShowSearchBar] = useState(true);
@@ -29,6 +30,7 @@ export default function Home() {
       <SponsorBanner />
       {showSearchBar && <SearchBar />}
       <Categories />
+      <PlansShowcase />
     </main>
   );
 }
