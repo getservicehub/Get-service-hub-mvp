@@ -22,11 +22,18 @@ type WaitlistEntry = {
   services: { title: string } | null;
 };
 
+type PendingLicense = {
+  id: string;
+  full_name: string;
+  business_name: string | null;
+  license_number: string;
+};
+
 export default function AdminPage() {
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const [requests, setRequests] = useState<PlanRequest[]>([]);
   const [waitlist, setWaitlist] = useState<WaitlistEntry[]>([]);
-  const [pendingLicenses, setPendingLicenses] = useState<{ id: string; full_name: string; business_name: string | null; license_number: string }[]>([]);
+  const [pendingLicenses, setPendingLicenses] = useState<PendingLicense[]>([]);
   const [loading, setLoading] = useState(true);
   const [processingId, setProcessingId] = useState<string | null>(null);
   const supabase = createClient();
@@ -70,17 +77,22 @@ export default function AdminPage() {
 
     if (waitlistData) setWaitlist(waitlistData as unknown as WaitlistEntry[]);
 
-    const { data: pendingLic } = await supabase.from("profiles").select("id, full_name, business_name, license_number").eq("role", "provider").eq("is_verified", false).not("license_number", "is", null);
-    if (pendingLic) setPendingLicenses(pendingLic as any);
+    const { data: pendingLic } = await supabase
+      .from("profiles")
+      .select("id, full_name, business_name, license_number")
+      .eq("role", "provider")
+      .eq("is_verified", false)
+      .not("license_number", "is", null);
+
+    if (pendingLic) setPendingLicenses(pendingLic as unknown as PendingLicense[]);
+
     setLoading(false);
   };
 
   const approveRequest = async (request: PlanRequest) => {
     setProcessingId(request.id);
-
     await supabase.from("services").update({ plan: request.requested_plan }).eq("id", request.service_id);
     await supabase.from("plan_requests").update({ status: "approved" }).eq("id", request.id);
-
     setRequests((prev) => prev.filter((r) => r.id !== request.id));
     setProcessingId(null);
   };
@@ -90,6 +102,7 @@ export default function AdminPage() {
     await supabase.from("plan_requests").update({ status: "rejected" }).eq("id", requestId);
     setRequests((prev) => prev.filter((r) => r.id !== requestId));
     setProcessingId(null);
+  };
 
   const approveLicense = async (profileId: string) => {
     setProcessingId(profileId);
@@ -125,11 +138,9 @@ export default function AdminPage() {
 
         <div className="mb-10">
           <h2 className="text-lg font-extrabold mb-4">Plan Upgrade Requests ({requests.length})</h2>
-
           {requests.length === 0 && (
             <div className="text-muted2 text-sm py-6 text-center bg-card border border-white/[.08] rounded-2xl">No pending requests.</div>
           )}
-
           <div className="space-y-3">
             {requests.map((r) => (
               <div key={r.id} className="bg-card border border-white/[.08] rounded-2xl p-4 flex items-center justify-between gap-4">
@@ -146,13 +157,11 @@ export default function AdminPage() {
           </div>
         </div>
 
-        <div>
+        <div className="mb-10">
           <h2 className="text-lg font-extrabold mb-4">Elite Waitlist ({waitlist.length})</h2>
-
           {waitlist.length === 0 && (
             <div className="text-muted2 text-sm py-6 text-center bg-card border border-white/[.08] rounded-2xl">No one on the waitlist.</div>
           )}
-
           <div className="space-y-3">
             {waitlist.map((w) => (
               <div key={w.id} className="bg-card border border-amber-400/20 rounded-2xl p-4">
@@ -161,8 +170,9 @@ export default function AdminPage() {
               </div>
             ))}
           </div>
+        </div>
 
-        <div className="mt-10">
+        <div>
           <h2 className="text-lg font-extrabold mb-4">License Verification ({pendingLicenses.length})</h2>
           {pendingLicenses.length === 0 && (
             <div className="text-muted2 text-sm py-6 text-center bg-card border border-white/[.08] rounded-2xl">No pending license verifications.</div>
@@ -178,7 +188,6 @@ export default function AdminPage() {
               </div>
             ))}
           </div>
-        </div>
         </div>
       </div>
     </main>
