@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { trackEvent } from "@/lib/tracking/events";
 import { getServiceById, type ServiceCard } from "@/lib/services/queries";
+import { CategoryIcon } from "@/lib/services/categoryIcons";
 
 
 type Review = {
@@ -158,7 +159,7 @@ export default function ServiceDetailPage() {
       <div className="max-w-[700px] mx-auto">
         <div className="w-full h-[280px] rounded-2xl overflow-hidden flex items-center justify-center text-7xl bg-gradient-to-br from-[#0A1628] to-[#0D1A2E] mb-6">
           {hasImage && <img src={service.image_url as string} alt={service.title} className="w-full h-full object-cover" />}
-          {!hasImage && <span>{service.categories?.icon || "⚡"}</span>}
+          {!hasImage && <CategoryIcon name={service.categories?.name || ""} className="w-16 h-16" />}
         </div>
 
         <div className="text-xs font-bold tracking-[2px] uppercase text-cyan-400 mb-2">{service.categories?.name}</div>

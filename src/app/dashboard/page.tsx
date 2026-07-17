@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { CategoryIcon } from "@/lib/services/categoryIcons";
 
 type Service = {
   id: string;
@@ -94,7 +95,7 @@ export default function DashboardPage() {
           {services.map((s) => (
             <div key={s.id} className="bg-card border border-white/[.08] rounded-2xl p-5 flex items-center gap-4">
               <div className="w-14 h-14 rounded-xl overflow-hidden flex items-center justify-center text-2xl bg-gradient-to-br from-[#0A1628] to-[#0D1A2E] flex-shrink-0">
-                {s.image_url ? <img src={s.image_url} alt={s.title} className="w-full h-full object-cover" /> : (s.categories?.icon || "⚡")}
+                {s.image_url ? <img src={s.image_url} alt={s.title} className="w-full h-full object-cover" /> : <CategoryIcon name={s.categories?.name || ""} className="w-6 h-6" />}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="text-[15px] font-bold">{s.title}</div>
