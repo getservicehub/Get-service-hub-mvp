@@ -32,6 +32,7 @@ export default async function FindPage({
 
   const { data: categories } = await supabase.from("categories").select("id, name, icon").order("name");
   const { data: ratings } = await supabase.from("service_ratings").select("service_id, avg_rating, review_count");
+  const { data: responseStats } = await supabase.from("provider_response_stats").select("provider_id, replied_conversations, avg_response_minutes");
 
   const allServices = ((services as any) || []).map((s: any) => {
     const rating = ratings?.find((r) => r.service_id === s.id);
@@ -39,6 +40,7 @@ export default async function FindPage({
       ...s,
       avg_rating: rating?.avg_rating || null,
       review_count: rating?.review_count || 0,
+      respondsQuickly: (() => { const rs = responseStats?.find((r) => r.provider_id === s.provider_id); return rs && rs.replied_conversations >= 3 && rs.avg_response_minutes < 60; })(),
     };
   });
 

@@ -10,6 +10,7 @@ type Category = { id: string; name: string; icon: string };
 type ServiceWithRating = ServiceCard & {
   avg_rating: number | null;
   review_count: number;
+  respondsQuickly: boolean;
 };
 
 type Props = {
@@ -108,6 +109,7 @@ export default function DirectoryClient({ initialServices, sponsored, initialCat
                   <div className="flex gap-2 flex-wrap">
                     {(service.plan === "premium" || service.plan === "premier") && <span className="text-[11px] px-2 py-0.5 rounded-full bg-amber-400/15 text-amber-400 font-bold">{service.plan === "premier" ? "Premier" : "Premium"}</span>}
                     {service.emergency && <span className="text-[11px] px-2 py-0.5 rounded-full bg-red-500/15 text-red-400 font-bold">Emergency</span>}
+                    {service.respondsQuickly && <span className="text-[11px] px-2 py-0.5 rounded-full bg-green-500/15 text-green-400 font-bold">⚡ Responds Quickly</span>}
                     {service.espanol && <span className="text-[11px] px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-400 font-bold">Se habla espanol</span>}
                     {service.price_from && <span className="text-[11px] px-2 py-0.5 rounded-full bg-green-500/15 text-green-400 font-bold">From ${service.price_from}</span>}
                   </div>
