@@ -97,7 +97,6 @@ export default function AdminPage() {
     setPendingLicenses((prev) => prev.filter((p) => p.id !== profileId));
     setProcessingId(null);
   };
-  };
 
   if (loading) {
     return (
