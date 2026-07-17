@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 
 import { getProviderName, getContactLinks, type ServiceCard } from "@/lib/services/queries";
 import { CategoryIcon } from "@/lib/services/categoryIcons";
@@ -18,11 +19,11 @@ export default function EliteClient({ eliteServices, plusServices }: Props) {
         <p className="text-base text-muted2 max-w-[540px] mb-10">Only 5 exclusive spots total. Maximum visibility, maximum trust.</p>
 
         {eliteServices.length === 0 && (
-          <div className="text-center py-16 bg-card border border-amber-400/20 rounded-2xl mb-14">
+          <Link href="/dashboard/upgrade" className="block text-center py-16 bg-card border border-amber-400/20 rounded-2xl mb-14 hover:border-amber-400/40 transition-all">
             <div className="text-5xl mb-4">👑</div>
             <div className="text-muted2 text-sm mb-2">No Elite spots claimed yet.</div>
             <div className="text-muted2 text-xs">Be one of the first 5 businesses in San Diego.</div>
-          </div>
+          </Link>
         )}
 
         {eliteServices.length > 0 && (
