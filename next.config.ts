@@ -16,7 +16,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/featured",
-        destination: "/premier-partners",
+        destination: "/elite-partners",
+        permanent: true,
+      },
+      {
+        source: "/premier-partners",
+        destination: "/elite-partners",
         permanent: true,
       },
     ];
