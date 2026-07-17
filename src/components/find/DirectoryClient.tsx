@@ -97,7 +97,7 @@ export default function DirectoryClient({ initialServices, sponsored, initialCat
                   {!hasImage && <CategoryIcon name={service.categories?.name || ""} className="w-12 h-12" />}
                 </div>
                 <div className="p-4">
-                  <div className="text-[15px] font-extrabold mb-1">{getProviderName(service)}</div>
+                  <a href={`/provider/${service.provider_id}`} onClick={(e) => e.stopPropagation()} className="text-[15px] font-extrabold mb-1 hover:text-cyan-400 transition-colors inline-block">{getProviderName(service)}</a>
                   {service.avg_rating && (
                     <div className="flex items-center gap-1.5 mb-1.5">
                       <StarRating rating={service.avg_rating} size="text-xs" />
