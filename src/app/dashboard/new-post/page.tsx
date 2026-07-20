@@ -6,8 +6,8 @@ import { createClient } from "@/lib/supabase/client";
 
 export default function NewPostPage() {
   const [caption, setCaption] = useState("");
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imageFiles, setImageFiles] = useState<File[]>([]);
+  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -15,18 +15,20 @@ export default function NewPostPage() {
   const supabase = createClient();
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setImageFile(file);
-    setImagePreview(URL.createObjectURL(file));
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    const selected = Array.from(files).slice(0, 3);
+    setImageFiles(selected);
+    setImagePreviews(selected.map((f) => URL.createObjectURL(f)));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
-    if (!imageFile) {
-      setError("Please select a photo");
+    if (imageFiles.length === 0) {
+      setError("Please select at least one photo");
       return;
     }
 
@@ -40,29 +42,44 @@ export default function NewPostPage() {
       return;
     }
 
-    const fileExt = imageFile.name.split(".").pop();
-    const fileName = `posts/${user.id}/${Date.now()}.${fileExt}`;
+    const uploadedUrls: string[] = [];
 
-    const { error: uploadError } = await supabase.storage.from("service-images").upload(fileName, imageFile);
+    for (let i = 0; i < imageFiles.length; i++) {
+      const file = imageFiles[i];
+      const fileExt = file.name.split(".").pop();
+      const fileName = `${user.id}/${Date.now()}-${i}.${fileExt}`;
 
-    if (uploadError) {
-      setError("Upload failed: " + uploadError.message);
+      const { error: uploadError } = await supabase.storage.from("service-images").upload(fileName, file);
+
+      if (uploadError) {
+        setError("Upload failed: " + uploadError.message);
+        setLoading(false);
+        return;
+      }
+
+      const { data: urlData } = supabase.storage.from("service-images").getPublicUrl(fileName);
+      uploadedUrls.push(urlData.publicUrl);
+    }
+
+    const { data: newPost, error: insertError } = await supabase
+      .from("posts")
+      .insert({ provider_id: user.id, image_url: uploadedUrls[0], caption })
+      .select("id")
+      .single();
+
+    if (insertError || !newPost) {
+      setError(insertError?.message || "Failed to create post");
       setLoading(false);
       return;
     }
 
-    const { data: urlData } = supabase.storage.from("service-images").getPublicUrl(fileName);
-
-    const { error: insertError } = await supabase.from("posts").insert({
-      provider_id: user.id,
-      image_url: urlData.publicUrl,
-      caption,
-    });
-
-    if (insertError) {
-      setError(insertError.message);
-      setLoading(false);
-      return;
+    if (uploadedUrls.length > 1) {
+      const extraImages = uploadedUrls.slice(1).map((url, idx) => ({
+        post_id: newPost.id,
+        image_url: url,
+        display_order: idx + 1,
+      }));
+      await supabase.from("post_images").insert(extraImages);
     }
 
     setSuccess(true);
@@ -92,15 +109,22 @@ export default function NewPostPage() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-muted2 mb-1.5">Photo</label>
+            <label className="block text-xs font-semibold text-muted2 mb-1.5">Photos (up to 3)</label>
             <div className="border-2 border-dashed border-white/20 rounded-xl p-4 text-center">
-              {imagePreview && (
-                <img src={imagePreview} alt="Preview" className="w-full h-[240px] object-cover rounded-lg mb-3" />
+              {imagePreviews.length > 0 && (
+                <div className="grid grid-cols-3 gap-2 mb-3">
+                  {imagePreviews.map((preview, i) => (
+                    <img key={i} src={preview} alt={`Preview ${i + 1}`} className="w-full aspect-square object-cover rounded-lg" />
+                  ))}
+                </div>
               )}
-              {!imagePreview && (
+              {imagePreviews.length === 0 && (
                 <div className="w-full h-[140px] flex items-center justify-center text-4xl text-muted2 mb-2">📷</div>
               )}
-              <input type="file" accept="image/jpeg,image/png,image/webp" onChange={handleImageChange} className="text-xs text-muted2 w-full" />
+              <label className="inline-block px-4 py-2 rounded-lg gradient-bg text-white text-xs font-bold cursor-pointer hover:opacity-90 transition-all">
+                Choose Photos
+                <input type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={handleImageChange} className="hidden" />
+              </label>
             </div>
           </div>
 

@@ -10,6 +10,7 @@ type Post = {
   provider_id: string;
   created_at: string;
   profiles: { full_name: string; business_name: string; phone: string | null; avatar_url: string | null } | null;
+  extraImages: string[];
 };
 
 type Props = {
@@ -21,6 +22,7 @@ export default function GalleryClient({ posts }: Props) {
   const [following, setFollowing] = useState<string[]>([]);
   const [userId, setUserId] = useState<string | null>(null);
   const [tab, setTab] = useState<"all" | "following">("all");
+  const [imageIndex, setImageIndex] = useState<Record<string, number>>({});
   const supabase = createClient();
 
   useEffect(() => {
@@ -138,8 +140,15 @@ export default function GalleryClient({ posts }: Props) {
                   )}
                 </div>
 
-                <div className="w-full h-[280px] flex items-center justify-center bg-gradient-to-br from-[#0A1628] to-[#0D1A2E] overflow-hidden">
-                  <img src={post.image_url} alt="Work post" className="w-full h-full object-cover" />
+                <div className="relative w-full h-[280px] flex items-center justify-center bg-gradient-to-br from-[#0A1628] to-[#0D1A2E] overflow-hidden">
+                  <img src={[post.image_url, ...post.extraImages][imageIndex[post.id] || 0]} alt="Work post" className="w-full h-full object-cover" />
+                  {post.extraImages.length > 0 && (
+                    <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5">
+                      {[post.image_url, ...post.extraImages].map((_, i) => (
+                        <button key={i} onClick={() => setImageIndex((prev) => ({ ...prev, [post.id]: i }))} className={(imageIndex[post.id] || 0) === i ? "w-5 h-1.5 rounded-full bg-white transition-all" : "w-1.5 h-1.5 rounded-full bg-white/40 transition-all"} />
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex items-center gap-3 px-4 pt-3">
