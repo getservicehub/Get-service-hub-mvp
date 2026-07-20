@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import CommentsSection from "./CommentsSection";
 import { createClient } from "@/lib/supabase/client";
 
 type Post = {
