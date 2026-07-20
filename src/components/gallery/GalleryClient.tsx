@@ -23,6 +23,7 @@ export default function GalleryClient({ posts }: Props) {
   const [userId, setUserId] = useState<string | null>(null);
   const [tab, setTab] = useState<"all" | "following">("all");
   const [imageIndex, setImageIndex] = useState<Record<string, number>>({});
+  const [openComments, setOpenComments] = useState<string | null>(null);
   const supabase = createClient();
 
   useEffect(() => {
@@ -159,6 +160,7 @@ export default function GalleryClient({ posts }: Props) {
                   )}
                   {isOwnPost && <span className="text-xs text-muted2 font-semibold">Your post</span>}
                 </div>
+                <button onClick={() => setOpenComments(openComments === post.id ? null : post.id)} className="px-4 pb-2 text-xs text-muted2 hover:text-cyan-400">💬 Comments</button>
 
                 {post.caption && (
                   <div className="text-[13px] text-muted2 px-4 pt-2 pb-3">
@@ -179,6 +181,7 @@ export default function GalleryClient({ posts }: Props) {
                     <span className="flex-1 text-center py-2 rounded-lg text-xs font-bold bg-white/5 text-muted2">No phone</span>
                   </div>
                 )}
+                {openComments === post.id && <CommentsSection postId={post.id} />}
               </div>
             );
           })}
