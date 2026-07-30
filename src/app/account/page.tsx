@@ -20,11 +20,19 @@ export default function AccountPage() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [saved, setSaved] = useState(false);
+  const [initialSnapshot, setInitialSnapshot] = useState("");
+  const [hasChanges, setHasChanges] = useState(false);
   const supabase = createClient();
 
   useEffect(() => {
     loadProfile();
   }, []);
+
+  useEffect(() => {
+    if (!initialSnapshot) return;
+    const current = JSON.stringify({ fullName, businessName, serviceType, phone, licenseNumber, city });
+    setHasChanges(current !== initialSnapshot);
+  }, [fullName, businessName, serviceType, phone, licenseNumber, city, initialSnapshot]);
 
   const loadProfile = async () => {
     const { data: { user } } = await supabase.auth.getUser();
@@ -48,6 +56,7 @@ export default function AccountPage() {
       setBusinessName(data.business_name || "");
       setServiceType(data.service_type || "");
       setPhone(data.phone || "");
+        setInitialSnapshot(JSON.stringify({ fullName: data.full_name, businessName: data.business_name, serviceType: data.service_type, phone: data.phone, licenseNumber: data.license_number, city: data.city }));
       setLicenseNumber(data.license_number || "");
       setIsVerified(data.is_verified || false);
       setCity(data.city || "San Diego");
@@ -112,6 +121,7 @@ export default function AccountPage() {
       return;
     }
 
+    setInitialSnapshot(JSON.stringify({ fullName, businessName, serviceType, phone, licenseNumber, city }));
     setSaved(true);
     setSaving(false);
     setTimeout(() => setSaved(false), 3000);
@@ -189,6 +199,11 @@ export default function AccountPage() {
           </button>
         </form>
       </div>
+      {hasChanges && (
+        <div className="fixed bottom-0 left-0 right-0 md:left-[72px] bg-amber-400 text-[#1a1206] px-5 py-3 flex items-center justify-center gap-3 z-50 text-sm font-bold">
+          ⚠️ You have unsaved changes
+        </div>
+      )}
     </main>
   );
 }
