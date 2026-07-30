@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Home, Search, Crown, Camera } from "lucide-react";
 
 const items = [
-  { href: "/", label: "Home", icon: "🏠" },
-  { href: "/find", label: "Find Pros", icon: "🔍" },
-  { href: "/elite-partners", label: "Elite Partners", icon: "👑" },
-  { href: "/gallery", label: "Work Gallery", icon: "📸" },
+  { href: "/", label: "Home", Icon: Home },
+  { href: "/find", label: "Find Pros", Icon: Search },
+  { href: "/elite-partners", label: "Elite Partners", Icon: Crown },
+  { href: "/gallery", label: "Work Gallery", Icon: Camera },
 ];
 
 export default function Sidebar() {
@@ -30,8 +31,8 @@ export default function Sidebar() {
             {active && (
               <span className="absolute left-0 top-0 bottom-0 w-[3px] gradient-bg rounded-r" />
             )}
-            <span className="w-8 h-8 rounded-[10px] bg-white/[.04] flex items-center justify-center text-[17px] flex-shrink-0">
-              {item.icon}
+            <span className="w-8 h-8 rounded-[10px] bg-white/[.04] flex items-center justify-center flex-shrink-0">
+              <item.Icon className="w-4 h-4" />
             </span>
             <span className="text-[13px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
               {item.label}
