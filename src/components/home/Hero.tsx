@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import { matchCategory } from "@/lib/services/keywords";
 import { getCities } from "@/lib/services/queries";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { Languages, PiggyBank, MapPin, Scale, Search, TrendingUp, ShieldCheck } from "lucide-react";
 import { CategoryIcon } from "@/lib/services/categoryIcons";
 
 type Category = { id: string; name: string; icon: string };
@@ -92,27 +93,27 @@ export default function Hero() {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mt-12 pt-9 border-t border-white/[.08]">
-              <div><div className="text-xl">🌐</div><div className="text-xs text-muted2 mt-1 font-semibold">{t("hero_stat_pros")}</div></div>
-              <div><div className="text-xl">💰</div><div className="text-xs text-muted2 mt-1 font-semibold">{t("hero_stat_clients")}</div></div>
-              <div><div className="text-xl">📍</div><div className="text-xs text-muted2 mt-1 font-semibold">{t("hero_stat_commission")}</div></div>
-              <div><div className="text-xl">⚖️</div><div className="text-xs text-muted2 mt-1 font-semibold">{t("hero_stat_rating")}</div></div>
+              <div><Languages className="w-5 h-5 mx-auto text-cyan-400" /><div className="text-xs text-muted2 mt-1 font-semibold">{t("hero_stat_pros")}</div></div>
+              <div><PiggyBank className="w-5 h-5 mx-auto text-cyan-400" /><div className="text-xs text-muted2 mt-1 font-semibold">{t("hero_stat_clients")}</div></div>
+              <div><MapPin className="w-5 h-5 mx-auto text-cyan-400" /><div className="text-xs text-muted2 mt-1 font-semibold">{t("hero_stat_commission")}</div></div>
+              <div><Scale className="w-5 h-5 mx-auto text-cyan-400" /><div className="text-xs text-muted2 mt-1 font-semibold">{t("hero_stat_rating")}</div></div>
             </div>
           </div>
 
           <div className="hidden md:block relative h-[480px]">
-            <div className="absolute top-5 left-0 w-[200px] bg-card border border-white/10 rounded-2xl p-5 shadow-2xl">
+              <Search className="w-8 h-8 mb-2 text-cyan-400" />
               <div className="text-3xl mb-2">🔍</div>
               <div className="text-base font-extrabold mb-0.5">{t("value_card_1_title")}</div>
               <div className="text-[11px] text-muted2">{t("value_card_1_sub")}</div>
             </div>
 
-            <div className="absolute top-[190px] right-0 w-[200px] bg-card border border-white/10 rounded-2xl p-5 shadow-2xl">
+              <TrendingUp className="w-8 h-8 mb-2 text-cyan-400" />
               <div className="text-3xl mb-2">📈</div>
               <div className="text-base font-extrabold mb-0.5">{t("value_card_2_title")}</div>
               <div className="text-[11px] text-muted2">{t("value_card_2_sub")}</div>
             </div>
 
-            <div className="absolute bottom-10 left-14 w-[200px] bg-card border border-white/10 rounded-2xl p-5 shadow-2xl">
+              <ShieldCheck className="w-8 h-8 mb-2 text-cyan-400" />
               <div className="text-3xl mb-2">🌐</div>
               <div className="text-base font-extrabold mb-0.5">{t("value_card_3_title")}</div>
               <div className="text-[11px] text-muted2">{t("value_card_3_sub")}</div>
