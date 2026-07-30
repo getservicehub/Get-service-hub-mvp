@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { CategoryIcon } from "@/lib/services/categoryIcons";
 
 type FavoriteRow = {
   id: string;
@@ -84,7 +85,7 @@ export default function FavoritesPage() {
               <div key={fav.id} className="bg-card border border-white/[.08] rounded-[20px] overflow-hidden">
                 <div className="w-full h-[160px] flex items-center justify-center text-5xl bg-gradient-to-br from-[#0A1628] to-[#0D1A2E] overflow-hidden">
                   {hasImage && <img src={s.image_url as string} alt={s.title} className="w-full h-full object-cover" />}
-                  {!hasImage && <span>{s.categories?.icon || "⚡"}</span>}
+                  {!hasImage && <CategoryIcon name={s.categories?.name || ""} className="w-10 h-10" />}
                 </div>
                 <div className="p-4">
                   <div className="text-[15px] font-extrabold mb-1">{name}</div>
