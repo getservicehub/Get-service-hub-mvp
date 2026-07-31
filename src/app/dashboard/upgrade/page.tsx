@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 
-type MyService = { id: string; title: string; plan: string };
+type MyService = { id: string; title: string; plan: string; category_id: string };
 
 export default function UpgradePage() {
   const [services, setServices] = useState<MyService[]>([]);
@@ -14,7 +14,7 @@ export default function UpgradePage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [waitlisted, setWaitlisted] = useState(false);
-  const [eliteSpotsLeft, setEliteSpotsLeft] = useState(5);
+  const [eliteSpotsLeft, setEliteSpotsLeft] = useState(10);
   const supabase = createClient();
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function UpgradePage() {
       return;
     }
 
-    const { data: myServices } = await supabase.from("services").select("id, title, plan").eq("provider_id", user.id);
+    const { data: myServices } = await supabase.from("services").select("id, title, plan, category_id").eq("provider_id", user.id);
     if (myServices) {
       setServices(myServices);
       if (myServices.length > 0) setSelectedServiceId(myServices[0].id);
@@ -37,11 +37,22 @@ export default function UpgradePage() {
     const { data: requests } = await supabase.from("plan_requests").select("id").eq("provider_id", user.id).eq("status", "pending");
     if (requests && requests.length > 0) setPendingRequest(true);
 
-    const { count: eliteCount } = await supabase.from("services").select("id", { count: "exact", head: true }).eq("plan", "premier");
-    setEliteSpotsLeft(Math.max(0, 5 - (eliteCount || 0)));
-
     setLoading(false);
   };
+
+  useEffect(() => {
+    const checkEliteSpots = async () => {
+      const service = services.find((s) => s.id === selectedServiceId);
+      if (!service) return;
+
+      const { count } = await supabase.from("services").select("id", { count: "exact", head: true }).eq("plan", "premier").eq("category_id", service.category_id);
+      setEliteSpotsLeft(Math.max(0, 10 - (count || 0)));
+    };
+
+    if (selectedServiceId && services.length > 0) {
+      checkEliteSpots();
+    }
+  }, [selectedServiceId, services]);
 
   const submitRequest = async () => {
     if (!selectedPlan || !selectedServiceId) return;
@@ -76,9 +87,9 @@ export default function UpgradePage() {
   };
 
   const plans = [
-    { id: "pro", name: "Pro", price: "$29", desc: "Featured badge + priority placement", color: "border-cyan-400/30" },
-    { id: "premium", name: "Plus", price: "$59", desc: "Weekly rotation in Find results", color: "border-blue-400/30" },
-    { id: "premier", name: "Elite", price: "$199", desc: eliteSpotsLeft > 0 ? `Only ${eliteSpotsLeft} of 5 spots left. Maximum exclusivity.` : "All 5 spots taken. Join the waitlist.", color: "border-amber-400/30" },
+    { id: "pro", name: "Pro", price: "$19", desc: "Featured badge + priority placement", color: "border-cyan-400/30" },
+    { id: "premium", name: "Plus", price: "$39", desc: "Weekly rotation in Find results", color: "border-blue-400/30" },
+    { id: "premier", name: "Elite", price: "$99", desc: eliteSpotsLeft > 0 ? `Only ${eliteSpotsLeft} of 10 spots left in your category.` : "All 10 spots taken in your category. Join the waitlist.", color: "border-amber-400/30" },
   ];
 
   if (loading) {
@@ -107,7 +118,7 @@ export default function UpgradePage() {
           <div className="text-5xl mb-5">📝</div>
           <h1 className="text-2xl font-extrabold mb-3">You're on the Waitlist</h1>
           <p className="text-muted2 text-sm leading-relaxed">
-            All 5 Elite spots are currently taken. We will notify you the moment one becomes available.
+            All 10 Elite spots in your category are currently taken. We will notify you the moment one becomes available.
           </p>
         </div>
       </main>
