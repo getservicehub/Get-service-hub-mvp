@@ -7,15 +7,15 @@ import { createClient } from "@/lib/supabase/client";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 const SLIDES_EN = [
-  { title: "Want your business seen by thousands?", sub: "Premier spots put you at the top of every category, every day. Only 3 spots available in San Diego." },
+  { title: "Want your business seen by thousands?", sub: "Elite spots put you at the top of your category, every day. 10 spots available per category." },
   { title: "This spot could be your brand.", sub: "Get maximum visibility on GetServiHub's homepage, seen by every visitor." },
-  { title: "Be one of the first Premier Partners.", sub: "Limited to 3 businesses total. Claim your spot before they're gone." },
+  { title: "Be one of the first Elite Partners.", sub: "Limited to 10 businesses per category. Claim your spot before they're gone." },
 ];
 
 const SLIDES_ES = [
-  { title: "¿Quieres que miles vean tu negocio?", sub: "Los espacios Premier te ponen hasta arriba en cada categoría, todos los días. Solo 3 espacios disponibles en San Diego." },
+  { title: "¿Quieres que miles vean tu negocio?", sub: "Los espacios Elite te ponen hasta arriba en tu categoría, todos los días. 10 espacios disponibles por categoría." },
   { title: "Este espacio podría ser tu marca.", sub: "Obtén máxima visibilidad en la página principal de GetServiHub, vista por cada visitante." },
-  { title: "Se de los primeros Premier Partners.", sub: "Limitado a 3 negocios en total. Reclama tu espacio antes de que se agoten." },
+  { title: "Se de los primeros Elite Partners.", sub: "Limitado a 10 negocios por categoría. Reclama tu espacio antes de que se agoten." },
 ];
 
 export default function SponsorBanner() {
