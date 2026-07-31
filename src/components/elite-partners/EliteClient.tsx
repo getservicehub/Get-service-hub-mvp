@@ -16,13 +16,13 @@ export default function EliteClient({ eliteServices, plusServices }: Props) {
       <div className="max-w-[1140px] mx-auto">
         <div className="text-xs font-bold tracking-[2px] uppercase text-amber-400 mb-3">Elite Partners</div>
         <h1 className="text-3xl md:text-4xl font-extrabold mb-4">San Diego's Elite Service Pros</h1>
-        <p className="text-base text-muted2 max-w-[540px] mb-10">Only 5 exclusive spots total. Maximum visibility, maximum trust.</p>
+        <p className="text-base text-muted2 max-w-[540px] mb-10">10 exclusive spots per category. Maximum visibility, maximum trust.</p>
 
         {eliteServices.length === 0 && (
           <Link href="/dashboard/upgrade" className="block text-center py-16 bg-card border border-amber-400/20 rounded-2xl mb-14 hover:border-amber-400/40 transition-all">
             <div className="text-5xl mb-4">👑</div>
             <div className="text-muted2 text-sm mb-2">No Elite spots claimed yet.</div>
-            <div className="text-muted2 text-xs">Be one of the first 5 businesses in San Diego.</div>
+            <div className="text-muted2 text-xs">10 spots available per category. Claim yours today.</div>
           </Link>
         )}
 

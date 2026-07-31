@@ -7,16 +7,16 @@ import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 const PLANS_EN = [
   { name: "Basic", price: "Free", features: ["Business profile", "Search visibility", "Customer reviews"], color: "border-white/10" },
-  { name: "Pro", price: "$29", features: ["Everything in Basic", "Featured badge", "Priority placement"], color: "border-cyan-400/30" },
-  { name: "Plus", price: "$59", features: ["Everything in Pro", "Weekly rotation in Find", "Top visibility"], color: "border-blue-400/30" },
-  { name: "Elite", price: "$199", features: ["Everything in Plus", "Only 5 spots total", "Maximum exclusivity"], color: "border-amber-400/30" },
+  { name: "Pro", price: "$19", features: ["Everything in Basic", "Featured badge", "Priority placement"], color: "border-cyan-400/30" },
+  { name: "Plus", price: "$39", features: ["Everything in Pro", "Weekly rotation in Find", "Top visibility"], color: "border-blue-400/30" },
+  { name: "Elite", price: "$99", features: ["Everything in Plus", "10 spots per category", "Maximum exclusivity"], color: "border-amber-400/30" },
 ];
 
 const PLANS_ES = [
   { name: "Basic", price: "Gratis", features: ["Perfil de negocio", "Visibilidad en busqueda", "Resenas de clientes"], color: "border-white/10" },
-  { name: "Pro", price: "$29", features: ["Todo en Basic", "Insignia destacada", "Prioridad de posicion"], color: "border-cyan-400/30" },
-  { name: "Plus", price: "$59", features: ["Todo en Pro", "Rotacion semanal en Find", "Maxima visibilidad"], color: "border-blue-400/30" },
-  { name: "Elite", price: "$199", features: ["Todo en Plus", "Solo 5 espacios totales", "Maxima exclusividad"], color: "border-amber-400/30" },
+  { name: "Pro", price: "$19", features: ["Todo en Basic", "Insignia destacada", "Prioridad de posicion"], color: "border-cyan-400/30" },
+  { name: "Plus", price: "$39", features: ["Todo en Pro", "Rotacion semanal en Find", "Maxima visibilidad"], color: "border-blue-400/30" },
+  { name: "Elite", price: "$99", features: ["Todo en Plus", "10 espacios por categoria", "Maxima exclusividad"], color: "border-amber-400/30" },
 ];
 
 export default function PlansShowcase() {

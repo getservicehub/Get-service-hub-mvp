@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
+  description: "Meet San Diego's Elite Partners - our most exclusive, top-tier service professionals. 10 spots available per category.",
   title: "Elite Partners | GetServiHub",
   description: "Meet San Diego's Elite Partners - our most exclusive, top-tier service professionals. Only 5 spots available.",
 };
