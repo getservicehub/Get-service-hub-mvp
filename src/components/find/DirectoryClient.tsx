@@ -1,5 +1,7 @@
 "use client";
 
+import { useLanguage } from "@/lib/i18n/LanguageContext";
+
 import { useState } from "react";
 import { getProviderName, type ServiceCard } from "@/lib/services/queries";
 import StarRating from "@/components/ui/StarRating";
@@ -23,6 +25,7 @@ type Props = {
 };
 
 export default function DirectoryClient({ initialServices, sponsored, initialCategories, initialFilter, initialCity, cities }: Props) {
+  const { t } = useLanguage();
   const [filter, setFilter] = useState(initialFilter);
   const [cityFilter, setCityFilter] = useState(initialCity);
 
@@ -60,11 +63,11 @@ export default function DirectoryClient({ initialServices, sponsored, initialCat
         )}
 
         <div className="text-xs font-bold tracking-[2px] uppercase text-cyan-400 mb-3">Find Local Pros</div>
-        <h1 className="text-3xl md:text-4xl font-extrabold mb-8">Browse All Professionals</h1>
+        <h1 className="text-3xl md:text-4xl font-extrabold mb-8">{t("find_title")}</h1>
 
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <select value={cityFilter} onChange={(e) => setCityFilter(e.target.value)} className="px-4 py-2.5 bg-card border border-white/20 rounded-lg text-sm text-white max-w-[220px]">
-            <option value="" className="bg-bg2">📍 All Cities</option>
+            <option value="" className="bg-bg2">📍 {t("find_all_cities")}</option>
             {cities.map((city) => (
               <option key={city} value={city} className="bg-bg2">{city}</option>
             ))}
@@ -72,7 +75,7 @@ export default function DirectoryClient({ initialServices, sponsored, initialCat
         </div>
 
         <div className="flex flex-wrap gap-2.5 mb-8">
-          <button onClick={() => setFilter("All")} className={filter === "All" ? "px-4.5 py-2 rounded-full text-[13px] font-semibold gradient-bg text-white" : "px-4.5 py-2 rounded-full text-[13px] font-semibold border border-white/20 text-muted2"}>All</button>
+          <button onClick={() => setFilter("All")} className={filter === "All" ? "px-4.5 py-2 rounded-full text-[13px] font-semibold gradient-bg text-white" : "px-4.5 py-2 rounded-full text-[13px] font-semibold border border-white/20 text-muted2"}>{t("find_all")}</button>
           {initialCategories.map((cat) => (
             <button key={cat.id} onClick={() => setFilter(cat.name)} className={filter === cat.name ? "flex items-center gap-1.5 px-4.5 py-2 rounded-full text-[13px] font-semibold gradient-bg text-white" : "flex items-center gap-1.5 px-4.5 py-2 rounded-full text-[13px] font-semibold border border-white/20 text-muted2"}>
               <CategoryIcon name={cat.name} className="w-3.5 h-3.5" /> {cat.name}
@@ -83,7 +86,7 @@ export default function DirectoryClient({ initialServices, sponsored, initialCat
         {filtered.length === 0 && (
           <div className="text-center py-16">
             <div className="text-5xl mb-4">📭</div>
-            <div className="text-muted2 text-sm">No services found matching your filters.</div>
+            <div className="text-muted2 text-sm">{t("find_no_results")}</div>
           </div>
         )}
 

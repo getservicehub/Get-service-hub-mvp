@@ -61,6 +61,11 @@ export const translations = {
     footer_terms: "Terms of Service",
     footer_privacy: "Privacy Policy",
     footer_rights: "All rights reserved.",
+    find_eyebrow: "Find Local Pros",
+    find_title: "Browse All Professionals",
+    find_all_cities: "All Cities",
+    find_all: "All",
+    find_no_results: "No services found matching your filters.",
   },
   es: {
     nav_browse: "Buscar",
@@ -124,6 +129,11 @@ export const translations = {
     footer_terms: "Terminos de Servicio",
     footer_privacy: "Politica de Privacidad",
     footer_rights: "Todos los derechos reservados.",
+    find_eyebrow: "Encuentra Profesionales",
+    find_title: "Explora Todos los Profesionales",
+    find_all_cities: "Todas las Ciudades",
+    find_all: "Todos",
+    find_no_results: "No se encontraron servicios con esos filtros.",
   },
 };
 
