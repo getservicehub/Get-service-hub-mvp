@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client";
 
 type MyService = { id: string; title: string; plan: string; category_id: string };
 
+const PLAN_NAMES: Record<string, string> = { basic: "Basic", pro: "Pro", premium: "Plus", premier: "Elite" };
 export default function UpgradePage() {
   const [services, setServices] = useState<MyService[]>([]);
   const [selectedServiceId, setSelectedServiceId] = useState("");
@@ -150,7 +151,7 @@ export default function UpgradePage() {
             <label className="block text-xs font-semibold text-muted2 mb-1.5">Which service?</label>
             <select value={selectedServiceId} onChange={(e) => setSelectedServiceId(e.target.value)} className="w-full px-4 py-3 bg-bg2 border border-white/20 rounded-lg text-white text-sm outline-none focus:border-cyan-400">
               {services.map((s) => (
-                <option key={s.id} value={s.id}>{s.title} (currently {s.plan})</option>
+                <option key={s.id} value={s.id}>{s.title} (currently {PLAN_NAMES[s.plan] || s.plan})</option>
               ))}
             </select>
           </div>
