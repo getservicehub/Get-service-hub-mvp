@@ -103,60 +103,54 @@ export default function SponsorBanner() {
   return (
     <div className="max-w-[1140px] mx-auto px-5 py-6">
       <div className="relative bg-gradient-to-br from-[#0D1A2E] via-[#0D1A2E] to-[#1a1206] border border-amber-400/30 rounded-3xl overflow-hidden shadow-[0_0_60px_rgba(245,158,11,.08)]">
-        <div className="absolute -top-20 -right-20 w-[300px] h-[300px] bg-[radial-gradient(circle,rgba(245,158,11,.15)_0%,transparent_70%)] pointer-events-none" />
         <div className="absolute top-4 left-4 flex items-center gap-1.5 text-[10px] font-bold tracking-[1.5px] uppercase text-amber-400 bg-amber-400/10 border border-amber-400/20 px-3 py-1.5 rounded-full z-10">
           ⭐ {currentElite ? "Elite Partner" : "Sponsored"}
         </div>
 
         {currentElite ? (
-          <div className="relative flex flex-col md:flex-row items-center gap-6 p-8 md:p-10 min-h-[180px]">
-            <Link href={`/provider/${currentElite.provider_id}`} className="w-24 h-24 md:w-28 md:h-28 rounded-2xl overflow-hidden bg-card border-2 border-amber-400/30 flex items-center justify-center flex-shrink-0 text-amber-400">
+          <div className="relative flex flex-col md:flex-row items-stretch">
+            <Link href={`/provider/${currentElite.provider_id}`} className="w-full md:w-[45%] h-56 md:h-auto min-h-[220px] flex items-center justify-center bg-card text-amber-400 flex-shrink-0 overflow-hidden">
               {currentElite.image_url ? (
                 <img src={currentElite.image_url} alt={currentElite.name} className="w-full h-full object-cover" />
               ) : (
-                <CategoryIcon name={currentElite.categoryName} className="w-12 h-12" />
+                <CategoryIcon name={currentElite.categoryName} className="w-20 h-20" />
               )}
             </Link>
 
-            <div className="hidden md:block w-px h-20 bg-amber-400/20" />
-
-            <div className="flex-1 text-center md:text-left transition-opacity duration-500" key={slideIndex}>
-              <Link href={`/provider/${currentElite.provider_id}`} className="text-2xl md:text-3xl font-black mb-1.5 leading-tight hover:text-amber-400 transition-colors block">{currentElite.name}</Link>
-              <div className="text-sm text-muted2 mb-2">{currentElite.categoryName} - {currentElite.city}</div>
+            <div className="flex-1 flex flex-col justify-center gap-3 p-6 md:p-8 text-center md:text-left" key={slideIndex}>
+              <Link href={`/provider/${currentElite.provider_id}`} className="text-2xl md:text-3xl font-black leading-tight hover:text-amber-400 transition-colors">{currentElite.name}</Link>
+              <div className="text-sm text-muted2">{currentElite.categoryName} - {currentElite.city}</div>
               {currentElite.avgRating && (
                 <div className="flex items-center gap-1.5 justify-center md:justify-start">
                   <StarRating rating={currentElite.avgRating} size="text-xs" />
                   <span className="text-xs text-muted2">{currentElite.avgRating} ({currentElite.reviewCount})</span>
                 </div>
               )}
-            </div>
 
-            <div className="flex gap-2 flex-shrink-0">
-              {telLink && <a href={telLink} className="px-4 py-3 rounded-lg text-xs font-bold bg-red-500 text-white">Call</a>}
-              {waLink && <a href={waLink} target="_blank" className="px-4 py-3 rounded-lg text-xs font-bold bg-green-500 text-white">WhatsApp</a>}
-              <Link href={`/provider/${currentElite.provider_id}`} className="px-4 py-3 rounded-lg text-xs font-bold bg-gradient-to-r from-amber-400 to-amber-500 text-[#1a1206]">Profile</Link>
+              <div className="flex gap-2 justify-center md:justify-start mt-2">
+                {telLink && <a href={telLink} className="px-4 py-3 rounded-lg text-xs font-bold bg-red-500 text-white">Call</a>}
+                {waLink && <a href={waLink} target="_blank" className="px-4 py-3 rounded-lg text-xs font-bold bg-green-500 text-white">WhatsApp</a>}
+                <Link href={`/provider/${currentElite.provider_id}`} className="px-4 py-3 rounded-lg text-xs font-bold bg-gradient-to-r from-amber-400 to-amber-500 text-[#1a1206]">Profile</Link>
+              </div>
             </div>
           </div>
         ) : (
-          <div className="relative flex flex-col md:flex-row items-center gap-8 p-8 md:p-10 min-h-[180px]">
-            <div className="flex-shrink-0">
-              <Image src="/logo-full.png" alt="GetServiHub" width={220} height={110} className="h-24 md:h-28 w-auto" />
+          <div className="relative flex flex-col md:flex-row items-stretch">
+            <div className="w-full md:w-[45%] h-56 md:h-auto min-h-[220px] flex items-center justify-center bg-card flex-shrink-0">
+              <Image src="/logo-full.png" alt="GetServiHub" width={280} height={140} className="h-24 md:h-32 w-auto" />
             </div>
 
-            <div className="hidden md:block w-px h-20 bg-amber-400/20" />
-
-            <div className="flex-1 text-center md:text-left transition-opacity duration-500" key={slideIndex}>
-              <div className="text-2xl md:text-3xl font-black mb-2 leading-tight">{currentPromo?.title}</div>
+            <div className="flex-1 flex flex-col justify-center gap-3 p-6 md:p-8 text-center md:text-left" key={slideIndex}>
+              <div className="text-2xl md:text-3xl font-black leading-tight">{currentPromo?.title}</div>
               <div className="text-sm text-muted2 max-w-[440px]">{currentPromo?.sub}</div>
+              <Link href={ctaLink} className="inline-block mt-2 px-8 py-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-[#1a1206] font-black text-sm whitespace-nowrap hover:opacity-90 hover:scale-105 transition-all shadow-lg w-fit mx-auto md:mx-0">
+                {t("sponsor_cta")} →
+              </Link>
             </div>
-
-            <Link href={ctaLink} className="flex-shrink-0 px-8 py-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-[#1a1206] font-black text-sm whitespace-nowrap hover:opacity-90 hover:scale-105 transition-all shadow-lg">
-              {t("sponsor_cta")} →
-            </Link>
           </div>
         )}
 
-        <div className="relative flex justify-center gap-1.5 pb-5">
+        <div className="relative flex justify-center gap-1.5 py-4 border-t border-amber-400/10">
           {Array.from({ length: totalSlides }).map((_, i) => (
             <button
               key={i}
