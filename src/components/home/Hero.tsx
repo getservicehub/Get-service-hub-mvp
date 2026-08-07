@@ -9,7 +9,7 @@ import { matchCategory } from "@/lib/services/keywords";
 import { getCities } from "@/lib/services/queries";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { CategoryIcon } from "@/lib/services/categoryIcons";
-import { Languages, PiggyBank, MapPin, Scale, Search, TrendingUp, ShieldCheck } from "lucide-react";
+import { Languages, PiggyBank, MapPin, Scale, Search, TrendingUp, ShieldCheck, UserCheck, MessageSquare } from "lucide-react";
 
 type Category = { id: string; name: string; icon: string };
 
@@ -77,9 +77,8 @@ export default function Hero() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#060D1A] via-[#060D1A]/85 to-[#060D1A]/50" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#060D1A] via-transparent to-[#060D1A]/40" />
         </div>
-        <div className="absolute -top-[100px] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse,rgba(0,87,231,.18)_0%,transparent_70%)] pointer-events-none" />
 
-        <div className="relative z-10 max-w-[1140px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
+        <div className="relative z-10 max-w-[1300px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.1fr_auto] gap-8 items-center">
           <div>
             <div className="inline-flex items-center gap-2 bg-cyan-400/[.08] border border-cyan-400/20 px-3.5 py-1.5 rounded-full text-xs font-semibold text-cyan-400 mb-6">
               <MapPin className="w-3.5 h-3.5" /> {t("hero_eyebrow")}
@@ -106,23 +105,45 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="hidden md:block relative h-[480px]">
-            <div className="absolute top-5 left-0 w-[200px] bg-card border border-white/10 rounded-2xl p-5 shadow-2xl">
-              <Search className="w-8 h-8 mb-2 text-cyan-400" />
-              <div className="text-base font-extrabold mb-0.5">{t("value_card_1_title")}</div>
-              <div className="text-[11px] text-muted2">{t("value_card_1_sub")}</div>
-            </div>
+          <div className="hidden lg:flex items-center justify-center">
+            <Image src="/hero-orbit-logo.png" alt="GetServiHub" width={620} height={420} className="w-full max-w-[560px] h-auto" priority />
+          </div>
 
-            <div className="absolute top-[190px] right-0 w-[200px] bg-card border border-white/10 rounded-2xl p-5 shadow-2xl">
-              <TrendingUp className="w-8 h-8 mb-2 text-cyan-400" />
-              <div className="text-base font-extrabold mb-0.5">{t("value_card_2_title")}</div>
-              <div className="text-[11px] text-muted2">{t("value_card_2_sub")}</div>
+          <div className="hidden lg:flex flex-col gap-4 bg-[#0A1628]/80 backdrop-blur-sm border border-white/10 rounded-2xl p-5 w-[240px]">
+            <div className="flex items-start gap-2.5">
+              <Languages className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <div className="text-xs font-bold text-cyan-400">{t("hero_trust_bilingual_title")}</div>
+                <div className="text-[11px] text-muted2">{t("hero_trust_bilingual_sub")}</div>
+              </div>
             </div>
-
-            <div className="absolute bottom-10 left-14 w-[200px] bg-card border border-white/10 rounded-2xl p-5 shadow-2xl">
-              <ShieldCheck className="w-8 h-8 mb-2 text-cyan-400" />
-              <div className="text-base font-extrabold mb-0.5">{t("value_card_3_title")}</div>
-              <div className="text-[11px] text-muted2">{t("value_card_3_sub")}</div>
+            <div className="flex items-start gap-2.5">
+              <UserCheck className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <div className="text-xs font-bold text-cyan-400">{t("hero_trust_verified_title")}</div>
+                <div className="text-[11px] text-muted2">{t("hero_trust_verified_sub")}</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-2.5">
+              <ShieldCheck className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <div className="text-xs font-bold text-cyan-400">{t("hero_trust_built_title")}</div>
+                <div className="text-[11px] text-muted2">{t("hero_trust_built_sub")}</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-2.5">
+              <MapPin className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <div className="text-xs font-bold text-cyan-400">{t("hero_trust_local_title")}</div>
+                <div className="text-[11px] text-muted2">{t("hero_trust_local_sub")}</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-2.5">
+              <MessageSquare className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <div className="text-xs font-bold text-cyan-400">{t("hero_trust_reviews_title")}</div>
+                <div className="text-[11px] text-muted2">{t("hero_trust_reviews_sub")}</div>
+              </div>
             </div>
           </div>
         </div>
