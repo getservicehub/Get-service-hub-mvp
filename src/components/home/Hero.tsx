@@ -71,6 +71,11 @@ export default function Hero() {
   if (!user) {
     return (
       <section className="relative overflow-hidden pt-[120px] pb-20 px-5">
+        <div className="absolute inset-0 -z-10">
+          <Image src="/hero-bg.jpg" alt="San Diego skyline" fill priority className="object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#060D1A] via-[#060D1A]/85 to-[#060D1A]/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#060D1A] via-transparent to-[#060D1A]/40" />
+        </div>
         <div className="absolute -top-[100px] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse,rgba(0,87,231,.18)_0%,transparent_70%)] pointer-events-none" />
 
         <div className="relative max-w-[1140px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
