@@ -1,0 +1,57 @@
+{
+  "nav": {
+    "explore": "Explore",
+    "howItWorks": "How it works",
+    "trust": "Trust",
+    "forProfessionals": "For professionals",
+    "login": "Log in",
+    "joinCta": "Join as a professional"
+  },
+  "hero": {
+    "eyebrow": "VERIFIED PROFESSIONAL NETWORK",
+    "title": "Verified professionals for decisions that matter.",
+    "subtitle": "Explore attorneys, architects, accountants, photographers and other specialists.",
+    "searchSpecialtyPlaceholder": "Corporate attorney, architect, accountant...",
+    "searchLocationPlaceholder": "San Diego, CA",
+    "searchButton": "Search"
+  },
+  "trustStrip": {
+    "identity": { "title": "Identity reviewed", "body": "We confirm who's behind the profile." },
+    "credentials": { "title": "Credentials, where applicable", "body": "We check licenses when required." },
+    "reviews": { "title": "Reviews with context", "body": "We separate verified experiences from general comments." },
+    "pricing": { "title": "Trust isn't for sale", "body": "Plans never substitute for relevance or track record." },
+    "howItWorksLink": "How it works"
+  },
+  "expertise": { "title": "Explore areas of expertise", "exploreLink": "Explore" },
+  "professional": {
+    "demoLabel": "SAMPLE PROFILE",
+    "demoNote": "This is a demo profile.",
+    "identityVerified": "Identity reviewed",
+    "licenseVerified": "License reviewed",
+    "licenseNotApplicable": "Portfolio reviewed",
+    "viewProfile": "View profile",
+    "yearsDeclared": "years of declared experience",
+    "specialtiesLabel": "Specialties",
+    "languagesLabel": "Languages",
+    "emptyStateTitle": "No professionals in this specialty yet",
+    "emptyStateBody": "We're forming the initial group in San Diego."
+  },
+  "howItWorks": {
+    "title": "How it works",
+    "step1Title": "Explore a specialty",
+    "step1Body": "Search by profession, need, or location.",
+    "step2Title": "Compare clear signals",
+    "step2Body": "Review experience, languages, credentials, and reviews.",
+    "step3Title": "Reach out with context",
+    "step3Body": "Explain what you need before starting the conversation.",
+    "step4Title": "Build trust",
+    "step4Body": "After the service, both sides can share feedback."
+  },
+  "search": {
+    "resultsTitle": "Results",
+    "noResultsTitle": "No results yet",
+    "noResultsBody": "Try a different specialty, or browse the full catalog.",
+    "filterBySpecialty": "Filter by specialty",
+    "allSpecialties": "All"
+  }
+}

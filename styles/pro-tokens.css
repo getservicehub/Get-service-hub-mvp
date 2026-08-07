@@ -1,0 +1,14 @@
+.pro-theme {
+  --pro-bg: #0a0e17;
+  --pro-panel: #0f1522;
+  --pro-navy: #0d1b2a;
+  --pro-gold: #c8a86a;
+  --pro-gold-bright: #ddbe8b;
+  --pro-text: #f7f7f7;
+  --pro-text-muted: rgba(247, 247, 247, 0.62);
+  --pro-line: rgba(247, 247, 247, 0.1);
+  --pro-success: #7fb89a;
+  --pro-warning: #d7b46a;
+  --pro-danger: #d47d7d;
+  --pro-info: #7f9fc7;
+}
