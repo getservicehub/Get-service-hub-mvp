@@ -77,6 +77,9 @@ export default function Hero() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#060D1A] via-[#060D1A]/85 to-[#060D1A]/50" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#060D1A] via-transparent to-[#060D1A]/40" />
         </div>
+        <div className="hidden lg:block absolute top-1/2 right-[8%] -translate-y-1/2 z-[5] w-[520px] opacity-90">
+          <Image src="/hero-orbit-logo.png" alt="GetServiHub" width={620} height={420} className="w-full h-auto" priority />
+        </div>
 
         <div className="relative z-10 max-w-[1300px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 items-center">
           <div>
