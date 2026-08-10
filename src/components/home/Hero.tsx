@@ -104,8 +104,6 @@ export default function Hero() {
               <div><Scale className="w-5 h-5 mx-auto text-cyan-400" /><div className="text-xs text-muted2 mt-1 font-semibold">{t("hero_stat_rating")}</div></div>
             </div>
           </div>
-          </div>
-
           <div className="hidden lg:flex flex-col gap-5 bg-[#0A1628]/80 backdrop-blur-sm border border-white/10 rounded-2xl p-7 w-[280px]">
             <div className="flex items-start gap-2.5">
               <Languages className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
