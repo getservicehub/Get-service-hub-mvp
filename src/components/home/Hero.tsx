@@ -78,7 +78,7 @@ export default function Hero() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#060D1A] via-transparent to-[#060D1A]/40" />
         </div>
 
-        <div className="relative z-10 max-w-[1300px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.1fr_auto] gap-8 items-center">
+        <div className="relative z-10 max-w-[1300px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 items-center">
           <div>
             <div className="inline-flex items-center gap-2 bg-cyan-400/[.08] border border-cyan-400/20 px-3.5 py-1.5 rounded-full text-xs font-semibold text-cyan-400 mb-6">
               <MapPin className="w-3.5 h-3.5" /> {t("hero_eyebrow")}
@@ -104,12 +104,9 @@ export default function Hero() {
               <div><Scale className="w-5 h-5 mx-auto text-cyan-400" /><div className="text-xs text-muted2 mt-1 font-semibold">{t("hero_stat_rating")}</div></div>
             </div>
           </div>
-
-          <div className="hidden lg:flex items-center justify-center">
-            <Image src="/hero-orbit-logo.png" alt="GetServiHub" width={620} height={420} className="w-full max-w-[560px] h-auto" priority />
           </div>
 
-          <div className="hidden lg:flex flex-col gap-4 bg-[#0A1628]/80 backdrop-blur-sm border border-white/10 rounded-2xl p-5 w-[240px]">
+          <div className="hidden lg:flex flex-col gap-5 bg-[#0A1628]/80 backdrop-blur-sm border border-white/10 rounded-2xl p-7 w-[280px]">
             <div className="flex items-start gap-2.5">
               <Languages className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
               <div>
