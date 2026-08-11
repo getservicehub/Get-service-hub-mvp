@@ -79,7 +79,7 @@ export default function Hero() {
           <div className="absolute top-1/4 right-[10%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(56,141,248,.20)_0%,transparent_70%)] pointer-events-none" />
         </div>
         <div className="relative z-10 max-w-[1300px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 items-center">
-          <div>
+          <div className="max-w-[640px]">
             <div className="inline-flex items-center gap-2 bg-cyan-400/[.08] border border-cyan-400/20 px-3.5 py-1.5 rounded-full text-xs font-semibold text-cyan-400 mb-6">
               <MapPin className="w-3.5 h-3.5" /> {t("hero_eyebrow")}
             </div>
