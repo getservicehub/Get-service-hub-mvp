@@ -73,14 +73,11 @@ export default function Hero() {
     return (
       <section className="relative overflow-hidden pt-[120px] pb-20 px-5">
         <div className="absolute inset-0 z-0">
-          <Image src="/hero-bg.jpg" alt="San Diego skyline" fill priority className="object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#060D1A] via-[#060D1A]/85 to-[#060D1A]/50" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#060D1A] via-transparent to-[#060D1A]/40" />
+          <Image src="/hero-bg.jpg" alt="San Diego skyline" fill priority className="object-cover" style={{ objectPosition: "75% 30%" }} />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#060D1A] via-[#060D1A]/90 via-45% to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#060D1A]/70 via-transparent to-transparent" />
+          <div className="absolute top-1/4 right-[10%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(56,141,248,.20)_0%,transparent_70%)] pointer-events-none" />
         </div>
-        <div className="hidden lg:block absolute top-1/2 right-[8%] -translate-y-1/2 z-[5] w-[520px] opacity-90">
-          <Image src="/hero-orbit-logo.png" alt="GetServiHub" width={620} height={420} className="w-full h-auto" priority />
-        </div>
-
         <div className="relative z-10 max-w-[1300px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 items-center">
           <div>
             <div className="inline-flex items-center gap-2 bg-cyan-400/[.08] border border-cyan-400/20 px-3.5 py-1.5 rounded-full text-xs font-semibold text-cyan-400 mb-6">
@@ -101,10 +98,10 @@ export default function Hero() {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mt-12 pt-9 border-t border-white/[.08]">
-              <div><Languages className="w-5 h-5 mx-auto text-cyan-400" /><div className="text-xs text-muted2 mt-1 font-semibold">{t("hero_stat_pros")}</div></div>
-              <div><PiggyBank className="w-5 h-5 mx-auto text-cyan-400" /><div className="text-xs text-muted2 mt-1 font-semibold">{t("hero_stat_clients")}</div></div>
-              <div><MapPin className="w-5 h-5 mx-auto text-cyan-400" /><div className="text-xs text-muted2 mt-1 font-semibold">{t("hero_stat_commission")}</div></div>
-              <div><Scale className="w-5 h-5 mx-auto text-cyan-400" /><div className="text-xs text-muted2 mt-1 font-semibold">{t("hero_stat_rating")}</div></div>
+              <div><PiggyBank className="w-5 h-5 mx-auto text-cyan-400" /><div className="text-xs font-bold mt-1.5">{t("hero_value_1_title")}</div><div className="text-[11px] text-muted2">{t("hero_value_1_sub")}</div></div>
+              <div><ShieldCheck className="w-5 h-5 mx-auto text-cyan-400" /><div className="text-xs font-bold mt-1.5">{t("hero_value_2_title")}</div><div className="text-[11px] text-muted2">{t("hero_value_2_sub")}</div></div>
+              <div><MapPin className="w-5 h-5 mx-auto text-cyan-400" /><div className="text-xs font-bold mt-1.5">{t("hero_value_3_title")}</div><div className="text-[11px] text-muted2">{t("hero_value_3_sub")}</div></div>
+              <div><Scale className="w-5 h-5 mx-auto text-cyan-400" /><div className="text-xs font-bold mt-1.5">{t("hero_value_4_title")}</div><div className="text-[11px] text-muted2">{t("hero_value_4_sub")}</div></div>
             </div>
           </div>
           <div className="hidden lg:flex flex-col gap-5 bg-[#0A1628]/80 backdrop-blur-sm border border-white/10 rounded-2xl p-7 w-[280px]">
