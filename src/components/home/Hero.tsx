@@ -74,11 +74,11 @@ export default function Hero() {
       <section className="relative overflow-hidden pt-[120px] pb-20 px-5">
         <div className="absolute inset-0 z-0">
           <Image src="/hero-bg.jpg" alt="San Diego skyline" fill priority className="object-cover" style={{ objectPosition: "75% 30%" }} />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#060D1A] via-[#060D1A]/90 via-45% to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#060D1A] via-[#060D1A]/85 via-35% to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#060D1A]/70 via-transparent to-transparent" />
-          <div className="absolute top-1/4 right-[10%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(56,141,248,.20)_0%,transparent_70%)] pointer-events-none" />
+          <div className="absolute top-1/4 right-[10%] w-[550px] h-[550px] bg-[radial-gradient(circle,rgba(56,141,248,.40)_0%,rgba(56,141,248,.15)_45%,transparent_75%)] pointer-events-none" />
         </div>
-        <div className="relative z-10 max-w-[1300px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 items-center">
+        <div className="relative z-10 max-w-[1300px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 items-start">
           <div className="max-w-[640px]">
             <div className="inline-flex items-center gap-2 bg-cyan-400/[.08] border border-cyan-400/20 px-3.5 py-1.5 rounded-full text-xs font-semibold text-cyan-400 mb-6">
               <MapPin className="w-3.5 h-3.5" /> {t("hero_eyebrow")}
@@ -104,7 +104,7 @@ export default function Hero() {
               <div><Scale className="w-5 h-5 mx-auto text-cyan-400" /><div className="text-xs font-bold mt-1.5">{t("hero_value_4_title")}</div><div className="text-[11px] text-muted2">{t("hero_value_4_sub")}</div></div>
             </div>
           </div>
-          <div className="hidden lg:flex flex-col gap-5 bg-[#0A1628]/80 backdrop-blur-sm border border-white/10 rounded-2xl p-7 w-[280px]">
+          <div className="hidden lg:flex flex-col gap-5 mt-16 bg-[#0A1628]/80 backdrop-blur-sm border border-white/10 rounded-2xl p-7 w-[280px]">
             <div className="flex items-start gap-2.5">
               <Languages className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
               <div>
