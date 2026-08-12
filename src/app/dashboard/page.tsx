@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { createClient } from "@/lib/supabase/client";
 import { ShieldCheck, Zap, Star, Camera, Calendar, Edit, Share2, Megaphone, ArrowRight } from "lucide-react";
 
@@ -180,10 +181,16 @@ export default function DashboardHome() {
   return (
     <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5">
       <div className="max-w-[1140px] mx-auto">
-        <div className="mb-8">
+        <div className="relative rounded-2xl overflow-hidden mb-8 p-6">
+          <div className="absolute inset-0 z-0">
+            <Image src="/hero-bg.jpg" alt="" fill className="object-cover" style={{ objectPosition: "50% 20%" }} />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#060D1A] via-[#060D1A]/80 to-[#060D1A]/40" />
+          </div>
+          <div className="relative z-10">
           <h1 className="text-2xl md:text-3xl font-extrabold mb-1">Welcome back, {displayName}! 👋</h1>
           <div className="text-sm text-muted2">{category} - {city}</div>
           <div className="text-xs text-muted2 mt-1">Member since {memberSince}</div>
+        </div>
         </div>
 
         <div className="bg-card border border-white/[.08] rounded-2xl p-5 mb-6">
