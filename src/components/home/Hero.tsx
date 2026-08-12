@@ -105,7 +105,7 @@ export default function Hero() {
             </div>
           </div>
         </div>
-          <div className="hidden lg:flex flex-col gap-5 absolute -bottom-10 right-6 z-20 bg-[#0A1628]/90 backdrop-blur-sm border border-white/10 rounded-2xl p-6 w-[260px]">
+          <div className="hidden lg:flex flex-col gap-5 absolute bottom-4 right-6 z-20 bg-[#0A1628]/90 backdrop-blur-sm border border-white/10 rounded-2xl p-6 w-[260px]">
             <div className="flex items-start gap-2.5">
               <Languages className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
               <div>
