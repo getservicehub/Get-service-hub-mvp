@@ -183,7 +183,7 @@ export default function DashboardHome() {
       <div className="max-w-[1140px] mx-auto">
         <div className="relative rounded-2xl overflow-hidden mb-8 p-6">
           <div className="absolute inset-0 z-0">
-            <Image src="/dashboard-header-bg.jpg" alt="" fill className="object-cover" style={{ objectPosition: "50% 20%" }} />
+            <Image src="/dashboard-header-bg.jpg" alt="" fill className="object-cover" style={{ objectPosition: "50% 45%" }} />
             <div className="absolute inset-0 bg-gradient-to-r from-[#060D1A] via-[#060D1A]/40 to-transparent" />
           </div>
           <div className="relative z-10">
