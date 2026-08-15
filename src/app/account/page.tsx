@@ -5,8 +5,8 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { ShieldCheck, MapPin, ExternalLink } from "lucide-react";
 
-  const [userId, setUserId] = useState("");
 export default function AccountPage() {
+  const [userId, setUserId] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [fullName, setFullName] = useState("");
