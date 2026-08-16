@@ -289,6 +289,10 @@ export default function DashboardHome() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+          <Link href="/dashboard/new-service" className="bg-card border border-cyan-400/20 rounded-xl p-4 text-center hover:border-cyan-400/40 transition-all">
+            <Plus className="w-5 h-5 mx-auto mb-2 text-cyan-400" />
+            <div className="text-xs font-semibold">New Service</div>
+          </Link>
           <Link href="/account" className="bg-card border border-white/[.08] rounded-xl p-4 text-center hover:border-cyan-400/30 transition-all">
             <Edit className="w-5 h-5 mx-auto mb-2 text-cyan-400" />
             <div className="text-xs font-semibold">Edit Profile</div>
