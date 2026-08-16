@@ -184,9 +184,9 @@ export default function GalleryClient({ posts }: Props) {
 
                 {!isOwnPost && telLink && (
                   <div className="flex gap-2 px-4 pb-4">
-                    <a href={telLink} onClick={() => trackEvent("contact_call", post.service?.id || null, { source: "gallery" })} className="flex-1 text-center py-2 rounded-lg text-xs font-bold bg-red-500 text-white">Call</a>
-                    <a href={smsLink || "#"} className="flex-1 text-center py-2 rounded-lg text-xs font-bold bg-blue-500 text-white">Text</a>
-                    <a href={waLink || "#"} target="_blank" onClick={() => trackEvent("contact_whatsapp", post.service?.id || null, { source: "gallery" })} className="flex-1 text-center py-2 rounded-lg text-xs font-bold bg-green-500 text-white">WhatsApp</a>
+                    <a href={telLink} onClick={() => trackEvent("contact_call", post.service?.id || null, { source: "gallery" })} className="flex-1 text-center py-2 rounded-lg text-xs font-bold border border-red-500/30 text-red-400">Call</a>
+                    <a href={smsLink || "#"} onClick={() => trackEvent("contact_sms", post.service?.id || null, { source: "gallery" })} className="flex-1 text-center py-2 rounded-lg text-xs font-bold border border-blue-400/30 text-blue-400">Text</a>
+                    <a href={waLink || "#"} target="_blank" onClick={() => trackEvent("contact_whatsapp", post.service?.id || null, { source: "gallery" })} className="flex-1 text-center py-2 rounded-lg text-xs font-bold border border-green-500/30 text-green-400">WhatsApp</a>
                   </div>
                 )}
 
