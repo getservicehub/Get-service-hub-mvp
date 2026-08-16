@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/client";
-import { ShieldCheck, Zap, Star, Camera, Calendar, Edit, Share2, Megaphone, ArrowRight } from "lucide-react";
+import { ShieldCheck, Zap, Star, Camera, Calendar, Edit, Share2, Megaphone, ArrowRight, Plus } from "lucide-react";
 
 type Profile = {
   business_name: string | null;
