@@ -16,7 +16,7 @@ export type ServiceCard = {
 };
 
 const SERVICE_SELECT =
-  "id, title, description, city, price_from, emergency, espanol, image_url, provider_id, plan, profiles(full_name, business_name, phone), categories(name, icon)";
+  "id, title, description, city, price_from, emergency, espanol, image_url, provider_id, plan, profiles(full_name, business_name, phone, is_verified), categories(name, icon)";
 
 export async function getActiveServices(): Promise<ServiceCard[]> {
   const supabase = createClient();
