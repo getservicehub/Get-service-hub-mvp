@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
@@ -11,9 +11,21 @@ export default function NewPostPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [myServices, setMyServices] = useState<{ id: string; title: string }[]>([]);
+  const [selectedServiceId, setSelectedServiceId] = useState("");
   const router = useRouter();
   const supabase = createClient();
 
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      if (data.user) {
+        supabase.from("services").select("id, title").eq("provider_id", data.user.id).then(({ data: services }) => {
+          if (services) setMyServices(services);
+        });
+      }
+    });
+  }, []);
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
@@ -63,7 +75,7 @@ export default function NewPostPage() {
 
     const { data: newPost, error: insertError } = await supabase
       .from("posts")
-      .insert({ provider_id: user.id, image_url: uploadedUrls[0], caption })
+      .insert({ provider_id: user.id, image_url: uploadedUrls[0], caption, service_id: selectedServiceId || null })
       .select("id")
       .single();
 
@@ -126,6 +138,16 @@ export default function NewPostPage() {
                 <input type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={handleImageChange} className="hidden" />
               </label>
             </div>
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-muted2 mb-1.5">Servicio relacionado (opcional)</label>
+            <p className="text-[11px] text-muted2 mb-2">Vincula este trabajo con uno de tus servicios para que los clientes puedan conocer más.</p>
+            <select value={selectedServiceId} onChange={(e) => setSelectedServiceId(e.target.value)} className="w-full px-4 py-3 bg-bg2 border border-white/20 rounded-lg text-white text-sm outline-none focus:border-cyan-400">
+              <option value="">Sin vincular</option>
+              {myServices.map((s) => (
+                <option key={s.id} value={s.id}>{s.title}</option>
+              ))}
+            </select>
           </div>
 
           <div>
