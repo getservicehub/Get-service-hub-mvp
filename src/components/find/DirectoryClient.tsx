@@ -137,7 +137,7 @@ export default function DirectoryClient({ initialServices, sponsored, initialCat
           <button onClick={() => setFilter("All")} className={filter === "All" ? "px-4 py-1.5 rounded-full text-[12px] font-semibold gradient-bg text-white" : "flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[12px] font-semibold border border-white/15 text-muted2 hover:border-cyan-400/40 transition-colors"}>{t("find_all")}</button>
           {initialCategories.map((cat) => (
             <button key={cat.id} onClick={() => setFilter(cat.name)} className={filter === cat.name ? "flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[12px] font-semibold gradient-bg text-white" : "flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[12px] font-semibold border border-white/15 text-muted2 hover:border-cyan-400/40 transition-colors"}>
-              <CategoryIcon name={cat.name} className="w-3.5 h-3.5" /> {cat.name}
+              <CategoryIcon name={cat.name} className={filter === cat.name ? "w-3.5 h-3.5 text-white" : "w-3.5 h-3.5 text-cyan-400"} /> {cat.name}
             </button>
           ))}
         </div>
