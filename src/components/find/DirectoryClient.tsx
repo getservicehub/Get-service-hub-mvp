@@ -198,8 +198,8 @@ export default function DirectoryClient({ initialServices, sponsored, initialCat
                     {service.espanol && <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-400 font-bold">Español</span>}
                     {service.price_from && <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/[.08] text-white font-bold">Desde ${service.price_from}</span>}
                   </div>
-                  <div className="flex items-center gap-1 text-[12px] font-bold text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                    Ver perfil <ArrowRight className="w-3.5 h-3.5" />
+                  <div className="w-full py-2.5 rounded-lg gradient-bg text-white font-bold text-[12px] text-center flex items-center justify-center gap-1.5">
+                    Ver Perfil <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
               </a>
