@@ -14,7 +14,7 @@ export default async function GalleryPage() {
 
   const { data: posts } = await supabase
     .from("posts")
-    .select("id, image_url, caption, provider_id, created_at, profiles(full_name, business_name, phone, avatar_url)")
+    .select("id, image_url, caption, provider_id, service_id, created_at, profiles(full_name, business_name, phone, avatar_url)")
     .order("created_at", { ascending: false });
 
   const postIds = (posts || []).map((p: any) => p.id);
@@ -35,9 +35,26 @@ export default async function GalleryPage() {
     }
   }
 
+  const serviceIds = Array.from(new Set((posts || []).map((p: any) => p.service_id).filter(Boolean)));
+  let servicesById: Record<string, any> = {};
+
+  if (serviceIds.length > 0) {
+    const { data: services } = await supabase
+      .from("services")
+      .select("id, title, price_from, city, categories(name)")
+      .in("id", serviceIds);
+
+    if (services) {
+      for (const svc of services) {
+        servicesById[svc.id] = svc;
+      }
+    }
+  }
+
   const postsWithImages = (posts || []).map((p: any) => ({
     ...p,
     extraImages: imagesByPost[p.id] || [],
+    service: p.service_id ? servicesById[p.service_id] || null : null,
   }));
 
   return <GalleryClient posts={postsWithImages} />;

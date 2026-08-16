@@ -1,5 +1,8 @@
 "use client";
 
+import Link from "next/link";
+import { trackEvent } from "@/lib/tracking/events";
+
 import { useState, useEffect } from "react";
 import CommentsSection from "./CommentsSection";
 import { createClient } from "@/lib/supabase/client";
@@ -11,6 +14,7 @@ type Post = {
   provider_id: string;
   created_at: string;
   profiles: { full_name: string; business_name: string; phone: string | null; avatar_url: string | null } | null;
+  service: { id: string; title: string; price_from: number | null; city: string; categories: { name: string } | null } | null;
   extraImages: string[];
 };
 
@@ -161,6 +165,15 @@ export default function GalleryClient({ posts }: Props) {
                   )}
                   {isOwnPost && <span className="text-xs text-muted2 font-semibold">Your post</span>}
                 </div>
+                {post.service && (
+                  <div className="px-4 pt-2 flex items-center justify-between gap-2 flex-wrap">
+                    <div className="text-[11px] text-cyan-400 font-semibold">
+                      {post.service.categories?.name}{post.service.city ? " - " + post.service.city : ""}
+                      {post.service.price_from && <span className="text-muted2"> - Starting at ${post.service.price_from}</span>}
+                    </div>
+                    <Link href={`/service/${post.service.id}`} onClick={() => trackEvent("click", post.service!.id, { source: "gallery", target: "service" })} className="text-[11px] font-bold text-cyan-400 hover:underline whitespace-nowrap">Ver servicio →</Link>
+                  </div>
+                )}
                 <button onClick={() => setOpenComments(openComments === post.id ? null : post.id)} className="px-4 pb-2 text-xs text-muted2 hover:text-cyan-400">💬 Comments</button>
 
                 {post.caption && (
@@ -171,9 +184,9 @@ export default function GalleryClient({ posts }: Props) {
 
                 {!isOwnPost && telLink && (
                   <div className="flex gap-2 px-4 pb-4">
-                    <a href={telLink} className="flex-1 text-center py-2 rounded-lg text-xs font-bold bg-red-500 text-white">Call</a>
+                    <a href={telLink} onClick={() => trackEvent("contact_call", post.service?.id || null, { source: "gallery" })} className="flex-1 text-center py-2 rounded-lg text-xs font-bold bg-red-500 text-white">Call</a>
                     <a href={smsLink || "#"} className="flex-1 text-center py-2 rounded-lg text-xs font-bold bg-blue-500 text-white">Text</a>
-                    <a href={waLink || "#"} target="_blank" className="flex-1 text-center py-2 rounded-lg text-xs font-bold bg-green-500 text-white">WhatsApp</a>
+                    <a href={waLink || "#"} target="_blank" onClick={() => trackEvent("contact_whatsapp", post.service?.id || null, { source: "gallery" })} className="flex-1 text-center py-2 rounded-lg text-xs font-bold bg-green-500 text-white">WhatsApp</a>
                   </div>
                 )}
 
