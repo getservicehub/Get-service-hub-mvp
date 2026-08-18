@@ -7,11 +7,10 @@ import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
 import NotificationBell from "./NotificationBell";
-import { useLanguage } from "@/lib/i18n/LanguageContext";
-  const pathname = usePathname();
-  if (pathname?.startsWith("/gateway") || pathname?.startsWith("/pro")) return null;
 
 export default function Navbar() {
+  const pathname = usePathname();
+  if (pathname?.startsWith("/gateway") || pathname?.startsWith("/pro")) return null;
   const { language, setLanguage, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
