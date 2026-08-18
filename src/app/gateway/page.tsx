@@ -5,10 +5,10 @@ import { ShieldCheck, Users, MapPin, MessageSquare, Lock, TrendingUp, Headset, S
 export default function GatewayPage() {
   return (
     <main className="min-h-screen bg-[#0a0e17] text-white relative overflow-hidden">
-      <div className="absolute inset-0 z-0">
+      <div className="absolute top-0 left-0 right-0 h-[750px] z-0">
         <Image src="/gateway-bg.jpg" alt="" fill priority className="object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0e17]/85 via-[#0a0e17]/40 to-[#0a0e17]/85" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e17] via-transparent to-[#0a0e17]/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0e17]/55 via-transparent to-[#0a0e17]/55" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e17]/60 via-transparent to-[#0a0e17]/20" />
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/15 via-transparent to-amber-400/15" />
       </div>
 
