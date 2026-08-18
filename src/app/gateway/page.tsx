@@ -88,7 +88,7 @@ export default function GatewayPage() {
             </div>
           </div>
           <div className="flex items-start gap-2">
-            <Users className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+            <Users className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
             <div>
               <div className="text-xs font-bold">Verified Professionals</div>
               <div className="text-[10px] text-muted2">Background checked</div>
@@ -109,7 +109,7 @@ export default function GatewayPage() {
             </div>
           </div>
           <div className="flex items-start gap-2">
-            <Lock className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+            <Lock className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
             <div>
               <div className="text-xs font-bold">Secure & Private</div>
               <div className="text-[10px] text-muted2">Your data stays safe</div>
@@ -123,7 +123,7 @@ export default function GatewayPage() {
             </div>
           </div>
           <div className="flex items-start gap-2">
-            <Headset className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+            <Headset className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
             <div>
               <div className="text-xs font-bold">Real Support</div>
               <div className="text-[10px] text-muted2">Real people, real help</div>
