@@ -14,8 +14,7 @@ export default function GatewayPage() {
 
       <div className="relative z-10 flex items-center justify-between px-6 pt-6 pb-2 max-w-[1400px] mx-auto">
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/logo-icon.png" alt="GetServiHub" width={44} height={44} className="w-11 h-11" />
-          <span className="text-xl font-extrabold">GetServiHub</span>
+          <Image src="/gateway-wordmark.png" alt="GetServiHub" width={264} height={107} className="h-10 w-auto" />
         </Link>
         <nav className="hidden lg:flex items-center gap-7 text-sm text-white/90 font-medium">
           <Link href="/how-it-works" className="hover:text-white transition-colors">How It Works</Link>
@@ -25,7 +24,7 @@ export default function GatewayPage() {
           <Link href="/about" className="hover:text-white transition-colors">About Us</Link>
         </nav>
         <div className="hidden md:flex items-center gap-3">
-          <span className="text-xs text-muted2 border border-white/15 rounded-full px-3 py-1.5">EN</span>
+          <span className="text-xs text-white/70 border border-white/15 rounded-full px-3 py-1.5">EN</span>
           <Link href="/login" className="text-sm font-semibold border border-white/20 rounded-lg px-4 py-2 hover:border-white/40 transition-colors">Log in</Link>
           <Link href="/register" className="text-sm font-bold gradient-bg rounded-lg px-4 py-2 hover:opacity-90 transition-all">Get Started</Link>
         </div>
@@ -39,7 +38,7 @@ export default function GatewayPage() {
           <h1 className="text-3xl md:text-5xl font-black leading-[1.1] mb-4">
             Find Trusted <span className="text-cyan-400">Local Services</span>
           </h1>
-          <p className="text-sm md:text-base text-muted2 leading-relaxed mb-7 max-w-[420px] mx-auto lg:mx-0">
+          <p className="text-sm md:text-base text-white/70 leading-relaxed mb-7 max-w-[420px] mx-auto lg:mx-0">
             Connect with verified local professionals for your home, auto, and everyday needs. No commissions. Just real people.
           </p>
           <Link href="/" className="inline-flex items-center gap-1.5 px-7 py-3.5 rounded-lg gradient-bg text-white font-semibold text-sm hover:opacity-90 transition-all">
@@ -55,7 +54,7 @@ export default function GatewayPage() {
           <h1 className="text-3xl md:text-5xl font-black leading-[1.1] mb-4">
             Grow Your <span className="text-amber-400">Professional Business</span>
           </h1>
-          <p className="text-sm md:text-base text-muted2 leading-relaxed mb-7 max-w-[420px] mx-auto lg:ml-auto lg:mr-0">
+          <p className="text-sm md:text-base text-white/70 leading-relaxed mb-7 max-w-[420px] mx-auto lg:ml-auto lg:mr-0">
             Join an exclusive network of top professionals. Get quality leads, collaborate, and grow your practice.
           </p>
           <Link href="/pro" className="inline-flex items-center gap-1.5 px-7 py-3.5 rounded-lg bg-gradient-to-r from-amber-400 to-amber-500 text-[#1a1206] font-bold text-sm hover:opacity-90 transition-all">
@@ -68,8 +67,8 @@ export default function GatewayPage() {
 
       <div className="relative z-10 text-center pb-8 pt-4">
         <p className="text-lg md:text-xl font-extrabold mb-1.5">One Platform. One Mission.</p>
-        <p className="text-sm text-muted2 mb-6">Connecting People. Empowering Professionals.</p>
-        <div className="flex flex-col items-center gap-1.5 text-muted2">
+        <p className="text-sm text-white/70 mb-6">Connecting People. Empowering Professionals.</p>
+        <div className="flex flex-col items-center gap-1.5 text-white/70">
           <MousePointer2 className="w-4 h-4 animate-bounce" />
           <span className="text-[11px]">Scroll to Explore</span>
         </div>
@@ -81,49 +80,49 @@ export default function GatewayPage() {
             <ShieldCheck className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
             <div>
               <div className="text-xs font-bold">Built on Trust</div>
-              <div className="text-[10px] text-muted2">Fair rankings always</div>
+              <div className="text-[10px] text-white/70">Fair rankings always</div>
             </div>
           </div>
           <div className="flex items-start gap-2">
             <Users className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
             <div>
               <div className="text-xs font-bold">Verified Professionals</div>
-              <div className="text-[10px] text-muted2">Background checked</div>
+              <div className="text-[10px] text-white/70">Background checked</div>
             </div>
           </div>
           <div className="flex items-start gap-2">
             <MapPin className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
             <div>
               <div className="text-xs font-bold">Local & Focused</div>
-              <div className="text-[10px] text-muted2">Proudly serving San Diego</div>
+              <div className="text-[10px] text-white/70">Proudly serving San Diego</div>
             </div>
           </div>
           <div className="flex items-start gap-2">
             <MessageSquare className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
             <div>
               <div className="text-xs font-bold">Real Reviews</div>
-              <div className="text-[10px] text-muted2">From real customers</div>
+              <div className="text-[10px] text-white/70">From real customers</div>
             </div>
           </div>
           <div className="flex items-start gap-2">
             <Lock className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
             <div>
               <div className="text-xs font-bold">Secure & Private</div>
-              <div className="text-[10px] text-muted2">Your data stays safe</div>
+              <div className="text-[10px] text-white/70">Your data stays safe</div>
             </div>
           </div>
           <div className="flex items-start gap-2">
             <TrendingUp className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
             <div>
               <div className="text-xs font-bold">No Commissions</div>
-              <div className="text-[10px] text-muted2">Ever. For anyone.</div>
+              <div className="text-[10px] text-white/70">Ever. For anyone.</div>
             </div>
           </div>
           <div className="flex items-start gap-2">
             <Headset className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
             <div>
               <div className="text-xs font-bold">Real Support</div>
-              <div className="text-[10px] text-muted2">Real people, real help</div>
+              <div className="text-[10px] text-white/70">Real people, real help</div>
             </div>
           </div>
         </div>
