@@ -14,7 +14,7 @@ export default function GatewayPage() {
 
       <div className="relative z-10 flex items-center justify-between px-6 pt-6 pb-2 max-w-[1400px] mx-auto">
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/gateway-wordmark.png" alt="GetServiHub" width={264} height={107} className="h-14 w-auto drop-shadow-[0_1px_8px_rgba(255,255,255,0.5)]" />
+          <Image src="/gateway-wordmark.png" alt="GetServiHub" width={264} height={107} className="h-16 w-auto" />
         </Link>
         <nav className="hidden lg:flex items-center gap-7 text-sm text-white/90 font-medium">
           <Link href="/how-it-works" className="hover:text-white transition-colors">How It Works</Link>
