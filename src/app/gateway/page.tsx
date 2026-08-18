@@ -14,10 +14,10 @@ export default function GatewayPage() {
 
       <div className="relative z-10 flex items-center justify-between px-6 pt-6 pb-2 max-w-[1400px] mx-auto">
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/logo-icon.png" alt="GetServiHub" width={32} height={32} className="w-8 h-8" />
-          <span className="text-base font-extrabold">GetServiHub</span>
+          <Image src="/logo-icon.png" alt="GetServiHub" width={44} height={44} className="w-11 h-11" />
+          <span className="text-xl font-extrabold">GetServiHub</span>
         </Link>
-        <nav className="hidden lg:flex items-center gap-7 text-sm text-muted2">
+        <nav className="hidden lg:flex items-center gap-7 text-sm text-white/90 font-medium">
           <Link href="/how-it-works" className="hover:text-white transition-colors">How It Works</Link>
           <Link href="/trust-safety" className="hover:text-white transition-colors">Trust & Safety</Link>
           <Link href="/find" className="hover:text-white transition-colors">Explore</Link>
