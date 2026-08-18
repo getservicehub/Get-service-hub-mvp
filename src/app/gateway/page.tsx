@@ -12,6 +12,7 @@ export default function GatewayPage() {
       </div>
 
       <div className="relative z-10 pt-8 px-6">
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/15 via-transparent to-amber-400/15" />
         <Link href="/" className="inline-flex items-center gap-2">
           <Image src="/logo-icon.png" alt="GetServiHub" width={36} height={36} className="w-9 h-9" />
           <span className="text-lg font-extrabold">GetServiHub</span>
@@ -32,6 +33,7 @@ export default function GatewayPage() {
           <Link href="/" className="inline-flex items-center gap-1.5 px-7 py-3.5 rounded-lg gradient-bg text-white font-semibold text-sm hover:opacity-90 transition-all">
             <Search className="w-4 h-4" /> Find Services
           </Link>
+          <div className="mt-3"><Link href="/find" className="text-xs font-semibold text-cyan-400 hover:underline">Explore Categories →</Link></div>
         </div>
 
         <div className="text-center lg:text-right lg:order-2">
@@ -47,6 +49,7 @@ export default function GatewayPage() {
           <Link href="/pro" className="inline-flex items-center gap-1.5 px-7 py-3.5 rounded-lg bg-gradient-to-r from-amber-400 to-amber-500 text-[#1a1206] font-bold text-sm hover:opacity-90 transition-all">
             <Crown className="w-4 h-4" /> Join the Network
           </Link>
+          <div className="mt-3"><Link href="/pro" className="text-xs font-semibold text-amber-400 hover:underline">Explore Professions →</Link></div>
         </div>
       </div>
 
