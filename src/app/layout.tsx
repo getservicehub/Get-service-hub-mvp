@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Sidebar from "@/components/layout/Sidebar";
 import Footer from "@/components/layout/Footer";
+import LayoutWrapper from "@/components/layout/LayoutWrapper";
 import { LanguageProvider } from "@/lib/i18n/LanguageContext";
 const inter = Inter({
   subsets: ["latin"],
@@ -28,7 +29,7 @@ export default function RootLayout({
        <LanguageProvider>
           <Navbar />
           <Sidebar />
-          <div className="md:ml-[72px]">
+          <LayoutWrapper>
             {children}
             <Footer />
           </div>

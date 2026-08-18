@@ -2,11 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
 import NotificationBell from "./NotificationBell";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+  const pathname = usePathname();
+  if (pathname?.startsWith("/gateway") || pathname?.startsWith("/pro")) return null;
 
 export default function Navbar() {
   const { language, setLanguage, t } = useLanguage();

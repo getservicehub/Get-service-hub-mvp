@@ -1,10 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function Footer() {
+  const pathname = usePathname();
+  if (pathname?.startsWith("/gateway") || pathname?.startsWith("/pro")) return null;
   const { t } = useLanguage();
 
   return (
