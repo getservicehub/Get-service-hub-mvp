@@ -65,9 +65,6 @@ export default function GatewayPage() {
         </div>
       </div>
 
-      <div className="hidden lg:flex absolute top-[46%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 items-center justify-center pointer-events-none">
-        <Image src="/gateway-logo.png" alt="" width={700} height={480} className="w-[420px] xl:w-[520px] h-auto drop-shadow-[0_0_60px_rgba(255,255,255,0.15)]" />
-      </div>
 
       <div className="relative z-10 text-center pb-8 pt-4">
         <p className="text-lg md:text-xl font-extrabold mb-1.5">One Platform. One Mission.</p>
