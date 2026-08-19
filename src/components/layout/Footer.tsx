@@ -45,6 +45,7 @@ export default function Footer() {
           <div className="flex flex-col gap-2.5">
             <Link href="/terms" className="text-xs text-muted2 hover:text-white">{t("footer_terms")}</Link>
             <Link href="/privacy" className="text-xs text-muted2 hover:text-white">{t("footer_privacy")}</Link>
+            <Link href="/community-guidelines" className="text-xs text-muted2 hover:text-white">Community Guidelines</Link>
           </div>
         </div>
       </div>

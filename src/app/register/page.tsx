@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import Link from "next/link";
 
 function getPasswordStrength(password: string) {
   let score = 0;
@@ -31,6 +32,7 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const strength = getPasswordStrength(password);
   const passwordsMatch = confirmPassword.length === 0 || password === confirmPassword;
@@ -39,6 +41,10 @@ export default function RegisterPage() {
     e.preventDefault();
     setError("");
 
+    if (!agreedToTerms) {
+      setError("Please agree to the Terms of Service, Privacy Policy, and Community Guidelines to continue.");
+      return;
+    }
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
@@ -173,7 +179,13 @@ export default function RegisterPage() {
             </>
           )}
 
-          <button type="submit" disabled={loading} className="w-full py-3.5 rounded-lg gradient-bg text-white font-bold text-sm disabled:opacity-50">
+          <label className="flex items-start gap-2.5 cursor-pointer">
+            <input type="checkbox" checked={agreedToTerms} onChange={(e) => setAgreedToTerms(e.target.checked)} className="mt-0.5 w-4 h-4 flex-shrink-0" />
+            <span className="text-xs text-muted2 leading-relaxed">
+              I am at least 18 years old, agree to the <Link href="/terms" target="_blank" className="text-cyan-400 hover:underline">Terms of Service</Link>, and acknowledge the <Link href="/privacy" target="_blank" className="text-cyan-400 hover:underline">Privacy Policy</Link> and <Link href="/community-guidelines" target="_blank" className="text-cyan-400 hover:underline">Community, Reviews &amp; Content Policy</Link>.
+            </span>
+          </label>
+          <button type="submit" disabled={loading || !agreedToTerms} className="w-full py-3.5 rounded-lg gradient-bg text-white font-bold text-sm disabled:opacity-50">
             {loading ? "Creating account..." : "Create Account"}
           </button>
         </form>
