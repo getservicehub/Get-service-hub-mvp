@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
+import { LEGAL_VERSIONS } from "@/lib/legal/versions";
 
 function getPasswordStrength(password: string) {
   let score = 0;
@@ -84,6 +85,18 @@ export default function RegisterPage() {
 
       if (profileError) {
         setError(profileError.message);
+        setLoading(false);
+        return;
+      }
+
+      const { error: acceptanceError } = await supabase.from("legal_acceptances").insert([
+        { user_id: data.user.id, document_type: "terms", document_version: LEGAL_VERSIONS.terms },
+        { user_id: data.user.id, document_type: "privacy", document_version: LEGAL_VERSIONS.privacy },
+        { user_id: data.user.id, document_type: "community", document_version: LEGAL_VERSIONS.community },
+      ]);
+
+      if (acceptanceError) {
+        setError("We could not record your legal acceptance. Please try again or contact support@getservihub.com.");
         setLoading(false);
         return;
       }
