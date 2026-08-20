@@ -133,14 +133,14 @@ export default function RegisterPage() {
         }
       `}</style>
 
-      <div className="relative lg:hidden h-[200px] w-full flex-shrink-0 overflow-hidden">
+      <div className="relative lg:hidden h-[240px] w-full flex-shrink-0 overflow-hidden">
         <Image src="/register-bg.jpg" alt="San Diego skyline" fill priority className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#060D1A] via-[#060D1A]/70 to-[#060D1A]/30" />
         <div className="relative z-10 h-full flex flex-col justify-between p-5">
           <Link href="/" className="self-start">
-            <Image src="/logo-horizontal.png" alt="GetServiHub" width={140} height={32} className="h-8 w-auto" />
+            <Image src="/logo-horizontal.png" alt="GetServiHub" width={220} height={64} className="h-16 w-auto" />
           </Link>
-          <h1 className="text-xl font-extrabold leading-snug">
+          <h1 className="text-2xl font-extrabold leading-snug">
             Real People. Real Services. <span className="text-cyan-400">Real Trust.</span>
           </h1>
         </div>
