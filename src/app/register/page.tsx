@@ -137,7 +137,9 @@ export default function RegisterPage() {
         <Image src="/register-bg.jpg" alt="San Diego skyline" fill priority className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#060D1A] via-[#060D1A]/70 to-[#060D1A]/30" />
         <div className="relative z-10 h-full flex flex-col justify-between p-5">
-          <Image src="/logo-horizontal.png" alt="GetServiHub" width={140} height={32} className="h-8 w-auto" />
+          <Link href="/" className="self-start">
+            <Image src="/logo-horizontal.png" alt="GetServiHub" width={140} height={32} className="h-8 w-auto" />
+          </Link>
           <h1 className="text-xl font-extrabold leading-snug">
             Real People. Real Services. <span className="text-cyan-400">Real Trust.</span>
           </h1>
