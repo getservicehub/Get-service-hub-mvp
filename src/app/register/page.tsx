@@ -59,11 +59,20 @@ export default function RegisterPage() {
     setLoading(true);
     const supabase = createClient();
 
-    const { data, error: signUpError } = await supabase.auth.signUp({
+    const { error: signUpError } = await supabase.auth.signUp({
       email,
       password,
       options: {
         emailRedirectTo: `${window.location.origin}/auth/callback`,
+        data: {
+          full_name: fullName,
+          role: role,
+          business_name: role === "provider" ? businessName : null,
+          service_type: role === "provider" ? serviceType : null,
+          terms_version: LEGAL_VERSIONS.terms,
+          privacy_version: LEGAL_VERSIONS.privacy,
+          community_version: LEGAL_VERSIONS.community,
+        },
       },
     });
 
@@ -73,38 +82,11 @@ export default function RegisterPage() {
       return;
     }
 
-    if (data.user) {
-      const { error: profileError } = await supabase.from("profiles").insert({
-        id: data.user.id,
-        email: email,
-        full_name: fullName,
-        role: role,
-        business_name: role === "provider" ? businessName : null,
-        service_type: role === "provider" ? serviceType : null,
-      });
-
-      if (profileError) {
-        setError(profileError.message);
-        setLoading(false);
-        return;
-      }
-
-      const { error: acceptanceError } = await supabase.from("legal_acceptances").insert([
-        { user_id: data.user.id, document_type: "terms", document_version: LEGAL_VERSIONS.terms },
-        { user_id: data.user.id, document_type: "privacy", document_version: LEGAL_VERSIONS.privacy },
-        { user_id: data.user.id, document_type: "community", document_version: LEGAL_VERSIONS.community },
-      ]);
-
-      if (acceptanceError) {
-        setError("We could not record your legal acceptance. Please try again or contact support@getservihub.com.");
-        setLoading(false);
-        return;
-      }
-    }
-
     setSuccess(true);
     setLoading(false);
-  };if (success) {
+  };
+
+  if (success) {
     return (
       <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5 flex items-center justify-center">
         <div className="max-w-[440px] text-center">
@@ -135,7 +117,9 @@ export default function RegisterPage() {
           </button>
         </div>
 
-        {error && <div className="bg-red-500/10 border border-red-500/30 text-red-400 text-sm rounded-lg p-3 mb-4">{error}</div>}<form onSubmit={handleSubmit} className="space-y-4">
+        {error && <div className="bg-red-500/10 border border-red-500/30 text-red-400 text-sm rounded-lg p-3 mb-4">{error}</div>}
+
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-xs font-semibold text-muted2 mb-1.5">Full Name</label>
             <input type="text" required value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Juan Ramirez" className="w-full px-4 py-3 bg-bg2 border border-white/20 rounded-lg text-white text-sm outline-none focus:border-cyan-400" />
