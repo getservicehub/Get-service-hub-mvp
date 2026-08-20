@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "About GetServiHub — Trust, Transparency, and Fair Competition",
+  description: "GetServiHub is a bilingual local services marketplace in San Diego. Learn about our mission to help clients find verified professionals and help providers grow without commission fees.",
+};
 
 export default function AboutPage() {
   return (

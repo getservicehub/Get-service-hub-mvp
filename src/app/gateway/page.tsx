@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ShieldCheck, Users, MapPin, MessageSquare, Lock, TrendingUp, Headset, Search, Crown, Scale, Building2, Sofa, Briefcase, HardHat, Palette, MousePointer2 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "GetServiHub — Local Services & Verified Professionals",
+  description: "Choose your path: browse trusted local home and lifestyle services, or explore GetServiHub Pro's verified network of licensed professionals.",
+};
 
 export default function GatewayPage() {
   return (

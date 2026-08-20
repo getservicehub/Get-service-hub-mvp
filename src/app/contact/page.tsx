@@ -1,3 +1,9 @@
+import type { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Contact GetServiHub — We're Here to Help",
+  description: "Have a question, a booking issue, or feedback? Get in touch with the GetServiHub team.",
+};
+
 export default function ContactPage() {
   return (
     <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5">

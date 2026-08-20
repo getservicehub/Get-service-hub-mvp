@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Crown, ArrowLeft } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "GetServiHub Pro — Coming Soon",
+  description: "GetServiHub Pro is a verified network for licensed professionals — attorneys, architects, consultants, and more. Not live yet, but coming soon.",
+  robots: { index: false, follow: true },
+};
 
 export default function ProComingSoonPage() {
   return (

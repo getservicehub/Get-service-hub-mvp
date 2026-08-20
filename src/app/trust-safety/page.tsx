@@ -1,3 +1,9 @@
+import type { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Trust & Safety — How Rankings Work | GetServiHub",
+  description: "See exactly how GetServiHub decides which professionals you see. Trust is earned through track record, not paid for.",
+};
+
 export default function TrustSafetyPage() {
   return (
     <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5">

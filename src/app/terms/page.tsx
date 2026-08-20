@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { LEGAL_VERSIONS, LEGAL_EFFECTIVE_DATE } from "@/lib/legal/versions";
+
+export const metadata: Metadata = {
+  title: "Terms of Service | GetServiHub",
+  description: "Terms of Service governing GetServiHub and GetServiHub Pro, including accounts, listings, messaging, reviews, and platform use.",
+};
 
 export default function TermsPage() {
   return (

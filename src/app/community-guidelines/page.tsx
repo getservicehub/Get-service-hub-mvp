@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { LEGAL_VERSIONS, LEGAL_EFFECTIVE_DATE } from "@/lib/legal/versions";
+
+export const metadata: Metadata = {
+  title: "Community, Reviews & Content Policy | GetServiHub",
+  description: "Integrity rules for reviews, ratings, and content on GetServiHub and GetServiHub Pro.",
+};
 
 export default function CommunityGuidelinesPage() {
   return (

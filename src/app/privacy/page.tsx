@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { LEGAL_VERSIONS, LEGAL_EFFECTIVE_DATE } from "@/lib/legal/versions";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | GetServiHub",
+  description: "How GetServiHub and GetServiHub Pro collect, use, and protect your information across the platform.",
+};
 
 export default function PrivacyPage() {
   return (
