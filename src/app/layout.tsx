@@ -13,6 +13,7 @@ const inter = Inter({
 });
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.getservihub.com"),
   title: "GetServiHub — Find. Connect. Grow.",
   description:
     "San Diego's bilingual local services marketplace. Find trusted mechanics, landscapers, cleaners & more in your community.",
