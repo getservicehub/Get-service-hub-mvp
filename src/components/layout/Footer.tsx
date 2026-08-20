@@ -7,7 +7,7 @@ import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function Footer() {
   const pathname = usePathname();
-  if (pathname?.startsWith("/gateway") || pathname?.startsWith("/pro") || pathname === "/register") return null;
+  if (pathname?.startsWith("/gateway") || pathname?.startsWith("/pro") || pathname === "/register" || pathname === "/login") return null;
   const { t } = useLanguage();
 
   return (
