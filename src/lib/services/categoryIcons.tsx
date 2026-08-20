@@ -17,6 +17,7 @@ import {
   Scissors,
   Flower2,
   HardHat,
+  Sprout,
   Infinity as InfinityIcon,
   Wrench as DefaultIcon,
 } from "lucide-react";
@@ -40,6 +41,7 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   "Beauty Services": Scissors,
   "Florist": Flower2,
   "Construction": HardHat,
+  "Artificial Turf": Sprout,
   "Others": InfinityIcon,
 };
 
