@@ -149,7 +149,7 @@ export default function RegisterPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#060D1A] via-[#060D1A]/80 to-[#060D1A]/55" />
         <div className="relative z-10 p-10 xl:p-14 flex flex-col h-full justify-between">
           <Link href="/">
-            <Image src="/logo-horizontal.png" alt="GetServiHub" width={180} height={40} className="h-10 w-auto" />
+            <Image src="/logo-horizontal.png" alt="GetServiHub" width={240} height={80} className="h-20 w-auto" />
           </Link>
 
           <div>
@@ -188,10 +188,10 @@ export default function RegisterPage() {
           </span>
         </div>
 
-        <div className="flex-1 flex items-center justify-center px-5 pb-12 lg:px-10">
+        <div className="flex-1 flex items-start justify-center px-5 pb-12 pt-2 lg:px-10 lg:pt-6">
           <div className="w-full max-w-[440px]">
             <h2 className="text-2xl md:text-3xl font-extrabold mb-2">Create Your Account</h2>
-            <p className="text-sm text-muted2 mb-7">
+            <p className="text-sm text-muted2 mb-10">
               Join GetServiHub to connect with local professionals — or grow your business by offering your services.
             </p>
 

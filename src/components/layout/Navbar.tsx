@@ -51,11 +51,11 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={scrolled ? "fixed top-0 left-0 right-0 z-[100] px-4 transition-all duration-300 bg-[#060D1A]/97 backdrop-blur-2xl shadow-lg" : "fixed top-0 left-0 right-0 z-[100] px-4 transition-all duration-300 bg-transparent"}>
-        <div className="max-w-[1140px] mx-auto flex items-center justify-between h-[72px]">
+      <nav className={scrolled ? "fixed top-0 left-0 right-0 z-[100] pl-2 pr-4 transition-all duration-300 bg-[#060D1A]/97 backdrop-blur-2xl shadow-lg" : "fixed top-0 left-0 right-0 z-[100] pl-2 pr-4 transition-all duration-300 bg-transparent"}>
+        <div className="max-w-[1280px] mx-auto flex items-center justify-between h-[84px]">
           <div className="flex items-center gap-3 flex-shrink-0">
             <Link href="/" className="flex items-center">
-              <Image src="/logo-horizontal.png" alt="GetServiHub" width={180} height={40} className="h-16 w-auto" priority />
+              <Image src="/logo-horizontal.png" alt="GetServiHub" width={240} height={80} className="h-20 w-auto" priority />
             </Link>
             <button onClick={() => setLanguage(language === "en" ? "es" : "en")} className="w-9 h-8 rounded-lg border border-white/20 text-[11px] font-bold text-white hover:bg-white/5 transition-all flex-shrink-0">
               {language === "en" ? "ES" : "EN"}
