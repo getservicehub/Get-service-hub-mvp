@@ -11,7 +11,7 @@ import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function Navbar() {
   const pathname = usePathname();
-  if (pathname?.startsWith("/gateway") || pathname?.startsWith("/pro")) return null;
+  if (pathname?.startsWith("/gateway") || pathname?.startsWith("/pro") || pathname === "/register") return null;
   const { language, setLanguage, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);

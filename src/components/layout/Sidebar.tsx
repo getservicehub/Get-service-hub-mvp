@@ -13,7 +13,7 @@ const items = [
 
 export default function Sidebar() {
   const pathname = usePathname();
-  if (pathname?.startsWith("/gateway") || pathname?.startsWith("/pro")) return null;
+  if (pathname?.startsWith("/gateway") || pathname?.startsWith("/pro") || pathname === "/register") return null;
 
   return (
     <aside className="hidden md:flex fixed top-[72px] left-0 bottom-0 w-[72px] hover:w-[220px] z-[90] bg-[#060D1A]/97 border-r border-white/[.08] flex-col items-center py-4 gap-1 transition-all duration-300 overflow-hidden group">
