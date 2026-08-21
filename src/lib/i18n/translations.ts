@@ -222,6 +222,7 @@ export const translations = {
     gallery_view_service: "View service",
     gallery_comments: "Comments",
     gallery_no_phone: "No phone",
+    nav_greeting: "Hi,",
   },
   es: {
     nav_browse: "Buscar",
@@ -446,6 +447,7 @@ export const translations = {
     gallery_view_service: "Ver servicio",
     gallery_comments: "Comentarios",
     gallery_no_phone: "Sin telefono",
+    nav_greeting: "Hola,",
   },
 };
 

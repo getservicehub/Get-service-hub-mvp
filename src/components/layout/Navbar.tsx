@@ -75,7 +75,7 @@ export default function Navbar() {
                 <Link href="/favorites" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">{t("nav_favorites")}</Link>
                 <Link href="/messages" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">{t("nav_messages")}</Link>
                 <Link href="/account" className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg text-cyan-400 hover:bg-cyan-400/10 transition-all">{t("nav_account")}</Link>
-                <span className="hidden md:inline text-sm text-muted2 max-w-[100px] truncate">Hi, {fullName || user.email}</span>
+                <span className="hidden md:inline text-sm text-muted2 max-w-[100px] truncate">{t("nav_greeting")} {fullName || user.email}</span>
                 <button onClick={handleSignOut} className="hidden md:inline-flex items-center text-[13px] font-semibold px-4.5 py-2 rounded-lg border border-white/20 text-white hover:bg-white/5 transition-all">{t("nav_signout")}</button>
               </>
             )}
@@ -104,7 +104,7 @@ export default function Navbar() {
             </div>
 
             {user && (
-              <div className="text-sm text-white font-semibold mb-4 pb-4 border-b border-white/10 truncate">Hi, {fullName || user.email}</div>
+              <div className="text-sm text-white font-semibold mb-4 pb-4 border-b border-white/10 truncate">{t("nav_greeting")} {fullName || user.email}</div>
             )}
 
             <Link href="/find" onClick={closeDrawer} className="py-3 text-white font-medium border-b border-white/[.06]">{t("nav_browse")}</Link>

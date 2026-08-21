@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { createClient } from "@/lib/supabase/client";
 import { getProviderName, type ServiceCard } from "@/lib/services/queries";
+import { getCategoryLabel } from "@/lib/services/categoryLabels";
 import StarRating from "@/components/ui/StarRating";
 import { CategoryIcon } from "@/lib/services/categoryIcons";
 import { Search, Heart, ArrowRight, Rocket, Briefcase } from "lucide-react";
@@ -26,7 +27,7 @@ type Props = {
 };
 
 export default function DirectoryClient({ initialServices, sponsored, initialCategories, initialFilter, initialCity, cities }: Props) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [filter, setFilter] = useState(initialFilter);
   const [cityFilter, setCityFilter] = useState(initialCity);
   const [query, setQuery] = useState("");
@@ -83,7 +84,7 @@ export default function DirectoryClient({ initialServices, sponsored, initialCat
 
         {sponsored.length > 0 && (
           <div className="mb-10">
-            <div className="text-[10px] font-bold tracking-[2px] uppercase text-amber-400 mb-4">Sponsored</div>
+            <div className="text-[10px] font-bold tracking-[2px] uppercase text-amber-400 mb-4">{t("find_sponsored_label")}</div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {sponsored.slice(0, 2).map((s) => {
                 const hasImage = s.image_url !== null && s.image_url !== "";
@@ -98,7 +99,7 @@ export default function DirectoryClient({ initialServices, sponsored, initialCat
                         <div className="text-[13px] font-bold truncate">{getProviderName(s)}</div>
                         <div className="text-[11px] text-muted2 truncate">{s.title}</div>
                       </div>
-                      <span className="flex-shrink-0 text-[11px] font-bold text-amber-400 border border-amber-400/30 rounded-lg px-2.5 py-1.5 whitespace-nowrap">Ver Perfil →</span>
+                      <span className="flex-shrink-0 text-[11px] font-bold text-amber-400 border border-amber-400/30 rounded-lg px-2.5 py-1.5 whitespace-nowrap">{t("find_view_profile")} →</span>
                     </div>
                   </a>
                 );
@@ -108,17 +109,17 @@ export default function DirectoryClient({ initialServices, sponsored, initialCat
                   <Rocket className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-sm font-bold mb-0.5">Haz crecer tu negocio</div>
-                  <div className="text-[11px] text-muted2 mb-2">Patrocina tu empresa y llega a más clientes.</div>
-                  <a href="/dashboard/upgrade" className="text-[11px] font-bold text-amber-400 hover:underline">Promocionar mi negocio →</a>
+                  <div className="text-sm font-bold mb-0.5">{t("find_grow_business_title")}</div>
+                  <div className="text-[11px] text-muted2 mb-2">{t("find_grow_business_sub")}</div>
+                  <a href="/dashboard/upgrade" className="text-[11px] font-bold text-amber-400 hover:underline">{t("find_promote_business_link")} →</a>
                 </div>
               </div>
             </div>
           </div>
         )}
 
-        <div className="text-xs font-bold tracking-[2px] uppercase text-cyan-400 mb-3">Find Local Pros</div>
-        <h1 className="text-3xl md:text-4xl font-extrabold mb-6">Explora <span className="text-cyan-400">Todos</span> los Profesionales</h1>
+        <div className="text-xs font-bold tracking-[2px] uppercase text-cyan-400 mb-3">{t("find_eyebrow")}</div>
+        <h1 className="text-3xl md:text-4xl font-extrabold mb-6">{t("find_title_pre")} <span className="text-cyan-400">{t("find_title_highlight")}</span> {t("find_title_post")}</h1>
 
         <div className="flex flex-col md:flex-row gap-3 mb-6">
           <select value={cityFilter} onChange={(e) => setCityFilter(e.target.value)} className="px-4 py-3 bg-card border border-white/20 rounded-lg text-sm text-white md:max-w-[220px]">
@@ -129,7 +130,7 @@ export default function DirectoryClient({ initialServices, sponsored, initialCat
           </select>
           <div className="relative flex-1">
             <Search className="w-4 h-4 text-muted2 absolute left-4 top-1/2 -translate-y-1/2" />
-            <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Buscar por servicio o profesional..." className="w-full pl-11 pr-4 py-3 bg-card border border-white/20 rounded-lg text-white text-sm outline-none focus:border-cyan-400" />
+            <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} placeholder={t("find_search_placeholder")} className="w-full pl-11 pr-4 py-3 bg-card border border-white/20 rounded-lg text-white text-sm outline-none focus:border-cyan-400" />
           </div>
         </div>
 
@@ -137,18 +138,18 @@ export default function DirectoryClient({ initialServices, sponsored, initialCat
           <button onClick={() => setFilter("All")} className={filter === "All" ? "px-4 py-1.5 rounded-full text-[12px] font-semibold gradient-bg text-white" : "flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[12px] font-semibold border border-white/15 text-muted2 hover:border-cyan-400/40 transition-colors"}>{t("find_all")}</button>
           {initialCategories.map((cat) => (
             <button key={cat.id} onClick={() => setFilter(cat.name)} className={filter === cat.name ? "flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[12px] font-semibold gradient-bg text-white" : "flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[12px] font-semibold border border-white/15 text-muted2 hover:border-cyan-400/40 transition-colors"}>
-              <CategoryIcon name={cat.name} className={filter === cat.name ? "w-3.5 h-3.5 text-white" : "w-3.5 h-3.5 text-cyan-400"} /> {cat.name}
+              <CategoryIcon name={cat.name} className={filter === cat.name ? "w-3.5 h-3.5 text-white" : "w-3.5 h-3.5 text-cyan-400"} /> {getCategoryLabel(cat.name, language)}
             </button>
           ))}
         </div>
 
         <div className="flex items-center justify-between mb-6">
-          <div className="text-sm text-muted2">Mostrando <span className="text-white font-bold">{filtered.length}</span> profesionales</div>
+          <div className="text-sm text-muted2">{t("find_showing_pre")} <span className="text-white font-bold">{filtered.length}</span> {t("find_showing_post")}</div>
           <div className="flex items-center gap-2">
-            <span className="text-xs text-muted2 hidden sm:inline">Ordenar por</span>
+            <span className="text-xs text-muted2 hidden sm:inline">{t("find_sort_by")}</span>
             <select value={sortBy} onChange={(e) => setSortBy(e.target.value as "recent" | "rating")} className="px-3 py-2 bg-card border border-white/20 rounded-lg text-xs text-white">
-              <option value="recent" className="bg-bg2">Más recientes</option>
-              <option value="rating" className="bg-bg2">Mejor calificados</option>
+              <option value="recent" className="bg-bg2">{t("find_sort_recent")}</option>
+              <option value="rating" className="bg-bg2">{t("find_sort_rating")}</option>
             </select>
           </div>
         </div>
@@ -183,7 +184,7 @@ export default function DirectoryClient({ initialServices, sponsored, initialCat
                       {service.profiles?.is_verified && <span className="text-blue-400 text-[11px]">✓</span>}
                     </a>
                   </div>
-                  <div className="text-[11px] text-muted2 mb-1.5">{service.categories?.name} - {service.city}</div>
+                  <div className="text-[11px] text-muted2 mb-1.5">{getCategoryLabel(service.categories?.name || "", language)} - {service.city}</div>
                   {service.avg_rating && (
                     <div className="flex items-center gap-1.5 mb-2">
                       <StarRating rating={service.avg_rating} size="text-xs" />
@@ -194,12 +195,12 @@ export default function DirectoryClient({ initialServices, sponsored, initialCat
                   <div className="flex gap-1.5 flex-wrap mb-3">
                     {(service.plan === "premium" || service.plan === "premier") && <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-400/15 text-amber-400 font-bold">{service.plan === "premier" ? "Elite" : "Plus"}</span>}
                     {service.emergency && <span className="text-[10px] px-2 py-0.5 rounded-full bg-red-500/15 text-red-400 font-bold">24/7</span>}
-                    {service.respondsQuickly && <span className="text-[10px] px-2 py-0.5 rounded-full bg-green-500/15 text-green-400 font-bold">⚡ Rápida</span>}
+                    {service.respondsQuickly && <span className="text-[10px] px-2 py-0.5 rounded-full bg-green-500/15 text-green-400 font-bold">⚡</span>}
                     {service.espanol && <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-400 font-bold">Español</span>}
-                    {service.price_from && <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/[.08] text-white font-bold">Desde ${service.price_from}</span>}
+                    {service.price_from && <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/[.08] text-white font-bold">${service.price_from}+</span>}
                   </div>
                   <div className="w-full py-2.5 rounded-lg gradient-bg text-white font-bold text-[12px] text-center flex items-center justify-center gap-1.5">
-                    Ver Perfil <ArrowRight className="w-3.5 h-3.5" />
+                    {t("find_view_profile")} <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
               </a>
@@ -213,11 +214,11 @@ export default function DirectoryClient({ initialServices, sponsored, initialCat
               <Briefcase className="w-5 h-5" />
             </div>
             <div>
-              <div className="text-sm font-bold">¿No encuentras lo que buscas?</div>
-              <div className="text-xs text-muted2">Explora todas nuestras categorías disponibles.</div>
+              <div className="text-sm font-bold">{t("find_no_match_title")}</div>
+              <div className="text-xs text-muted2">{t("find_no_match_sub")}</div>
             </div>
           </div>
-          <a href="/find" className="px-5 py-2.5 rounded-lg gradient-bg text-white font-semibold text-sm whitespace-nowrap">Ver Todas las Categorías →</a>
+          <a href="/find" className="px-5 py-2.5 rounded-lg gradient-bg text-white font-semibold text-sm whitespace-nowrap">{t("find_view_all_categories")} →</a>
         </div>
       </div>
     </main>
