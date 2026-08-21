@@ -104,7 +104,7 @@ export default function SponsorBanner() {
     <div className="max-w-[1140px] mx-auto px-5 py-6">
       <div className="relative bg-gradient-to-br from-[#0D1A2E] via-[#0D1A2E] to-[#1a1206] border border-amber-400/30 rounded-3xl overflow-hidden shadow-[0_0_60px_rgba(245,158,11,.08)]">
         <div className="absolute top-4 left-4 flex items-center gap-1.5 text-[10px] font-bold tracking-[1.5px] uppercase text-amber-400 bg-amber-400/10 border border-amber-400/20 px-3 py-1.5 rounded-full z-10">
-          ⭐ {currentElite ? "Elite Partner" : "Sponsored"}
+          ⭐ {currentElite ? t("sponsor_badge_elite") : t("sponsor_badge_sponsored")}
         </div>
 
         {currentElite ? (
@@ -128,9 +128,9 @@ export default function SponsorBanner() {
               )}
 
               <div className="flex gap-2 justify-center md:justify-start mt-2">
-                {telLink && <a href={telLink} className="px-4 py-3 rounded-lg text-xs font-bold bg-red-500 text-white">Call</a>}
-                {waLink && <a href={waLink} target="_blank" className="px-4 py-3 rounded-lg text-xs font-bold bg-green-500 text-white">WhatsApp</a>}
-                <Link href={`/provider/${currentElite.provider_id}`} className="px-4 py-3 rounded-lg text-xs font-bold bg-gradient-to-r from-amber-400 to-amber-500 text-[#1a1206]">Profile</Link>
+                {telLink && <a href={telLink} className="px-4 py-3 rounded-lg text-xs font-bold bg-red-500 text-white">{t("action_call")}</a>}
+                {waLink && <a href={waLink} target="_blank" className="px-4 py-3 rounded-lg text-xs font-bold bg-green-500 text-white">{t("action_whatsapp")}</a>}
+                <Link href={`/provider/${currentElite.provider_id}`} className="px-4 py-3 rounded-lg text-xs font-bold bg-gradient-to-r from-amber-400 to-amber-500 text-[#1a1206]">{t("action_profile")}</Link>
               </div>
             </div>
           </div>
