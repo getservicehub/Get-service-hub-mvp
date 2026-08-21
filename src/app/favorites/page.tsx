@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { CategoryIcon } from "@/lib/services/categoryIcons";
 
 type FavoriteRow = {
@@ -18,6 +19,7 @@ type FavoriteRow = {
 };
 
 export default function FavoritesPage() {
+  const { t } = useLanguage();
   const [favorites, setFavorites] = useState<FavoriteRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [removingId, setRemovingId] = useState<string | null>(null);
@@ -50,10 +52,12 @@ export default function FavoritesPage() {
     await supabase.from("favorites").delete().eq("id", favoriteId);
     setFavorites((prev) => prev.filter((f) => f.id !== favoriteId));
     setRemovingId(null);
-  };if (loading) {
+  };
+
+  if (loading) {
     return (
       <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5">
-        <div className="max-w-[1140px] mx-auto text-muted2 text-sm">Loading favorites...</div>
+        <div className="max-w-[1140px] mx-auto text-muted2 text-sm">{t("favorites_loading")}</div>
       </main>
     );
   }
@@ -61,13 +65,13 @@ export default function FavoritesPage() {
   return (
     <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5">
       <div className="max-w-[1140px] mx-auto">
-        <div className="text-xs font-bold tracking-[2px] uppercase text-cyan-400 mb-3">My Favorites</div>
-        <h1 className="text-3xl md:text-4xl font-extrabold mb-8">Saved Services</h1>
+        <div className="text-xs font-bold tracking-[2px] uppercase text-cyan-400 mb-3">{t("favorites_eyebrow")}</div>
+        <h1 className="text-3xl md:text-4xl font-extrabold mb-8">{t("favorites_title")}</h1>
 
         {favorites.length === 0 && (
           <div className="text-center py-16">
             <div className="text-5xl mb-4">💔</div>
-            <div className="text-muted2 text-sm">You have not saved any services yet.</div>
+            <div className="text-muted2 text-sm">{t("favorites_empty")}</div>
           </div>
         )}
 
@@ -91,9 +95,9 @@ export default function FavoritesPage() {
                   <div className="text-[15px] font-extrabold mb-1">{name}</div>
                   <div className="text-xs text-muted2 mb-3">{s.title} - {s.city}</div>
                   <div className="flex gap-2">
-                    {waLink && <a href={waLink} target="_blank" className="flex-1 text-center py-2 rounded-lg text-xs font-bold bg-green-500 text-white">WhatsApp</a>}
+                    {waLink && <a href={waLink} target="_blank" className="flex-1 text-center py-2 rounded-lg text-xs font-bold bg-green-500 text-white">{t("action_whatsapp")}</a>}
                     <button onClick={() => removeFavorite(fav.id)} disabled={removingId === fav.id} className="px-3 py-2 rounded-lg text-xs font-bold bg-red-500/10 text-red-400 border border-red-500/20">
-                      {removingId === fav.id ? "..." : "Remove"}
+                      {removingId === fav.id ? "..." : t("favorites_remove_btn")}
                     </button>
                   </div>
                 </div>

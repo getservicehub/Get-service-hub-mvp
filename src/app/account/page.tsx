@@ -3,9 +3,11 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { ShieldCheck, MapPin, ExternalLink } from "lucide-react";
 
 export default function AccountPage() {
+  const { t } = useLanguage();
   const [userId, setUserId] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
@@ -104,7 +106,7 @@ export default function AccountPage() {
       const fileName = `${user.id}/avatar-${Date.now()}.${fileExt}`;
       const { error: uploadError } = await supabase.storage.from("service-images").upload(fileName, avatarFile);
       if (uploadError) {
-        setError("Photo upload failed: " + uploadError.message);
+        setError(t("account_photo_upload_error_prefix") + " " + uploadError.message);
         setSaving(false);
         return;
       }
@@ -140,7 +142,7 @@ export default function AccountPage() {
   if (pageLoading) {
     return (
       <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5">
-        <div className="max-w-[900px] mx-auto text-muted2 text-sm">Loading your profile...</div>
+        <div className="max-w-[900px] mx-auto text-muted2 text-sm">{t("account_loading")}</div>
       </main>
     );
   }
@@ -151,8 +153,8 @@ export default function AccountPage() {
   return (
     <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5">
       <div className="max-w-[900px] mx-auto">
-        <h1 className="text-2xl md:text-3xl font-extrabold mb-1">{role === "provider" ? "Edit Business Profile" : "Account"}</h1>
-        <p className="text-sm text-muted2 mb-6">{role === "provider" ? "Manage how your business appears to customers." : "Manage your account information."}</p>
+        <h1 className="text-2xl md:text-3xl font-extrabold mb-1">{role === "provider" ? t("account_title_provider") : t("account_title_client")}</h1>
+        <p className="text-sm text-muted2 mb-6">{role === "provider" ? t("account_subtitle_provider") : t("account_subtitle_client")}</p>
 
         <form onSubmit={handleSave} className="space-y-5">
           <div className="bg-card border border-white/[.08] rounded-2xl p-5">
@@ -166,66 +168,66 @@ export default function AccountPage() {
                   )}
                 </div>
                 <div>
-                  <div className="text-lg font-extrabold">{displayName || "Your Name"}</div>
+                  <div className="text-lg font-extrabold">{displayName || t("account_default_name")}</div>
                   {role === "provider" && <div className="text-xs text-muted2">{category}{category && city ? " - " : ""}{city}</div>}
                   <div className="flex items-center gap-2 mt-1">
-                    {role === "provider" && isPublished && <span className="text-[10px] font-bold text-green-400 flex items-center gap-1">● Published</span>}
-                    {isVerified && <span className="text-[10px] font-bold text-cyan-400 flex items-center gap-1"><ShieldCheck className="w-3 h-3" /> Verified</span>}
+                    {role === "provider" && isPublished && <span className="text-[10px] font-bold text-green-400 flex items-center gap-1">● {t("account_published_badge")}</span>}
+                    {isVerified && <span className="text-[10px] font-bold text-cyan-400 flex items-center gap-1"><ShieldCheck className="w-3 h-3" /> {t("dashboard_status_verified")}</span>}
                   </div>
                 </div>
               </div>
 
-              <label className="inline-block px-4 py-2 rounded-lg gradient-bg text-white text-xs font-bold cursor-pointer hover:opacity-90 transition-all w-fit">Choose Photo<input type="file" accept="image/jpeg,image/png,image/webp" onChange={handleAvatarChange} className="hidden" /></label>
+              <label className="inline-block px-4 py-2 rounded-lg gradient-bg text-white text-xs font-bold cursor-pointer hover:opacity-90 transition-all w-fit">{t("account_choose_photo")}<input type="file" accept="image/jpeg,image/png,image/webp" onChange={handleAvatarChange} className="hidden" /></label>
 
               {role === "provider" && (
                 <div className="md:ml-auto flex flex-col gap-2 items-start md:items-end">
-                  <div className="text-xs text-muted2">Profile Completeness</div>
+                  <div className="text-xs text-muted2">{t("account_completeness_label")}</div>
                   <div className="flex items-center gap-2">
                     <div className="w-32 h-1.5 bg-bg2 rounded-full overflow-hidden">
                       <div className="h-full gradient-bg" style={{ width: `${completenessPct}%` }} />
                     </div>
                     <span className="text-sm font-extrabold text-cyan-400">{completenessPct}%</span>
                   </div>
-                  {userId && <Link href={`/provider/${userId}`} target="_blank" className="text-xs text-cyan-400 hover:underline inline-flex items-center gap-1 mt-1">View Public Profile <ExternalLink className="w-3 h-3" /></Link>}
+                  {userId && <Link href={`/provider/${userId}`} target="_blank" className="text-xs text-cyan-400 hover:underline inline-flex items-center gap-1 mt-1">{t("account_view_public_profile")} <ExternalLink className="w-3 h-3" /></Link>}
                 </div>
               )}
             </div>
           </div>
 
           {error && <div className="bg-red-500/10 border border-red-500/30 text-red-400 text-sm rounded-lg p-3">{error}</div>}
-          {saved && <div className="bg-green-500/10 border border-green-500/30 text-green-400 text-sm rounded-lg p-3">Changes saved successfully.</div>}
+          {saved && <div className="bg-green-500/10 border border-green-500/30 text-green-400 text-sm rounded-lg p-3">{t("account_changes_saved")}</div>}
 
           {role === "provider" ? (
             <div className="bg-card border border-white/[.08] rounded-2xl p-5">
-              <div className="text-xs font-bold tracking-[1px] uppercase text-cyan-400 mb-4">Business Information</div>
+              <div className="text-xs font-bold tracking-[1px] uppercase text-cyan-400 mb-4">{t("account_business_info_title")}</div>
               <div>
-                <label className="block text-xs font-semibold text-muted2 mb-1.5">Business Name</label>
+                <label className="block text-xs font-semibold text-muted2 mb-1.5">{t("field_business_name_label")}</label>
                 <input type="text" value={businessName} onChange={(e) => setBusinessName(e.target.value)} className="w-full px-4 py-3 bg-bg2 border border-white/20 rounded-lg text-white text-sm outline-none focus:border-cyan-400" />
               </div>
             </div>
           ) : (
             <div className="bg-card border border-white/[.08] rounded-2xl p-5">
-              <div className="text-xs font-bold tracking-[1px] uppercase text-cyan-400 mb-4">Your Information</div>
+              <div className="text-xs font-bold tracking-[1px] uppercase text-cyan-400 mb-4">{t("account_your_info_title")}</div>
               <div>
-                <label className="block text-xs font-semibold text-muted2 mb-1.5">Full Name</label>
+                <label className="block text-xs font-semibold text-muted2 mb-1.5">{t("field_full_name_label")}</label>
                 <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} className="w-full px-4 py-3 bg-bg2 border border-white/20 rounded-lg text-white text-sm outline-none focus:border-cyan-400" />
               </div>
             </div>
           )}
 
           <div className="bg-card border border-white/[.08] rounded-2xl p-5">
-            <div className="text-xs font-bold tracking-[1px] uppercase text-cyan-400 mb-4">Contact & Location</div>
+            <div className="text-xs font-bold tracking-[1px] uppercase text-cyan-400 mb-4">{t("account_contact_location_title")}</div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-muted2 mb-1.5">Phone Number</label>
+                <label className="block text-xs font-semibold text-muted2 mb-1.5">{t("account_phone_label")}</label>
                 <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full px-4 py-3 bg-bg2 border border-white/20 rounded-lg text-white text-sm outline-none focus:border-cyan-400" />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-muted2 mb-1.5 flex items-center gap-1">Email (private) 🔒</label>
+                <label className="block text-xs font-semibold text-muted2 mb-1.5 flex items-center gap-1">{t("account_email_private_label")} 🔒</label>
                 <input type="email" value={email} disabled className="w-full px-4 py-3 bg-bg2/50 border border-white/10 rounded-lg text-muted2 text-sm outline-none cursor-not-allowed" />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-muted2 mb-1.5">City</label>
+                <label className="block text-xs font-semibold text-muted2 mb-1.5">{t("field_city_label")}</label>
                 <input type="text" value={city} onChange={(e) => setCity(e.target.value)} className="w-full px-4 py-3 bg-bg2 border border-white/20 rounded-lg text-white text-sm outline-none focus:border-cyan-400" />
               </div>
             </div>
@@ -233,34 +235,34 @@ export default function AccountPage() {
 
           {role === "provider" && (
             <div className="bg-card border border-white/[.08] rounded-2xl p-5">
-              <div className="text-xs font-bold tracking-[1px] uppercase text-cyan-400 mb-4">Verification & Licenses</div>
+              <div className="text-xs font-bold tracking-[1px] uppercase text-cyan-400 mb-4">{t("account_verification_title")}</div>
 
               {isVerified && (
                 <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-3.5 flex items-center gap-3 mb-4">
                   <ShieldCheck className="w-5 h-5 text-green-400 flex-shrink-0" />
                   <div>
-                    <div className="text-sm font-bold text-green-400">Business Verified</div>
-                    <div className="text-xs text-muted2">Your license has been reviewed and confirmed.</div>
+                    <div className="text-sm font-bold text-green-400">{t("account_business_verified_title")}</div>
+                    <div className="text-xs text-muted2">{t("account_business_verified_desc")}</div>
                   </div>
                 </div>
               )}
 
-              <label className="block text-xs font-semibold text-muted2 mb-1.5">License Number (optional)</label>
+              <label className="block text-xs font-semibold text-muted2 mb-1.5">{t("account_license_label")}</label>
               <input type="text" value={licenseNumber} onChange={(e) => setLicenseNumber(e.target.value)} placeholder="e.g. CSLB #1234567" className="w-full px-4 py-3 bg-bg2 border border-white/20 rounded-lg text-white text-sm outline-none focus:border-cyan-400" />
-              {isVerified && <div className="text-[11px] text-amber-400 mt-1.5">Changing this number will require re-verification.</div>}
-              {!isVerified && licenseNumber && <div className="text-[11px] text-muted2 mt-1.5">Pending verification</div>}
+              {isVerified && <div className="text-[11px] text-amber-400 mt-1.5">{t("account_license_reverify_warning")}</div>}
+              {!isVerified && licenseNumber && <div className="text-[11px] text-muted2 mt-1.5">{t("account_license_pending")}</div>}
             </div>
           )}
 
           <button type="submit" disabled={saving} className="w-full py-3.5 rounded-lg gradient-bg text-white font-bold text-sm disabled:opacity-50">
-            {saving ? "Saving..." : "Save Changes"}
+            {saving ? t("account_saving_btn") : t("account_save_btn")}
           </button>
         </form>
       </div>
 
       {hasChanges && (
         <div className="fixed bottom-0 left-0 right-0 md:left-[72px] bg-amber-400 text-[#1a1206] px-5 py-3 flex items-center justify-center gap-3 z-50 text-sm font-bold">
-          ⚠️ You have unsaved changes
+          ⚠️ {t("account_unsaved_changes_banner")}
         </div>
       )}
     </main>

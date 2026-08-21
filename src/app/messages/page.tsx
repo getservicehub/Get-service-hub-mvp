@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 type Conversation = {
   id: string;
@@ -15,6 +16,7 @@ type Conversation = {
 };
 
 export default function MessagesPage() {
+  const { t } = useLanguage();
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [userId, setUserId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -50,7 +52,7 @@ export default function MessagesPage() {
       convos.map(async (c) => {
         const otherId = c.client_id === user.id ? c.provider_id : c.client_id;
         const profile = profiles?.find((p) => p.id === otherId);
-        const otherName = profile?.business_name || profile?.full_name || "User";
+        const otherName = profile?.business_name || profile?.full_name || t("messages_default_user");
 
         const { data: lastMsg } = await supabase
           .from("messages")
@@ -63,7 +65,7 @@ export default function MessagesPage() {
         return {
           ...c,
           otherName,
-          lastMessage: lastMsg?.content || "No messages yet",
+          lastMessage: lastMsg?.content || t("messages_no_messages_yet"),
           unread: lastMsg ? lastMsg.sender_id !== user.id && !lastMsg.read_at : false,
         };
       })
@@ -76,15 +78,15 @@ export default function MessagesPage() {
   return (
     <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5">
       <div className="max-w-[700px] mx-auto">
-        <div className="text-xs font-bold tracking-[2px] uppercase text-cyan-400 mb-3">Messages</div>
-        <h1 className="text-3xl font-extrabold mb-8">Your Conversations</h1>
+        <div className="text-xs font-bold tracking-[2px] uppercase text-cyan-400 mb-3">{t("nav_messages")}</div>
+        <h1 className="text-3xl font-extrabold mb-8">{t("messages_title")}</h1>
 
-        {loading && <div className="text-muted2 text-sm">Loading conversations...</div>}
+        {loading && <div className="text-muted2 text-sm">{t("messages_loading")}</div>}
 
         {!loading && conversations.length === 0 && (
           <div className="text-center py-16 bg-card border border-white/[.08] rounded-2xl">
             <div className="text-5xl mb-4">💬</div>
-            <div className="text-muted2 text-sm">No conversations yet. Start one from a service page.</div>
+            <div className="text-muted2 text-sm">{t("messages_empty")}</div>
           </div>
         )}
 
