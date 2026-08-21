@@ -223,6 +223,7 @@ export const translations = {
     gallery_comments: "Comments",
     gallery_no_phone: "No phone",
     nav_greeting: "Hi,",
+    hero_all_cities_option: "All Cities",
   },
   es: {
     nav_browse: "Buscar",
@@ -448,6 +449,7 @@ export const translations = {
     gallery_comments: "Comentarios",
     gallery_no_phone: "Sin telefono",
     nav_greeting: "Hola,",
+    hero_all_cities_option: "Todas las Ciudades",
   },
 };
 
