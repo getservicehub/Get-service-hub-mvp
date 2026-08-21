@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { matchCategory } from "@/lib/services/keywords";
+import { getCategoryLabel } from "@/lib/services/categoryLabels";
 import { CategoryIcon } from "@/lib/services/categoryIcons";
 
 const tags = [
@@ -17,7 +18,7 @@ const tags = [
 ];
 
 export default function SearchBar() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [query, setQuery] = useState("");
   const router = useRouter();
 
@@ -70,7 +71,7 @@ export default function SearchBar() {
               className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-500/10 border border-white/20 text-blue-300 hover:bg-blue-500/20 hover:text-cyan-400 transition-all"
             >
               <CategoryIcon name={tagName} className="w-3.5 h-3.5" />
-              {tagName}
+              {getCategoryLabel(tagName, language)}
             </button>
           ))}
         </div>
