@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { matchCategory } from "@/lib/services/keywords";
 import { getCities } from "@/lib/services/queries";
+import { getCategoryLabel } from "@/lib/services/categoryLabels";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { CategoryIcon } from "@/lib/services/categoryIcons";
 import { Languages, PiggyBank, MapPin, Scale, Search, TrendingUp, ShieldCheck, UserCheck, MessageSquare } from "lucide-react";
@@ -14,7 +15,7 @@ import { Languages, PiggyBank, MapPin, Scale, Search, TrendingUp, ShieldCheck, U
 type Category = { id: string; name: string; icon: string };
 
 export default function Hero() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [user, setUser] = useState<{ id: string } | null>(null);
   const [role, setRole] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState("");
@@ -207,7 +208,7 @@ export default function Hero() {
           <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleSearch()} placeholder={t("search_placeholder")} className="flex-1 bg-transparent border-none outline-none px-5 py-4 text-[15px] text-white placeholder:text-muted2" />
           <div className="hidden sm:block w-px bg-white/[.14]" />
           <select value={selectedCity} onChange={(e) => setSelectedCity(e.target.value)} className="bg-transparent border-none outline-none px-5 py-4 text-[14px] text-white max-w-[180px]">
-            <option value="" className="bg-bg2">All Cities</option>
+            <option value="" className="bg-bg2">{t("hero_all_cities_option")}</option>
             {cities.map((city) => (
               <option key={city} value={city} className="bg-bg2">{city}</option>
             ))}
@@ -222,8 +223,8 @@ export default function Hero() {
         <div className="flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {categories.map((cat) => (
             <Link key={cat.id} href={`/find?category=${encodeURIComponent(cat.name)}`} className="flex-shrink-0 flex items-center gap-2 bg-card border border-white/[.08] rounded-full px-4 py-2.5 hover:border-cyan-400/40 transition-all">
-              <CategoryIcon name={cat.name} className="w-4 h-4" />
-              <span className="text-[13px] font-semibold whitespace-nowrap">{cat.name}</span>
+              <CategoryIcon name={cat.name} className="w-4 h-4 text-cyan-400" />
+              <span className="text-[13px] font-semibold whitespace-nowrap">{getCategoryLabel(cat.name, language)}</span>
             </Link>
           ))}
         </div>
