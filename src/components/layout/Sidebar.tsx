@@ -3,16 +3,18 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, Search, Crown, Camera } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 const items = [
-  { href: "/", label: "Home", Icon: Home },
-  { href: "/find", label: "Find Pros", Icon: Search },
-  { href: "/elite-partners", label: "Elite Partners", Icon: Crown },
-  { href: "/gallery", label: "Work Gallery", Icon: Camera },
-];
+  { href: "/", labelKey: "sidebar_home", Icon: Home },
+  { href: "/find", labelKey: "sidebar_find_pros", Icon: Search },
+  { href: "/elite-partners", labelKey: "sidebar_elite_partners", Icon: Crown },
+  { href: "/gallery", labelKey: "sidebar_work_gallery", Icon: Camera },
+] as const;
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const { t } = useLanguage();
   if (pathname?.startsWith("/gateway") || pathname?.startsWith("/pro") || pathname === "/register" || pathname === "/login") return null;
 
   return (
@@ -36,7 +38,7 @@ export default function Sidebar() {
               <item.Icon className="w-4 h-4" />
             </span>
             <span className="text-[13px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
-              {item.label}
+              {t(item.labelKey)}
             </span>
           </Link>
         );

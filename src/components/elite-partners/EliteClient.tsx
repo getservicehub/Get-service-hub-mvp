@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { getProviderName, getContactLinks, type ServiceCard } from "@/lib/services/queries";
 import { CategoryIcon } from "@/lib/services/categoryIcons";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 type Props = {
   eliteServices: ServiceCard[];
@@ -10,19 +11,20 @@ type Props = {
 };
 
 export default function EliteClient({ eliteServices, plusServices }: Props) {
+  const { t } = useLanguage();
 
   return (
     <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5">
       <div className="max-w-[1140px] mx-auto">
-        <div className="text-xs font-bold tracking-[2px] uppercase text-amber-400 mb-3">Elite Partners</div>
-        <h1 className="text-3xl md:text-4xl font-extrabold mb-4">San Diego's Elite Service Pros</h1>
-        <p className="text-base text-muted2 max-w-[540px] mb-10">10 exclusive spots per category. Maximum visibility, maximum trust.</p>
+        <div className="text-xs font-bold tracking-[2px] uppercase text-amber-400 mb-3">{t("elite_eyebrow")}</div>
+        <h1 className="text-3xl md:text-4xl font-extrabold mb-4">{t("elite_title")}</h1>
+        <p className="text-base text-muted2 max-w-[540px] mb-10">{t("elite_subtitle")}</p>
 
         {eliteServices.length === 0 && (
           <Link href="/dashboard/upgrade" className="block text-center py-16 bg-card border border-amber-400/20 rounded-2xl mb-14 hover:border-amber-400/40 transition-all">
             <div className="text-5xl mb-4">👑</div>
-            <div className="text-muted2 text-sm mb-2">No Elite spots claimed yet.</div>
-            <div className="text-muted2 text-xs">10 spots available per category. Claim yours today.</div>
+            <div className="text-muted2 text-sm mb-2">{t("elite_empty_title")}</div>
+            <div className="text-muted2 text-xs">{t("elite_empty_sub")}</div>
           </Link>
         )}
 
@@ -49,9 +51,9 @@ export default function EliteClient({ eliteServices, plusServices }: Props) {
                     </div>
                   </a>
                   <div className="px-5 pb-5 flex gap-2">
-                    {telLink && <a href={telLink} className="flex-1 text-center py-2.5 rounded-lg text-xs font-bold bg-red-500 text-white">Call</a>}
-                    {smsLink && <a href={smsLink} className="flex-1 text-center py-2.5 rounded-lg text-xs font-bold bg-blue-500 text-white">Text</a>}
-                    {waLink && <a href={waLink} target="_blank" className="flex-1 text-center py-2.5 rounded-lg text-xs font-bold bg-green-500 text-white">WhatsApp</a>}
+                    {telLink && <a href={telLink} className="flex-1 text-center py-2.5 rounded-lg text-xs font-bold bg-red-500 text-white">{t("action_call")}</a>}
+                    {smsLink && <a href={smsLink} className="flex-1 text-center py-2.5 rounded-lg text-xs font-bold bg-blue-500 text-white">{t("action_text")}</a>}
+                    {waLink && <a href={waLink} target="_blank" className="flex-1 text-center py-2.5 rounded-lg text-xs font-bold bg-green-500 text-white">{t("action_whatsapp")}</a>}
                   </div>
                 </div>
               );
@@ -61,12 +63,11 @@ export default function EliteClient({ eliteServices, plusServices }: Props) {
 
         {plusServices.length > 0 && (
           <div>
-            <div className="text-xs font-bold tracking-[2px] uppercase text-cyan-400 mb-3">Also Featured</div>
-            <h2 className="text-xl font-extrabold mb-6">Plus Partners</h2>
+            <div className="text-xs font-bold tracking-[2px] uppercase text-cyan-400 mb-3">{t("elite_also_featured")}</div>
+            <h2 className="text-xl font-extrabold mb-6">{t("elite_plus_partners")}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {plusServices.map((s) => {
                 const name = getProviderName(s);
-                const { waLink } = getContactLinks(s);
                 const hasImage = s.image_url !== null && s.image_url !== "";
 
                 return (
