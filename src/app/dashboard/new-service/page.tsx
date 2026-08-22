@@ -10,6 +10,7 @@ import { Upload, MessageCircle, Clock, ShieldCheck, ArrowRight, Lock } from "luc
 type Category = { id: string; name: string; icon: string };
 
 const DESCRIPTION_LIMIT = 500;
+const DESCRIPTION_MIN = 40;
 
 export default function NewServicePage() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -75,6 +76,12 @@ export default function NewServicePage() {
       return;
     }
 
+    if (description.trim().length < DESCRIPTION_MIN) {
+      setError(`Description must be at least ${DESCRIPTION_MIN} characters`);
+      setLoading(false);
+      return;
+    }
+
     let imageUrl: string | null = null;
 
     if (imageFile) {
@@ -96,8 +103,8 @@ export default function NewServicePage() {
     const { error: insertError } = await supabase.from("services").insert({
       provider_id: user.id,
       category_id: categoryId,
-      title,
-      description,
+      title: title.trim(),
+      description: description.trim(),
       city,
       pricing_type: pricingType,
       price_from: pricingType !== "quote" && priceFrom ? parseFloat(priceFrom) : null,
@@ -121,7 +128,7 @@ export default function NewServicePage() {
     !!imagePreview,
     title.trim().length > 0,
     categoryId.length > 0,
-    description.trim().length > 0,
+    description.trim().length >= DESCRIPTION_MIN,
     pricingType === "quote" || priceFrom.length > 0,
   ];
   const completenessPct = Math.round((completenessItems.filter(Boolean).length / completenessItems.length) * 100);

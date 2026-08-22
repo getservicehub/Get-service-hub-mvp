@@ -37,11 +37,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     new Set((services || []).map((s) => s.provider_id).filter(Boolean))
   );
 
-  const providerRoutes: MetadataRoute.Sitemap = providerIds.map((id) => ({
-    url: `${BASE_URL}/provider/${id}`,
-    changeFrequency: "weekly",
-    priority: 0.7,
-  }));
+  const providerRoutes: MetadataRoute.Sitemap = providerIds.flatMap((id) => ([
+    { url: `${BASE_URL}/provider/${id}`, changeFrequency: "weekly" as const, priority: 0.7 },
+    { url: `${BASE_URL}/provider/${id}/gallery`, changeFrequency: "weekly" as const, priority: 0.5 },
+    { url: `${BASE_URL}/provider/${id}/reviews`, changeFrequency: "weekly" as const, priority: 0.5 },
+  ]));
 
   return [...staticRoutes, ...serviceRoutes, ...providerRoutes];
 }

@@ -7,6 +7,9 @@ import PhotoGalleryManager from "@/components/dashboard/PhotoGalleryManager";
 
 type Category = { id: string; name: string; icon: string };
 
+const DESCRIPTION_LIMIT = 500;
+const DESCRIPTION_MIN = 40;
+
 export default function EditServicePage() {
   const params = useParams();
   const serviceId = params.id as string;
@@ -77,6 +80,12 @@ export default function EditServicePage() {
       return;
     }
 
+    if (description.trim().length < DESCRIPTION_MIN) {
+      setError(`Description must be at least ${DESCRIPTION_MIN} characters`);
+      setSaving(false);
+      return;
+    }
+
     let imageUrl = currentImageUrl;
 
     if (imageFile) {
@@ -98,8 +107,8 @@ export default function EditServicePage() {
     const { error: updateError } = await supabase
       .from("services")
       .update({
-        title,
-        description,
+        title: title.trim(),
+        description: description.trim(),
         category_id: categoryId,
         city,
         price_from: priceFrom ? parseFloat(priceFrom) : null,
@@ -178,7 +187,7 @@ export default function EditServicePage() {
             </select>
           </div><div>
             <label className="block text-xs font-semibold text-muted2 mb-1.5">Description</label>
-            <textarea required value={description} onChange={(e) => setDescription(e.target.value)} rows={4} className="w-full px-4 py-3 bg-bg2 border border-white/20 rounded-lg text-white text-sm outline-none focus:border-cyan-400" />
+            <textarea required value={description} onChange={(e) => setDescription(e.target.value.slice(0, DESCRIPTION_LIMIT))} rows={4} className="w-full px-4 py-3 bg-bg2 border border-white/20 rounded-lg text-white text-sm outline-none focus:border-cyan-400" />
           </div>
 
           <div>
