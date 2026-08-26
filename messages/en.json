@@ -1,57 +1,47 @@
 {
   "nav": {
-    "explore": "Explore",
-    "howItWorks": "How it works",
-    "trust": "Trust",
-    "forProfessionals": "For professionals",
-    "login": "Log in",
-    "joinCta": "Join as a professional"
+    "explore": "Explore", "howItWorks": "How It Works", "trust": "Trust & Safety",
+    "forProfessionals": "For Professionals", "login": "Log in", "joinCta": "Join as a Professional"
   },
   "hero": {
-    "eyebrow": "VERIFIED PROFESSIONAL NETWORK",
-    "title": "Verified professionals for decisions that matter.",
-    "subtitle": "Explore attorneys, architects, accountants, photographers and other specialists.",
-    "searchSpecialtyPlaceholder": "Corporate attorney, architect, accountant...",
+    "eyebrow": "EXCLUSIVE NETWORK",
+    "title": "Where Top Professionals Build. Connect. Grow.",
+    "subtitle": "An exclusive network of verified professionals empowering your projects and your business.",
+    "searchSpecialtyPlaceholder": "Search attorneys, architects, consultants...",
     "searchLocationPlaceholder": "San Diego, CA",
     "searchButton": "Search"
   },
   "trustStrip": {
-    "identity": { "title": "Identity reviewed", "body": "We confirm who's behind the profile." },
-    "credentials": { "title": "Credentials, where applicable", "body": "We check licenses when required." },
-    "reviews": { "title": "Reviews with context", "body": "We separate verified experiences from general comments." },
-    "pricing": { "title": "Trust isn't for sale", "body": "Plans never substitute for relevance or track record." },
+    "identity": { "title": "Identity Verified", "body": "We confirm who's behind the profile." },
+    "credentials": { "title": "Credentials, Where Applicable", "body": "We check licenses when the profession requires one." },
+    "reviews": { "title": "Reviews With Context", "body": "We separate verified experiences from general comments." },
+    "pricing": { "title": "Trust Isn't For Sale", "body": "Plans never substitute for relevance or track record." },
     "howItWorksLink": "How it works"
   },
-  "expertise": { "title": "Explore areas of expertise", "exploreLink": "Explore" },
+  "expertise": { "title": "Excellence in Every Discipline", "exploreLink": "Explore" },
   "professional": {
     "demoLabel": "SAMPLE PROFILE",
-    "demoNote": "This is a demo profile.",
-    "identityVerified": "Identity reviewed",
-    "licenseVerified": "License reviewed",
-    "licenseNotApplicable": "Portfolio reviewed",
-    "viewProfile": "View profile",
+    "demoNote": "This is a demo profile — no real professionals are published in this specialty yet.",
+    "identityVerified": "Identity Verified",
+    "licenseVerified": "License Verified",
+    "licenseNotApplicable": "Portfolio Reviewed",
+    "viewProfile": "View Profile",
     "yearsDeclared": "years of declared experience",
     "specialtiesLabel": "Specialties",
     "languagesLabel": "Languages",
     "emptyStateTitle": "No professionals in this specialty yet",
-    "emptyStateBody": "We're forming the initial group in San Diego."
+    "emptyStateBody": "We're forming the initial group in San Diego. Check back soon."
   },
   "howItWorks": {
-    "title": "How it works",
-    "step1Title": "Explore a specialty",
-    "step1Body": "Search by profession, need, or location.",
-    "step2Title": "Compare clear signals",
-    "step2Body": "Review experience, languages, credentials, and reviews.",
-    "step3Title": "Reach out with context",
-    "step3Body": "Explain what you need before starting the conversation.",
-    "step4Title": "Build trust",
-    "step4Body": "After the service, both sides can share feedback."
+    "title": "How It Works",
+    "step1Title": "Explore a Specialty", "step1Body": "Search by profession, need, or location.",
+    "step2Title": "Compare Clear Signals", "step2Body": "Review experience, languages, credentials, and reviews.",
+    "step3Title": "Reach Out With Context", "step3Body": "Explain what you need before starting the conversation.",
+    "step4Title": "Build Trust", "step4Body": "After the service, both sides can share information about the experience."
   },
   "search": {
-    "resultsTitle": "Results",
-    "noResultsTitle": "No results yet",
+    "resultsTitle": "Results", "noResultsTitle": "No results yet",
     "noResultsBody": "Try a different specialty, or browse the full catalog.",
-    "filterBySpecialty": "Filter by specialty",
-    "allSpecialties": "All"
+    "filterBySpecialty": "Filter by specialty", "allSpecialties": "All"
   }
 }

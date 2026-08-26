@@ -1,16 +1,9 @@
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
 /**
- * Cliente de Supabase SIN manejo de cookies/sesión — seguro de usar
- * en cualquier contexto, incluyendo generateStaticParams (que corre
- * en build time, sin request HTTP, donde cookies() no está permitido).
- *
- * Úsalo para lecturas públicas que no dependen de quién está
- * logueado — que es todo lo que existe en el data layer de Pro por
- * ahora (especialidades y profesionales publicados son de lectura
- * pública vía RLS). Cuando exista una función que sí necesite sesión
- * (ej. "el profesional edita su propio perfil", Bloque 6+), esa sí
- * debe usar lib/supabase/server.ts en su lugar.
+ * Cliente SIN cookies — el que usa todo el data layer actual.
+ * Necesario porque generateStaticParams corre en build time sin
+ * contexto de request, donde cookies() no está permitido.
  */
 export function createPublicClient() {
   return createSupabaseClient(

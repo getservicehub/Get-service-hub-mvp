@@ -1,16 +1,12 @@
 {
   "nav": {
-    "explore": "Explorar",
-    "howItWorks": "Cómo funciona",
-    "trust": "Confianza",
-    "forProfessionals": "Para profesionales",
-    "login": "Iniciar sesión",
-    "joinCta": "Únete como profesional"
+    "explore": "Explorar", "howItWorks": "Cómo funciona", "trust": "Confianza",
+    "forProfessionals": "Para profesionales", "login": "Iniciar sesión", "joinCta": "Únete como profesional"
   },
   "hero": {
     "eyebrow": "RED PROFESIONAL VERIFICADA",
     "title": "Profesionales verificados para decisiones importantes.",
-    "subtitle": "Explora abogados, arquitectos, contadores, fotógrafos y otros especialistas. Compara experiencia, credenciales y señales reales de confianza antes de contactar.",
+    "subtitle": "Explora abogados, arquitectos, contadores, fotógrafos y otros especialistas.",
     "searchSpecialtyPlaceholder": "Abogado corporativo, arquitecto, contador...",
     "searchLocationPlaceholder": "San Diego, CA",
     "searchButton": "Buscar"
@@ -38,20 +34,14 @@
   },
   "howItWorks": {
     "title": "Cómo funciona",
-    "step1Title": "Explora una especialidad",
-    "step1Body": "Busca por profesión, necesidad o ubicación.",
-    "step2Title": "Compara señales claras",
-    "step2Body": "Revisa experiencia, idiomas, credenciales y reseñas.",
-    "step3Title": "Contacta con contexto",
-    "step3Body": "Explica tu necesidad antes de iniciar la conversación.",
-    "step4Title": "Construye confianza",
-    "step4Body": "Después del servicio, ambas partes pueden aportar información."
+    "step1Title": "Explora una especialidad", "step1Body": "Busca por profesión, necesidad o ubicación.",
+    "step2Title": "Compara señales claras", "step2Body": "Revisa experiencia, idiomas, credenciales y reseñas.",
+    "step3Title": "Contacta con contexto", "step3Body": "Explica tu necesidad antes de iniciar la conversación.",
+    "step4Title": "Construye confianza", "step4Body": "Después del servicio, ambas partes pueden aportar información."
   },
   "search": {
-    "resultsTitle": "Resultados",
-    "noResultsTitle": "Sin resultados todavía",
+    "resultsTitle": "Resultados", "noResultsTitle": "Sin resultados todavía",
     "noResultsBody": "Prueba con otra especialidad, o explora el catálogo completo.",
-    "filterBySpecialty": "Filtrar por especialidad",
-    "allSpecialties": "Todas"
+    "filterBySpecialty": "Filtrar por especialidad", "allSpecialties": "Todas"
   }
 }

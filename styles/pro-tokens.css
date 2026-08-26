@@ -1,12 +1,17 @@
+/**
+ * Tokens finales, cerrados hoy. Dorado de Eiven (#D9A520) sobre
+ * fondo casi negro — no el navy anterior, no el amber de /gateway.
+ */
 .pro-theme {
-  --pro-bg: #0a0e17;
-  --pro-panel: #0f1522;
+  --pro-bg: #070707;
+  --pro-panel: #101010;
   --pro-navy: #0d1b2a;
-  --pro-gold: #c8a86a;
-  --pro-gold-bright: #ddbe8b;
+  --pro-gold: #D9A520;
+  --pro-gold-bright: #E4B83F;
+  --pro-gold-luminous: #F2C94C;
   --pro-text: #f7f7f7;
   --pro-text-muted: rgba(247, 247, 247, 0.62);
-  --pro-line: rgba(247, 247, 247, 0.1);
+  --pro-line: rgba(217, 165, 32, 0.25);
   --pro-success: #7fb89a;
   --pro-warning: #d7b46a;
   --pro-danger: #d47d7d;

@@ -1,25 +1,26 @@
 "use client";
 
+/**
+ * Diccionario ligero EN/ES. Inglés primario, español secundario —
+ * decisión confirmada hoy. El toggle arranca en "en" por defecto.
+ */
+
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import es from "../../messages/es.json";
 import en from "../../messages/en.json";
 
-type Dictionary = typeof es;
+type Dictionary = typeof en;
 type Lang = "es" | "en";
 
 const dictionaries: Record<Lang, Dictionary> = { es, en };
 
-type ProLangContextValue = {
-  lang: Lang;
-  setLang: (lang: Lang) => void;
-  t: Dictionary;
-};
+type ProLangContextValue = { lang: Lang; setLang: (lang: Lang) => void; t: Dictionary };
 
 const ProLangContext = createContext<ProLangContextValue | null>(null);
 const STORAGE_KEY = "gsh_pro_lang";
 
 export function ProLangProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("es");
+  const [lang, setLangState] = useState<Lang>("en");
 
   useEffect(() => {
     const stored = window.localStorage.getItem(STORAGE_KEY);
