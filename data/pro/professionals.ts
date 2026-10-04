@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { createPublicClient } from "../../src/lib/supabase/public";
 import type { Professional } from "../../types/pro";
 import type { ProfessionalRow, ProfessionalStatsRow } from "../../types/database";
@@ -30,39 +31,55 @@ async function getSpecialtyIdsByProfessional(professionalIds: string[]): Promise
   return map;
 }
 
-export async function getAllProfessionals(): Promise<MaybeDemoProfessional[]> {
-  const supabase = createPublicClient();
-  const { data, error } = await supabase.from("pro_professionals").select("*").eq("is_published", true).order("display_name");
-  if (error || !data) return [];
-  const rows = data as ProfessionalRow[];
-  const specialtyMap = await getSpecialtyIdsByProfessional(rows.map((r) => r.id));
-  return rows.map((row) => mapRow(row, specialtyMap[row.id] ?? []));
-}
+export const getAllProfessionals = unstable_cache(
+  async (): Promise<MaybeDemoProfessional[]> => {
+    const supabase = createPublicClient();
+    const { data, error } = await supabase.from("pro_professionals").select("*").eq("is_published", true).order("display_name");
+    if (error || !data) return [];
+    const rows = data as ProfessionalRow[];
+    const specialtyMap = await getSpecialtyIdsByProfessional(rows.map((r) => r.id));
+    return rows.map((row) => mapRow(row, specialtyMap[row.id] ?? []));
+  },
+  ["pro-professionals-all"],
+  { revalidate: 300, tags: ["pro-professionals"] }
+);
 
-export async function getProfessionalsBySpecialty(specialtyId: string): Promise<MaybeDemoProfessional[]> {
-  const supabase = createPublicClient();
-  const { data, error } = await supabase.from("pro_professional_specialties").select("professional_id").eq("specialty_id", specialtyId);
-  if (error || !data || data.length === 0) return [];
-  const ids = (data as { professional_id: string }[]).map((r) => r.professional_id);
-  const { data: profRows, error: profError } = await supabase.from("pro_professionals").select("*").in("id", ids).eq("is_published", true).order("display_name");
-  if (profError || !profRows) return [];
-  const rows = profRows as ProfessionalRow[];
-  const specialtyMap = await getSpecialtyIdsByProfessional(rows.map((r) => r.id));
-  return rows.map((row) => mapRow(row, specialtyMap[row.id] ?? []));
-}
+export const getProfessionalsBySpecialty = unstable_cache(
+  async (specialtyId: string): Promise<MaybeDemoProfessional[]> => {
+    const supabase = createPublicClient();
+    const { data, error } = await supabase.from("pro_professional_specialties").select("professional_id").eq("specialty_id", specialtyId);
+    if (error || !data || data.length === 0) return [];
+    const ids = (data as { professional_id: string }[]).map((r) => r.professional_id);
+    const { data: profRows, error: profError } = await supabase.from("pro_professionals").select("*").in("id", ids).eq("is_published", true).order("display_name");
+    if (profError || !profRows) return [];
+    const rows = profRows as ProfessionalRow[];
+    const specialtyMap = await getSpecialtyIdsByProfessional(rows.map((r) => r.id));
+    return rows.map((row) => mapRow(row, specialtyMap[row.id] ?? []));
+  },
+  ["pro-professionals-by-specialty"],
+  { revalidate: 300, tags: ["pro-professionals"] }
+);
 
-export async function getProfessionalBySlug(slug: string): Promise<MaybeDemoProfessional | null> {
-  const supabase = createPublicClient();
-  const { data, error } = await supabase.from("pro_professionals").select("*").eq("slug", slug).eq("is_published", true).maybeSingle();
-  if (error || !data) return null;
-  const row = data as ProfessionalRow;
-  const specialtyMap = await getSpecialtyIdsByProfessional([row.id]);
-  return mapRow(row, specialtyMap[row.id] ?? []);
-}
+export const getProfessionalBySlug = unstable_cache(
+  async (slug: string): Promise<MaybeDemoProfessional | null> => {
+    const supabase = createPublicClient();
+    const { data, error } = await supabase.from("pro_professionals").select("*").eq("slug", slug).eq("is_published", true).maybeSingle();
+    if (error || !data) return null;
+    const row = data as ProfessionalRow;
+    const specialtyMap = await getSpecialtyIdsByProfessional([row.id]);
+    return mapRow(row, specialtyMap[row.id] ?? []);
+  },
+  ["pro-professional-by-slug"],
+  { revalidate: 300, tags: ["pro-professionals"] }
+);
 
-export async function getProfessionalStats(professionalId: string): Promise<ProfessionalStatsRow | null> {
-  const supabase = createPublicClient();
-  const { data, error } = await supabase.from("pro_professional_stats").select("*").eq("professional_id", professionalId).maybeSingle();
-  if (error || !data) return null;
-  return data as ProfessionalStatsRow;
-}
+export const getProfessionalStats = unstable_cache(
+  async (professionalId: string): Promise<ProfessionalStatsRow | null> => {
+    const supabase = createPublicClient();
+    const { data, error } = await supabase.from("pro_professional_stats").select("*").eq("professional_id", professionalId).maybeSingle();
+    if (error || !data) return null;
+    return data as ProfessionalStatsRow;
+  },
+  ["pro-professional-stats"],
+  { revalidate: 300, tags: ["pro-professionals"] }
+);

@@ -1,14 +1,41 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ShieldCheck, Users, MapPin, MessageSquare, Lock, TrendingUp, Headset, Search, Crown, Scale, Building2, Sofa, Briefcase, HardHat, Palette, MousePointer2 } from "lucide-react";
+import {
+  ShieldCheck, Users, MapPin, MessageSquare, Lock, TrendingUp, Headset, Search, Crown, MousePointer2,
+} from "lucide-react";
+import { getSpecialties } from "../../../data/pro/categories";
 
 export const metadata: Metadata = {
   title: "GetServiHub — Local Services & Verified Professionals",
   description: "Choose your path: browse trusted local home and lifestyle services, or explore GetServiHub Pro's verified network of licensed professionals.",
 };
 
-export default function GatewayPage() {
+// Gateway no tiene sistema de idioma propio (a diferencia de /pro), así que
+// no usamos specialty.name (viene en español desde la DB) — mapeamos por id
+// a una etiqueta en inglés fija para esta página.
+const EN_LABELS: Record<string, string> = {
+  law: "Attorneys",
+  architecture: "Architects",
+  "interior-design": "Interior Designers",
+  "graphic-design": "Graphic Designers",
+  accounting: "Accountants",
+  photography: "Photographers",
+  "real-estate": "Real Estate",
+};
+
+
+// Portada Gateway: solo mostramos 5 de las 7 specialties reales (teaser,
+// no el catálogo completo — igual que el lado de clientes solo muestra 3
+// de sus ~20 categorías reales). Las 7 siguen existiendo en el sistema.
+const FEATURED_SPECIALTY_IDS = ["law", "architecture", "accounting", "real-estate", "interior-design"];
+
+export default async function GatewayPage() {
+  const allSpecialties = await getSpecialties();
+  const specialties = FEATURED_SPECIALTY_IDS
+    .map((id) => allSpecialties.find((s) => s.id === id))
+    .filter((s): s is NonNullable<typeof s> => Boolean(s));
+
   return (
     <main className="min-h-screen bg-[#0a0e17] text-white relative overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-[750px] z-0">
@@ -20,7 +47,7 @@ export default function GatewayPage() {
 
       <div className="relative z-10 flex items-center justify-between px-6 pt-6 pb-2 max-w-[1400px] mx-auto">
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/gateway-wordmark.png" alt="GetServiHub" width={264} height={107} className="h-16 w-auto" />
+          <Image src="/logo-horizontal.png" alt="GetServiHub" width={264} height={88} className="h-16 w-auto" />
         </Link>
         <nav className="hidden lg:flex items-center gap-7 text-sm text-white/90 font-medium">
           <Link href="/how-it-works" className="hover:text-white transition-colors">How It Works</Link>
@@ -135,44 +162,73 @@ export default function GatewayPage() {
       </div>
 
       <div className="relative z-10 max-w-[1300px] mx-auto px-6 pb-20">
-        <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
-          <div className="text-xs font-bold tracking-[1.5px] uppercase text-cyan-400">Popular Service Categories</div>
-          <Link href="/find" className="hidden md:inline-flex items-center gap-1.5 text-xs font-semibold text-white border border-white/20 rounded-full px-4 py-1.5 hover:border-white/40 transition-colors">See All Categories</Link>
-          <div className="text-xs font-bold tracking-[1.5px] uppercase text-amber-400">Top Professional Categories</div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          <div>
+            <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
+              <div className="text-xs font-bold tracking-[1.5px] uppercase text-cyan-400">Popular Service Categories</div>
+              <Link href="/find" className="hidden md:inline-flex items-center gap-1.5 text-xs font-semibold text-white border border-white/20 rounded-full px-4 py-1.5 hover:border-white/40 transition-colors">See All →</Link>
+            </div>
+            <div className="grid grid-cols-5 gap-2">
+              <Link href="/find?category=Auto+Detailing" className="relative aspect-square rounded-xl overflow-hidden border border-white/10 hover:border-cyan-400/40 transition-all group">
+                <Image src="/categories/auto-detailing.jpg" alt="Auto Detailing" fill sizes="150px" className="object-cover group-hover:scale-105 transition-transform duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                <div className="absolute bottom-1.5 left-1.5 right-1.5 text-[10px] font-bold leading-tight">Auto Detailing</div>
+              </Link>
+              <Link href="/find?category=Cleaning" className="relative aspect-square rounded-xl overflow-hidden border border-white/10 hover:border-cyan-400/40 transition-all group">
+                <Image src="/categories/cleaning.jpg" alt="Cleaning" fill sizes="150px" className="object-cover group-hover:scale-105 transition-transform duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                <div className="absolute bottom-1.5 left-1.5 right-1.5 text-[10px] font-bold leading-tight">Cleaning</div>
+              </Link>
+              <Link href="/find?category=Landscaping" className="relative aspect-square rounded-xl overflow-hidden border border-white/10 hover:border-cyan-400/40 transition-all group">
+                <Image src="/categories/landscaping.jpg" alt="Landscaping" fill sizes="150px" className="object-cover group-hover:scale-105 transition-transform duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                <div className="absolute bottom-1.5 left-1.5 right-1.5 text-[10px] font-bold leading-tight">Landscaping</div>
+              </Link>
+              <Link href="/find?category=Remodeling" className="relative aspect-square rounded-xl overflow-hidden border border-white/10 hover:border-cyan-400/40 transition-all group">
+                <Image src="/categories/remodeling.jpg" alt="Remodeling" fill sizes="150px" className="object-cover group-hover:scale-105 transition-transform duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                <div className="absolute bottom-1.5 left-1.5 right-1.5 text-[10px] font-bold leading-tight">Remodeling</div>
+              </Link>
+              <Link href="/find?category=Plumber" className="relative aspect-square rounded-xl overflow-hidden border border-white/10 hover:border-cyan-400/40 transition-all group">
+                <Image src="/categories/plumber.jpg" alt="Plumber" fill sizes="150px" className="object-cover group-hover:scale-105 transition-transform duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                <div className="absolute bottom-1.5 left-1.5 right-1.5 text-[10px] font-bold leading-tight">Plumber</div>
+              </Link>
+            </div>
+            <Link href="/find" className="md:hidden mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-white border border-white/20 rounded-full px-4 py-1.5">See All Categories</Link>
+          </div>
+
+          <div>
+            <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
+              <div className="text-xs font-bold tracking-[1.5px] uppercase text-amber-400">Top Professional Categories</div>
+              <Link href="/pro" className="hidden md:inline-flex items-center gap-1.5 text-xs font-semibold text-white border border-white/20 rounded-full px-4 py-1.5 hover:border-white/40 transition-colors">Explore →</Link>
+            </div>
+            {specialties.length > 0 ? (
+              <div className="grid grid-cols-5 gap-2">
+                {specialties.map((specialty) => (
+                  <Link
+                    key={specialty.id}
+                    href="/pro"
+                    className="relative aspect-square rounded-xl overflow-hidden border border-white/10 hover:border-amber-400/40 transition-all group"
+                  >
+                    <Image
+                      src={`/categories/${specialty.id}.jpg`}
+                      alt={EN_LABELS[specialty.id] ?? specialty.name}
+                      fill
+                      sizes="150px"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                    <div className="absolute bottom-1.5 left-1.5 right-1.5 text-[10px] font-bold leading-tight">{EN_LABELS[specialty.id] ?? specialty.name}</div>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <p className="text-xs text-white/50">Professional categories are temporarily unavailable.</p>
+            )}
+            <Link href="/pro" className="md:hidden mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-white border border-white/20 rounded-full px-4 py-1.5">Explore GetServiHub Pro</Link>
+          </div>
         </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-3">
-          <Link href="/find?category=Auto+Detailing" className="col-span-1 lg:col-span-2 relative aspect-square rounded-xl overflow-hidden border border-white/10 hover:border-cyan-400/40 transition-all group">
-            <Image src="/categories/auto-detailing.jpg" alt="Auto Detailing" fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-            <div className="absolute bottom-2 left-2 right-2 text-[11px] font-bold">Auto Detailing</div>
-          </Link>
-          <Link href="/find?category=Cleaning" className="col-span-1 lg:col-span-2 relative aspect-square rounded-xl overflow-hidden border border-white/10 hover:border-cyan-400/40 transition-all group">
-            <Image src="/categories/cleaning.jpg" alt="Cleaning" fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-            <div className="absolute bottom-2 left-2 right-2 text-[11px] font-bold">Cleaning</div>
-          </Link>
-          <Link href="/find?category=Landscaping" className="col-span-1 lg:col-span-2 relative aspect-square rounded-xl overflow-hidden border border-white/10 hover:border-cyan-400/40 transition-all group">
-            <Image src="/categories/landscaping.jpg" alt="Landscaping" fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-            <div className="absolute bottom-2 left-2 right-2 text-[11px] font-bold">Landscaping</div>
-          </Link>
-
-          <Link href="/pro" className="col-span-1 lg:col-span-2 aspect-square rounded-xl border border-amber-400/15 hover:border-amber-400/40 transition-all flex flex-col items-center justify-center gap-2 bg-[#0d1220]/60">
-            <Scale className="w-7 h-7 text-amber-400" />
-            <span className="text-xs font-bold">Attorneys</span>
-          </Link>
-          <Link href="/pro" className="col-span-1 lg:col-span-2 aspect-square rounded-xl border border-amber-400/15 hover:border-amber-400/40 transition-all flex flex-col items-center justify-center gap-2 bg-[#0d1220]/60">
-            <Building2 className="w-7 h-7 text-amber-400" />
-            <span className="text-xs font-bold">Architects</span>
-          </Link>
-          <Link href="/pro" className="col-span-1 lg:col-span-2 aspect-square rounded-xl border border-amber-400/15 hover:border-amber-400/40 transition-all flex flex-col items-center justify-center gap-2 bg-[#0d1220]/60">
-            <Sofa className="w-7 h-7 text-amber-400" />
-            <span className="text-xs font-bold text-center px-1">Interior Designers</span>
-          </Link>
-        </div>
-
-        <Link href="/find" className="md:hidden mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-white border border-white/20 rounded-full px-4 py-1.5">See All Categories</Link>
       </div>
     </main>
   );

@@ -17,8 +17,8 @@ export function ProHeader() {
   return (
     <header className="relative border-b border-[var(--pro-line)] bg-[var(--pro-bg)] z-10">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 md:px-8">
-        <Link href="/pro" className="flex items-center gap-2">
-          <Image src="/brand/logo-getservihub-pro.png" alt="GetServiHub Pro" width={160} height={40} className="h-9 w-auto" priority />
+        <Link href="/pro" className="-ml-2 flex items-center gap-2 md:-ml-3">
+          <Image src="/brand/logo-getservihub-pro.png" alt="GetServiHub Pro" width={120} height={40} className="h-16 w-auto" priority />
         </Link>
         <div className="hidden items-center gap-6 md:flex">
           {navLinks.map((link) => (

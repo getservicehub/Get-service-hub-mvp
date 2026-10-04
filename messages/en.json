@@ -1,7 +1,11 @@
 {
   "nav": {
-    "explore": "Explore", "howItWorks": "How It Works", "trust": "Trust & Safety",
-    "forProfessionals": "For Professionals", "login": "Log in", "joinCta": "Join as a Professional"
+    "explore": "Explore",
+    "howItWorks": "How It Works",
+    "trust": "Trust & Safety",
+    "forProfessionals": "For Professionals",
+    "login": "Log in",
+    "joinCta": "Join as a Professional"
   },
   "hero": {
     "eyebrow": "EXCLUSIVE NETWORK",
@@ -12,13 +16,28 @@
     "searchButton": "Search"
   },
   "trustStrip": {
-    "identity": { "title": "Identity Verified", "body": "We confirm who's behind the profile." },
-    "credentials": { "title": "Credentials, Where Applicable", "body": "We check licenses when the profession requires one." },
-    "reviews": { "title": "Reviews With Context", "body": "We separate verified experiences from general comments." },
-    "pricing": { "title": "Trust Isn't For Sale", "body": "Plans never substitute for relevance or track record." },
+    "identity": {
+      "title": "Identity Verified",
+      "body": "We confirm who's behind the profile."
+    },
+    "credentials": {
+      "title": "Credentials, Where Applicable",
+      "body": "We check licenses when the profession requires one."
+    },
+    "reviews": {
+      "title": "Reviews With Context",
+      "body": "We separate verified experiences from general comments."
+    },
+    "pricing": {
+      "title": "Trust Isn't For Sale",
+      "body": "Plans never substitute for relevance or track record."
+    },
     "howItWorksLink": "How it works"
   },
-  "expertise": { "title": "Excellence in Every Discipline", "exploreLink": "Explore" },
+  "expertise": {
+    "title": "Excellence in Every Discipline",
+    "exploreLink": "Explore"
+  },
   "professional": {
     "demoLabel": "SAMPLE PROFILE",
     "demoNote": "This is a demo profile — no real professionals are published in this specialty yet.",
@@ -30,18 +49,47 @@
     "specialtiesLabel": "Specialties",
     "languagesLabel": "Languages",
     "emptyStateTitle": "No professionals in this specialty yet",
-    "emptyStateBody": "We're forming the initial group in San Diego. Check back soon."
+    "emptyStateBody": "We're forming the initial group in San Diego. Check back soon.",
+    "trustTitle": "Trust & Performance",
+    "completedJobs": "Completed Jobs",
+    "verifiedReviews": "Verified Reviews",
+    "memberSince": "Member since"
   },
   "howItWorks": {
     "title": "How It Works",
-    "step1Title": "Explore a Specialty", "step1Body": "Search by profession, need, or location.",
-    "step2Title": "Compare Clear Signals", "step2Body": "Review experience, languages, credentials, and reviews.",
-    "step3Title": "Reach Out With Context", "step3Body": "Explain what you need before starting the conversation.",
-    "step4Title": "Build Trust", "step4Body": "After the service, both sides can share information about the experience."
+    "step1Title": "Explore a Specialty",
+    "step1Body": "Search by profession, need, or location.",
+    "step2Title": "Compare Clear Signals",
+    "step2Body": "Review experience, languages, credentials, and reviews.",
+    "step3Title": "Reach Out With Context",
+    "step3Body": "Explain what you need before starting the conversation.",
+    "step4Title": "Build Trust",
+    "step4Body": "After the service, both sides can share information about the experience."
   },
   "search": {
-    "resultsTitle": "Results", "noResultsTitle": "No results yet",
+    "resultsTitle": "Results",
+    "noResultsTitle": "No results yet",
     "noResultsBody": "Try a different specialty, or browse the full catalog.",
-    "filterBySpecialty": "Filter by specialty", "allSpecialties": "All"
+    "filterBySpecialty": "Filter by specialty",
+    "allSpecialties": "All"
+  },
+  "join": {
+    "title": "Join the Network",
+    "subtitle": "Apply to become part of GetServiHub Pro's verified network of professionals. We review every application before it's published.",
+    "fullNameLabel": "Full Name",
+    "emailLabel": "Email",
+    "specialtyLabel": "Area of Expertise",
+    "specialtyPlaceholder": "Select your specialty",
+    "specialtyOther": "Other / Not listed",
+    "messageLabel": "Tell us about your practice",
+    "submitButton": "Submit Application",
+    "submittingButton": "Submitting...",
+    "successTitle": "Application received",
+    "successBody": "Thank you — we'll review your application and follow up by email.",
+    "errorBody": "Something went wrong. Please try again.",
+    "consentLead": "I agree to the",
+    "termsLink": "Terms of Service",
+    "consentAnd": "and",
+    "privacyLink": "Privacy Policy"
   }
 }

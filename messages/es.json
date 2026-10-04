@@ -1,7 +1,11 @@
 {
   "nav": {
-    "explore": "Explorar", "howItWorks": "Cómo funciona", "trust": "Confianza",
-    "forProfessionals": "Para profesionales", "login": "Iniciar sesión", "joinCta": "Únete como profesional"
+    "explore": "Explorar",
+    "howItWorks": "Cómo funciona",
+    "trust": "Confianza",
+    "forProfessionals": "Para profesionales",
+    "login": "Iniciar sesión",
+    "joinCta": "Únete como profesional"
   },
   "hero": {
     "eyebrow": "RED PROFESIONAL VERIFICADA",
@@ -12,13 +16,28 @@
     "searchButton": "Buscar"
   },
   "trustStrip": {
-    "identity": { "title": "Identidad revisada", "body": "Confirmamos quién está detrás del perfil." },
-    "credentials": { "title": "Credenciales aplicables", "body": "Revisamos licencias cuando la profesión lo requiere." },
-    "reviews": { "title": "Reseñas con contexto", "body": "Diferenciamos experiencias verificadas de comentarios generales." },
-    "pricing": { "title": "La confianza no se compra", "body": "Los planes no sustituyen relevancia ni comportamiento." },
+    "identity": {
+      "title": "Identidad revisada",
+      "body": "Confirmamos quién está detrás del perfil."
+    },
+    "credentials": {
+      "title": "Credenciales aplicables",
+      "body": "Revisamos licencias cuando la profesión lo requiere."
+    },
+    "reviews": {
+      "title": "Reseñas con contexto",
+      "body": "Diferenciamos experiencias verificadas de comentarios generales."
+    },
+    "pricing": {
+      "title": "La confianza no se compra",
+      "body": "Los planes no sustituyen relevancia ni comportamiento."
+    },
     "howItWorksLink": "Cómo funciona"
   },
-  "expertise": { "title": "Explora áreas de especialidad", "exploreLink": "Explorar" },
+  "expertise": {
+    "title": "Explora áreas de especialidad",
+    "exploreLink": "Explorar"
+  },
   "professional": {
     "demoLabel": "PERFIL DE EJEMPLO",
     "demoNote": "Este es un perfil de demostración.",
@@ -30,18 +49,47 @@
     "specialtiesLabel": "Especialidades",
     "languagesLabel": "Idiomas",
     "emptyStateTitle": "Todavía no hay profesionales en esta especialidad",
-    "emptyStateBody": "Estamos formando el grupo inicial en San Diego. Vuelve pronto."
+    "emptyStateBody": "Estamos formando el grupo inicial en San Diego. Vuelve pronto.",
+    "trustTitle": "Confianza y desempeño",
+    "completedJobs": "Trabajos completados",
+    "verifiedReviews": "Reseñas verificadas",
+    "memberSince": "Miembro desde"
   },
   "howItWorks": {
     "title": "Cómo funciona",
-    "step1Title": "Explora una especialidad", "step1Body": "Busca por profesión, necesidad o ubicación.",
-    "step2Title": "Compara señales claras", "step2Body": "Revisa experiencia, idiomas, credenciales y reseñas.",
-    "step3Title": "Contacta con contexto", "step3Body": "Explica tu necesidad antes de iniciar la conversación.",
-    "step4Title": "Construye confianza", "step4Body": "Después del servicio, ambas partes pueden aportar información."
+    "step1Title": "Explora una especialidad",
+    "step1Body": "Busca por profesión, necesidad o ubicación.",
+    "step2Title": "Compara señales claras",
+    "step2Body": "Revisa experiencia, idiomas, credenciales y reseñas.",
+    "step3Title": "Contacta con contexto",
+    "step3Body": "Explica tu necesidad antes de iniciar la conversación.",
+    "step4Title": "Construye confianza",
+    "step4Body": "Después del servicio, ambas partes pueden aportar información."
   },
   "search": {
-    "resultsTitle": "Resultados", "noResultsTitle": "Sin resultados todavía",
+    "resultsTitle": "Resultados",
+    "noResultsTitle": "Sin resultados todavía",
     "noResultsBody": "Prueba con otra especialidad, o explora el catálogo completo.",
-    "filterBySpecialty": "Filtrar por especialidad", "allSpecialties": "Todas"
+    "filterBySpecialty": "Filtrar por especialidad",
+    "allSpecialties": "Todas"
+  },
+  "join": {
+    "title": "Únete a la red",
+    "subtitle": "Aplica para formar parte de la red verificada de profesionales de GetServiHub Pro. Revisamos cada solicitud antes de publicarla.",
+    "fullNameLabel": "Nombre completo",
+    "emailLabel": "Correo electrónico",
+    "specialtyLabel": "Área de especialidad",
+    "specialtyPlaceholder": "Selecciona tu especialidad",
+    "specialtyOther": "Otra / No está en la lista",
+    "messageLabel": "Cuéntanos sobre tu práctica",
+    "submitButton": "Enviar solicitud",
+    "submittingButton": "Enviando...",
+    "successTitle": "Solicitud recibida",
+    "successBody": "Gracias — revisaremos tu solicitud y te contactaremos por correo.",
+    "errorBody": "Algo salió mal. Intenta de nuevo.",
+    "consentLead": "Acepto los",
+    "termsLink": "Términos de servicio",
+    "consentAnd": "y la",
+    "privacyLink": "Política de privacidad"
   }
 }

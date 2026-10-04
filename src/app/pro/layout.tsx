@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter, IBM_Plex_Mono } from "next/font/google";
+import { Cormorant_Garamond, Inter, IBM_Plex_Mono } from "next/font/google";
 import { ProLangProvider } from "../../lib/pro-i18n";
 import { ProHeader } from "../../components/pro/ProHeader";
 import { ProFooter } from "../../components/pro/ProFooter";
 import "../../../styles/pro-tokens.css";
 
-const playfair = Playfair_Display({ subsets: ["latin"], style: ["normal", "italic"], weight: ["600", "700"], variable: "--font-playfair" });
+const cormorant = Cormorant_Garamond({ subsets: ["latin"], style: ["normal", "italic"], weight: ["600", "700"], variable: "--font-cormorant" });
 const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"], variable: "--font-inter" });
 const plexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-plex-mono" });
 
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function ProLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className={`pro-theme ${playfair.variable} ${inter.variable} ${plexMono.variable} min-h-screen bg-[var(--pro-bg)] font-sans text-[var(--pro-text)]`}>
+    <div className={`pro-theme ${cormorant.variable} ${inter.variable} ${plexMono.variable} min-h-screen bg-[var(--pro-bg)] font-sans text-[var(--pro-text)]`}>
       <ProLangProvider>
         <ProHeader />
         {children}

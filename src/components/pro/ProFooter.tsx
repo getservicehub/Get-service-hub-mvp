@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 export function ProFooter() {
   const columns = [
@@ -9,6 +10,7 @@ export function ProFooter() {
   return (
     <footer className="border-t border-[var(--pro-line)] px-5 py-10 md:px-8">
       <div className="mx-auto flex max-w-6xl flex-col gap-6">
+        <Image src="/brand/logo-getservihub-pro.png" alt="GetServiHub Pro" width={120} height={40} className="h-10 w-auto self-start" />
         <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-[var(--pro-text-muted)]">
           {columns.map((c) => <Link key={c.href} href={c.href} className="hover:text-[var(--pro-text)]">{c.label}</Link>)}
         </div>
