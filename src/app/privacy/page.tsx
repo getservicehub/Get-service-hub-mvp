@@ -29,6 +29,7 @@ export default function PrivacyPage() {
               <li>Business name, business hours, service information, descriptions, portfolio and listing information.</li>
               <li>License number and verification-related status where a provider supplies such information.</li>
               <li>Account creation and update timestamps and administrative/account status information.</li>
+              <li>Records of your acceptance of our Terms and Privacy Policy, including the document version and the date and time you accepted, when you create an account or submit a Pro application.</li>
             </ul>
             <p className="font-semibold text-white mt-3 mb-1">B. GetServiHub Pro information</p>
             <ul className="list-disc pl-5 space-y-1">
@@ -47,7 +48,7 @@ export default function PrivacyPage() {
             <p className="font-semibold text-white mt-3 mb-1">E. Technical information</p>
             <p>When you use the Platform, GetServiHub and its service providers may process device, browser, network, IP-address, log, error, diagnostic, performance, session, and similar technical information needed to host, secure, debug, monitor, and operate the Platform. Sentry is currently used for error and technical monitoring, and Vercel provides hosting infrastructure.</p>
             <p className="font-semibold text-white mt-3 mb-1">F. Information we do not currently collect through an integrated payment processor</p>
-            <p>As of this version, Stripe is not integrated and GetServiHub does not represent that it collects payment-card information for third-party service transactions through an integrated GetServiHub checkout. This Policy should be updated before a payment processor or subscription checkout is launched.</p>
+            <p>As of this version, Stripe is not integrated and GetServiHub does not represent that it collects payment-card information for third-party service transactions through an integrated GetServiHub checkout. We will update this Policy before we begin accepting payments.</p>
           </section>
 
           <section>
@@ -71,11 +72,11 @@ export default function PrivacyPage() {
             <ul className="list-disc pl-5 space-y-1.5 mt-2">
               <li>Other users: profile, listing, service, portfolio, review, rating, comment, and other information you intentionally make public or share through Platform features.</li>
               <li>Messaging counterparties: information you choose to share in a conversation and basic account/context information needed to support the conversation.</li>
-              <li>Service providers: infrastructure, hosting, authentication, database, storage, realtime, security, error monitoring, and other vendors processing information on our behalf. Current confirmed providers include Supabase, Vercel, and Sentry.</li>
+              <li>Service providers: infrastructure, hosting, authentication, database, storage, realtime, security, error monitoring, and other vendors processing information on our behalf. Current providers include Supabase (database, authentication, and storage), Vercel (hosting), Sentry (error monitoring), Resend (outgoing email), and ImprovMX (forwarding of messages sent to our support addresses).</li>
               <li>Legal and safety: authorities, courts, advisers, or other parties when reasonably necessary to comply with law, respond to valid process, protect rights or safety, investigate fraud, or enforce agreements.</li>
               <li>Business transfers: a buyer, investor, lender, successor, or adviser in connection with a financing, merger, acquisition, restructuring, bankruptcy, sale, or diligence process, subject to appropriate safeguards.</li>
             </ul>
-            <p className="mt-2">GetServiHub does not state in this draft that it sells personal information or shares personal information for cross-context behavioral advertising. If product practices change, this Policy and any legally required opt-out mechanisms must be updated before or when those practices begin.</p>
+            <p className="mt-2">We do not sell your personal information, and we do not share it for cross-context behavioral advertising. If that changes, we will update this Policy and offer any opt-out the law requires before it does.</p>
           </section>
 
           <section>
@@ -86,20 +87,20 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="text-white font-bold text-base mb-2">6. Verification and Sensitive Documents</h2>
-            <p>If GetServiHub collects identity, license, credential, or other verification information, it will use that information for verification, fraud prevention, trust, safety, compliance, and related purposes. The Platform should minimize collection and retention of sensitive verification materials and should not publicly display underlying identity documents.</p>
-            <p className="mt-2">The product team must confirm actual verification vendors, sources, document retention, and access controls before expanding this section or representing a particular verification method.</p>
+            <p>If GetServiHub collects identity, license, credential, or other verification information, we use it for verification, fraud prevention, trust, safety, compliance, and related purposes. We limit what we collect and keep to what verification requires, and we do not publicly display the underlying identity documents.</p>
           </section>
 
           <section>
             <h2 className="text-white font-bold text-base mb-2">7. Cookies and Similar Technologies</h2>
-            <p>The Platform and its infrastructure providers may use cookies, local storage, session technologies, logs, and similar technologies necessary for authentication, security, preferences, functionality, diagnostics, and analytics. The product should maintain an accurate inventory of non-essential analytics or advertising technologies and implement any consent or opt-out controls required by applicable law.</p>
-            <p className="mt-2">This draft does not claim the use of advertising cookies or cross-site behavioral advertising because that was not established by the audit.</p>
+            <p>The Platform and its infrastructure providers may use cookies, local storage, session technologies, logs, and similar technologies necessary for authentication, security, preferences, functionality, diagnostics, and analytics.</p>
+            <p className="mt-2">We do not use advertising cookies or cross-site behavioral advertising technologies. If that changes, we will update this Policy and provide any consent or opt-out controls the law requires before it does.</p>
           </section>
 
           <section>
             <h2 className="text-white font-bold text-base mb-2">8. Data Retention</h2>
             <p>GetServiHub retains personal information for as long as reasonably necessary for the purposes described in this Policy, including account operation, user-requested services, trust and safety, fraud prevention, dispute handling, legal compliance, enforcement, security, and legitimate business records.</p>
             <p className="mt-2">Retention periods may vary by data type. Account deletion does not necessarily require immediate deletion of every record where retention is reasonably necessary or legally permitted, for example to preserve transaction/dispute records, security logs, fraud evidence, legal claims, or the integrity of reviews and moderation records.</p>
+            <p className="mt-2">When an account is deleted, its personal information is removed or de-identified. A record that a completed job took place may be kept without information that identifies the person, so that the verified track record of other users is not altered.</p>
           </section>
 
           <section>
@@ -110,22 +111,19 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="text-white font-bold text-base mb-2">10. Your Choices and Privacy Requests</h2>
-            <p>Subject to applicable law, users may request access to, correction of, or deletion of certain personal information and may have additional rights depending on their jurisdiction. Requests may currently be submitted to hello@getservihub.com. GetServiHub may need to verify the requester&apos;s identity before fulfilling a request.</p>
+            <p>Subject to applicable law, you may ask to access, correct, or delete certain personal information, and you may have additional rights depending on where you live. There is no self-service account deletion or data export yet, so to make a request write to support@getservihub.com. We may need to verify your identity before we act on a request. We aim to confirm that we received it within 10 business days and to respond within 45 days.</p>
             <p className="mt-2">A deletion request may be denied or limited where retention is permitted or required for security, fraud prevention, legal obligations, dispute resolution, exercise or defense of legal claims, or other lawful exceptions.</p>
-            <div className="mt-3 border border-amber-400/30 bg-amber-400/5 rounded-lg p-3 text-xs text-amber-300">Implementation required: There is currently no in-product account deletion or data export function. Establish an operational privacy-request workflow, response ownership, identity-verification method, and recordkeeping before publicizing automated controls.</div>
           </section>
 
           <section>
             <h2 className="text-white font-bold text-base mb-2">11. California Privacy</h2>
-            <p>California law may provide residents with privacy rights depending on the law that applies to GetServiHub and, for certain statutes, whether the operator meets statutory applicability thresholds. Regardless of threshold status, this Policy is intended to describe the categories of personal information collected and the purposes for which it is used.</p>
-            <p className="mt-2">Where applicable, California residents may have rights to know/access, correct, delete, obtain information about certain disclosures, and opt out of certain sale/sharing practices, as well as rights against unlawful discrimination for exercising privacy rights. GetServiHub will honor rights required by applicable law after appropriate verification.</p>
-            <p className="mt-2">GetServiHub should reassess California Consumer Privacy Act applicability as the business grows, especially revenue, data-volume, and sale/sharing thresholds, and should implement required notices, request methods, metrics, contractual terms, and opt-out signals if and when applicable.</p>
-            <p className="mt-2">California&apos;s online privacy rules also require commercial online services collecting personally identifiable information from California consumers to conspicuously post a privacy policy describing specified practices. This Policy should remain linked conspicuously from the Platform.</p>
+            <p>California residents may have rights under California privacy law, including the right to know what personal information we collect and how we use it, to access and correct it, to delete it, to learn about certain disclosures, and not to be treated unfairly for exercising those rights. We offer these rights to any California resident who asks, whether or not the law requires us to, through the process in Section 10.</p>
+            <p className="mt-2">We do not sell your personal information and we do not share it for cross-context behavioral advertising, so there is no sale or sharing to opt out of.</p>
           </section>
 
           <section>
             <h2 className="text-white font-bold text-base mb-2">12. Do Not Track / Global Privacy Signals</h2>
-            <p>The product audit did not establish a specific Do Not Track or Global Privacy Control implementation. Before publication, counsel and engineering should confirm the Platform&apos;s actual response to browser signals and add any disclosure or technical behavior required by applicable law.</p>
+            <p>We do not currently change how the Platform works in response to Do Not Track browser signals, because there is no common standard for them. We also do not sell personal information or share it for cross-context behavioral advertising, so a Global Privacy Control signal does not change how we handle your information.</p>
           </section>
 
           <section>
@@ -135,18 +133,18 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="text-white font-bold text-base mb-2">14. International Users</h2>
-            <p>The Platform is currently oriented to the United States and San Diego-area marketplace. If you access the Platform from another jurisdiction, your information may be processed in the United States or other locations where service providers operate. Expansion outside the United States should trigger a separate privacy and cross-border compliance review.</p>
+            <p>The Platform is currently oriented to the United States and San Diego-area marketplace. If you access the Platform from another jurisdiction, your information may be processed in the United States or other locations where service providers operate.</p>
           </section>
 
           <section>
             <h2 className="text-white font-bold text-base mb-2">15. Changes to This Policy</h2>
-            <p>Each published Privacy Policy must display a fixed effective date and version. We may update this Policy to reflect product, legal, or operational changes. Material changes should be communicated as required by applicable law.</p>
+            <p>Each published version of this Policy shows its effective date and version number. We may update it to reflect product, legal, or operational changes, and we will communicate material changes as the law requires.</p>
           </section>
 
           <section>
             <h2 className="text-white font-bold text-base mb-2">16. Contact</h2>
-            <p>Privacy/general inquiries: hello@getservihub.com</p>
-            <p>Support: support@getservihub.com</p>
+            <p>Privacy requests and support: support@getservihub.com</p>
+            <p>General inquiries: hello@getservihub.com</p>
           </section>
         </div>
       </div>

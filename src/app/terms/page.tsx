@@ -116,7 +116,6 @@ export default function TermsPage() {
           <section>
             <h2 className="text-white font-bold text-base mb-2">16. Copyright and Rights Complaints</h2>
             <p>If you believe content on the Platform infringes your copyright or other rights, contact hello@getservihub.com with sufficient information to identify the work, the allegedly infringing material, your contact information, and the basis for your claim. GetServiHub may request additional information and may remove or restrict content where appropriate.</p>
-            <p className="mt-2">This section is not intended to claim that GetServiHub has designated a DMCA agent. If the operator later elects to use the statutory DMCA safe-harbor process, the required designation and notice procedure should be separately implemented and published.</p>
           </section>
 
           <section>
@@ -152,6 +151,7 @@ export default function TermsPage() {
             <h2 className="text-white font-bold text-base mb-2">21. Suspension and Termination</h2>
             <p>We may restrict, suspend, or terminate access, remove listings or content, or disable features when reasonably necessary for security, suspected fraud, policy violations, legal compliance, nonpayment of future paid features, risk to users, or protection of Platform integrity. Where appropriate and legally required, we may provide notice or an opportunity to appeal.</p>
             <p className="mt-2">Users remain responsible for obligations and transactions incurred before termination. Provisions that by their nature should survive termination - including ownership, disclaimers, limitations, indemnification, dispute provisions, and accrued obligations - survive.</p>
+            <p className="mt-2">You may stop using the Platform at any time. To ask us to delete your account, write to support@getservihub.com; we may need to verify your identity first. When we delete an account we remove or de-identify its personal information as described in the Privacy Policy, but we may keep limited records where the law allows or requires it, such as security and fraud records, records of your acceptance of these Terms, and the fact that a completed job took place (without information that identifies you), so that the verified track record of other users is not altered.</p>
           </section>
 
           <section>
@@ -183,19 +183,18 @@ export default function TermsPage() {
 
           <section>
             <h2 className="text-white font-bold text-base mb-2">26. Governing Law and Venue</h2>
-            <p><span className="font-semibold text-white">Subject to review by California counsel:</span> These Terms and disputes concerning the Platform are intended to be governed by the laws of the State of California, without regard to conflict-of-law principles. Unless a valid arbitration agreement is later adopted and applies, the parties intend exclusive venue in the state and federal courts located in San Diego County, California, except where applicable consumer law requires otherwise.</p>
-            <div className="mt-3 border border-amber-400/30 bg-amber-400/5 rounded-lg p-3 text-xs text-amber-300">Counsel review required: Confirm operator domicile, venue, consumer-law limitations, and whether this governing-law clause is appropriate before publication.</div>
+            <p>These Terms and any dispute concerning the Platform are governed by the laws of the State of California, without regard to conflict-of-law principles. Except where applicable consumer law requires otherwise, the state and federal courts located in San Diego County, California have exclusive venue over those disputes.</p>
           </section>
 
           <section>
             <h2 className="text-white font-bold text-base mb-2">27. Arbitration / Class-Action Waiver</h2>
-            <p className="italic">[Reserved for California counsel. No binding arbitration or class-action waiver is inserted in this draft. If adopted, the clause and the electronic assent flow should be reviewed together, including opt-out mechanics, mass-arbitration considerations, small-claims rights, notice, fees, and applicable consumer-law requirements.]</p>
+            <p>Disputes are handled in court as described in Section 26. These Terms do not currently contain a binding arbitration agreement or a class-action waiver.</p>
           </section>
 
           <section>
             <h2 className="text-white font-bold text-base mb-2">28. Changes to These Terms</h2>
-            <p>We may update these Terms from time to time. Each published version must display a fixed effective date and version identifier. For material changes, GetServiHub should provide notice appropriate to the nature of the change and, when legally or contractually required, obtain renewed affirmative consent before the changes bind an existing user.</p>
-            <p className="mt-2">Continued use alone should not be relied upon where applicable law requires affirmative assent.</p>
+            <p>We may update these Terms from time to time. Each published version shows its effective date and version number. For material changes, we will give notice appropriate to the nature of the change and, where the law requires it, ask for your affirmative acceptance before the changes apply to you.</p>
+            <p className="mt-2">Where the law requires affirmative acceptance, continued use of the Platform alone will not be treated as acceptance.</p>
           </section>
 
           <section>
