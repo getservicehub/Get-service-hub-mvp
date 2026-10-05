@@ -1,6 +1,6 @@
 export const LEGAL_VERSIONS = {
-  terms: "1.1",
-  privacy: "1.1",
+  terms: "1.2",
+  privacy: "1.2",
   community: "1.0",
 } as const;
 

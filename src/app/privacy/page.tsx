@@ -100,7 +100,7 @@ export default function PrivacyPage() {
             <h2 className="text-white font-bold text-base mb-2">8. Data Retention</h2>
             <p>GetServiHub retains personal information for as long as reasonably necessary for the purposes described in this Policy, including account operation, user-requested services, trust and safety, fraud prevention, dispute handling, legal compliance, enforcement, security, and legitimate business records.</p>
             <p className="mt-2">Retention periods may vary by data type. Account deletion does not necessarily require immediate deletion of every record where retention is reasonably necessary or legally permitted, for example to preserve transaction/dispute records, security logs, fraud evidence, legal claims, or the integrity of reviews and moderation records.</p>
-            <p className="mt-2">When an account is deleted, its personal information is removed or de-identified. A record that a completed job took place may be kept without information that identifies the person, so that the verified track record of other users is not altered.</p>
+            <p className="mt-2">When an account is deleted, its personal information is removed or de-identified. Reviews and messages from that account may be kept without the person&apos;s name. A record that a completed job took place may be kept without information that identifies the person, so that the verified track record of other users is not altered.</p>
           </section>
 
           <section>
@@ -111,7 +111,7 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="text-white font-bold text-base mb-2">10. Your Choices and Privacy Requests</h2>
-            <p>Subject to applicable law, you may ask to access, correct, or delete certain personal information, and you may have additional rights depending on where you live. There is no self-service account deletion or data export yet, so to make a request write to support@getservihub.com. We may need to verify your identity before we act on a request. We aim to confirm that we received it within 10 business days and to respond within 45 days.</p>
+            <p>Subject to applicable law, you may ask to access, correct, or delete certain personal information, and you may have additional rights depending on where you live. You can delete your account yourself after signing in at <a href="/account/delete" className="text-cyan-400 hover:underline">getservihub.com/account/delete</a>. For any other request, or if you cannot sign in, write to support@getservihub.com. There is no self-service data export yet. We may need to verify your identity before we act on a request. We aim to confirm that we received it within 10 business days and to respond within 45 days.</p>
             <p className="mt-2">A deletion request may be denied or limited where retention is permitted or required for security, fraud prevention, legal obligations, dispute resolution, exercise or defense of legal claims, or other lawful exceptions.</p>
           </section>
 
