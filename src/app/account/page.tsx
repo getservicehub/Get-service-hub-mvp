@@ -7,7 +7,7 @@ import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { ShieldCheck, MapPin, ExternalLink } from "lucide-react";
 
 export default function AccountPage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [userId, setUserId] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
@@ -150,6 +150,19 @@ export default function AccountPage() {
   const displayName = role === "provider" ? (businessName || fullName) : fullName;
   const isPublished = serviceCount > 0;
 
+    const deleteCopy =
+      language === "es"
+        ? {
+            title: "Eliminar cuenta",
+            body: "Elimina de forma permanente tu cuenta y tus datos personales. No se puede deshacer.",
+            button: "Eliminar mi cuenta",
+          }
+        : {
+            title: "Delete account",
+            body: "Permanently delete your account and personal data. This cannot be undone.",
+            button: "Delete my account",
+          };
+
   return (
     <main className="min-h-screen bg-bg text-white pt-[100px] pb-16 px-5">
       <div className="max-w-[900px] mx-auto">
@@ -258,6 +271,11 @@ export default function AccountPage() {
             {saving ? t("account_saving_btn") : t("account_save_btn")}
           </button>
         </form>
+          <div className="mt-8 bg-card border border-red-500/20 rounded-2xl p-5">
+            <div className="text-xs font-bold tracking-[1px] uppercase text-red-400 mb-2">{deleteCopy.title}</div>
+            <p className="text-sm text-muted2 mb-4">{deleteCopy.body}</p>
+            <Link href="/account/delete" className="inline-block px-4 py-2 rounded-lg border border-red-500/40 text-red-400 text-xs font-bold hover:bg-red-500/10 transition-all">{deleteCopy.button}</Link>
+          </div>
       </div>
 
       {hasChanges && (
